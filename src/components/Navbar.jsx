@@ -12,6 +12,7 @@ export const Navbar = () => {
       { to: '/', text: 'Inicio', private: false },
       { to: '/login', text: 'Ingresar', private: false, publicOnly: true },
       { to: '/register', text: 'Registrarse', private: false, publicOnly: true },
+      { to: '/user/profile', text: 'Mi Perfil', private: true},
       { to: '/dashboard', text: 'Dashboard', private: true },
       // { to: "/products", text: "Products", private: false },
   ];

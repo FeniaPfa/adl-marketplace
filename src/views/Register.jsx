@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { register } from "../config/firebase";
 
 
@@ -6,10 +7,13 @@ export const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const navigate = useNavigate()
+
   const handleRegister = async (e) => {
     e.preventDefault()
     try{
       await register({email, password})
+      navigate("/user/setprofile")
     } catch(err){
       console.log(err.code , err.message)
     }
