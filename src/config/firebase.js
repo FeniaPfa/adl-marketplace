@@ -1,5 +1,10 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import {
+    createUserWithEmailAndPassword,
+    getAuth,
+    signInWithEmailAndPassword,
+    signOut,
+} from 'firebase/auth';
 import { collection, getFirestore } from 'firebase/firestore';
 import { deleteObject, getStorage } from 'firebase/storage';
 
@@ -17,6 +22,8 @@ const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
 
+const register = ({ email, password }) => createUserWithEmailAndPassword(auth, email, password);
+
 const login = ({ email, password }) => signInWithEmailAndPassword(auth, email, password);
 
 const logOut = () => signOut(auth);
@@ -29,7 +36,17 @@ const productsCollectionRef = collection(db, 'products');
 const usersCollectionRef = collection(db, 'users');
 
 const deleteFile = async (ref) => {
-  await deleteObject(ref);
+    await deleteObject(ref);
 };
 
-export { auth, login, logOut, db, storage, productsCollectionRef, usersCollectionRef, deleteFile };
+export {
+    auth,
+    register,
+    login,
+    logOut,
+    db,
+    storage,
+    productsCollectionRef,
+    usersCollectionRef,
+    deleteFile,
+};
