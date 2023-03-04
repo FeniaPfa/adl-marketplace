@@ -8,6 +8,10 @@ import { Login } from './views/Login';
 import { Profile } from './views/Profile';
 import { Register } from './views/Register';
 import { SetProfile } from './views/SetProfile';
+import { Dashboard } from './views/Dashboard';
+import { ProductsManager } from './views/ProductsManager';
+import { AddProduct } from './views/AddProduct';
+import { EditProduct } from './views/EditProduct';
 
 function App() {
     return (
@@ -36,6 +40,21 @@ function App() {
                                 </PrivateRoute>
                             }
                         />
+                        
+                        <Route
+                        path="/dashboard"
+                        element={
+                            <PrivateRoute>
+                                <Dashboard />
+                            </PrivateRoute>
+                        }
+                    >
+                        <Route index element={<ProductsManager />} />
+                        <Route path="addproduct" element={<AddProduct />} />
+                        <Route path=":id" element={<EditProduct />} />
+                        {/* + rutas */}
+
+                    </Route>
                     </Routes>
                 </Container>
             </UserContextProvider>
