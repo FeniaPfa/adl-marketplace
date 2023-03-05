@@ -20,8 +20,8 @@ export const Dashboard = () => {
                 </Stack>
             </Box>
 
-            <Box>
-                      <Outlet />
+            <Box margin="2rem auto">
+                <Outlet />
             </Box>
         </>
     );

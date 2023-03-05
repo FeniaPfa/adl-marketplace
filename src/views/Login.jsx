@@ -19,7 +19,7 @@ export const Login = () => {
             await login({ email, password });
             navigate('/user/profile');
         } catch (err) {
-            console.log({ err });
+            // console.log({ err });
             if (err.code == 'auth/user-not-found') {
                 setError({ status: true, message: 'Correo invalido' });
             }
