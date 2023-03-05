@@ -1,13 +1,58 @@
-import { useUserContext } from '../context/userContext'
+import { Box, Container, Paper, Stack, Typography } from '@mui/material';
+import { doc, getDoc } from 'firebase/firestore';
+import { getDownloadURL, ref } from 'firebase/storage';
+import { useEffect, useState } from 'react';
+import { db, storage } from '../config/firebase';
+import { useUserContext } from '../context/userContext';
+import DefaultImg from '/defaultavatar.svg'
+
 
 export const Profile = () => {
-  const { user } = useUserContext()
-  return (
-    <>
-    <p>{user.email}</p>
-    <p>{user?.displayName}</p>
-    <img src={user.photoURL} width="200px" />
-    
-    </>
-  )
-}
+    const { user } = useUserContext();
+    const [userData, setUserData] = useState();
+    const [image, setImage] = useState(null);
+
+    const userRef = doc(db, 'users', user.uid);
+
+    const getUser = async () => {
+        try {
+            const docSnap = await getDoc(userRef);
+            const data = docSnap.data();
+            const imgRef = ref(storage, `users-avatar/${user.uid}`);
+            if(data.hasAvatar){
+              const url = await getDownloadURL(imgRef);
+              setImage(url);
+
+            }
+            setUserData(data);
+        } catch (err) {
+            console.log(err.message);
+        }
+    };
+    console.log(userData);
+
+    useEffect(() => {
+        getUser();
+    }, []);
+
+    if (!userData) {
+        return <p>Cargando...</p>;
+    }
+
+    return (
+        <>
+            <Paper sx={{ padding: '2rem' }}>
+                <Stack direction="row" gap="2rem">
+                    <img src={image ? image : DefaultImg} className="avatar" />
+                    <Box>
+                        <Typography variant="h2">
+                            {userData.name} {userData.apellido}
+                        </Typography>
+
+                        <p>email: {userData.email}</p>
+                    </Box>
+                </Stack>
+            </Paper>
+        </>
+    );
+};
