@@ -9,12 +9,12 @@ import { collection, getFirestore } from 'firebase/firestore';
 import { deleteObject, getStorage } from 'firebase/storage';
 
 const firebaseConfig = {
-    apiKey: 'AIzaSyChBXMLQo2_oxaxIdKG--h9CCCu85Ec6dU',
-    authDomain: 'adl-marketplace.firebaseapp.com',
-    projectId: 'adl-marketplace',
-    storageBucket: 'adl-marketplace.appspot.com',
-    messagingSenderId: '404073098406',
-    appId: '1:404073098406:web:520d252d5bfad0b9065867',
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
 // Initialize Firebase
