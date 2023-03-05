@@ -13,7 +13,7 @@ export const Dashboard = () => {
             <Box>
                 <Stack direction="row" gap="1rem">
                     {dashboardLinks.map((item) => (
-                        <Button variant="contained" to={item.to} component={Link}>
+                        <Button key={item.text} variant="contained" to={item.to} component={Link}>
                             {item.text}
                         </Button>
                     ))}

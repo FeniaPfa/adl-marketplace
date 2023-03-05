@@ -3,10 +3,12 @@ import { updateProfile } from 'firebase/auth';
 import { collection, doc, setDoc } from 'firebase/firestore';
 import { ref, uploadBytes } from 'firebase/storage';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { auth, db, storage, usersCollectionRef } from '../config/firebase';
 import { useUserContext } from '../context/userContext';
 
 export const SetProfile = () => {
+    const navigate = useNavigate();
     const { user } = useUserContext();
 
     const [avatar, setAvatar] = useState(null);
@@ -18,6 +20,7 @@ export const SetProfile = () => {
         id: user.uid,
         email: user.email,
         hasAvatar: false,
+        favs: [],
     });
 
     // crear con setDoc un user en su colleccion
@@ -41,7 +44,7 @@ export const SetProfile = () => {
         const filesFolderRef = ref(storage, `users-avatar/${user.uid}`);
         try {
             await uploadBytes(filesFolderRef, avatar);
-            setUserInfo({...userInfo, hasAvatar: true})
+            setUserInfo({ ...userInfo, hasAvatar: true });
         } catch (err) {
             console.error(err);
         }
@@ -54,6 +57,7 @@ export const SetProfile = () => {
             await setDoc(userRef, userInfo);
             uploadAvatar();
             console.log('Datos Actualizados');
+            navigate('/user/profile');
         } catch (err) {
             console.log(err.message);
         }

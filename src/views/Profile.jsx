@@ -1,4 +1,4 @@
-import { Box, Container, Paper, Stack, Typography } from '@mui/material';
+import { Avatar, Box, Container, Paper, Stack, Typography } from '@mui/material';
 import { doc, getDoc } from 'firebase/firestore';
 import { getDownloadURL, ref } from 'firebase/storage';
 import { useEffect, useState } from 'react';
@@ -43,7 +43,7 @@ export const Profile = () => {
         <>
             <Paper sx={{ padding: '2rem' }}>
                 <Stack direction="row" gap="2rem">
-                    <img src={image ? image : DefaultImg} className="avatar" />
+                  <Avatar src={image ? image : DefaultImg} alt={userData.name} sx={{width:"200px",height:"200px"}}/>
                     <Box>
                         <Typography variant="h2">
                             {userData.name} {userData.apellido}
