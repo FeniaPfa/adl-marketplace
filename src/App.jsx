@@ -13,6 +13,7 @@ import { ProductsManager } from './views/ProductsManager';
 import { Favorites } from './views/Favorites';
 import { AddProduct } from './views/AddProduct';
 import { EditProduct } from './views/EditProduct';
+import { Cart } from './views/Cart';
 
 function App() {
     return (
@@ -30,6 +31,14 @@ function App() {
                             element={
                                 <PrivateRoute>
                                     <Profile />
+                                </PrivateRoute>
+                            }
+                        />
+                        <Route
+                            path="cart"
+                            element={
+                                <PrivateRoute>
+                                    <Cart />
                                 </PrivateRoute>
                             }
                         />

@@ -31,20 +31,20 @@ export const SetProfile = () => {
         if (fileSize > 1) {
             setError(true);
             setAvatar(null);
+            setUserInfo({ ...userInfo, hasAvatar: false });
             return;
         }
+        setUserInfo({ ...userInfo, hasAvatar: true });
         setAvatar(e.target.files[0]);
     };
 
     const uploadAvatar = async () => {
         if (!avatar) {
-            setUserInfo({ ...userInfo, hasAvatar: false });
             return;
         }
         const filesFolderRef = ref(storage, `users-avatar/${user.uid}`);
         try {
             await uploadBytes(filesFolderRef, avatar);
-            setUserInfo({ ...userInfo, hasAvatar: true });
         } catch (err) {
             console.error(err);
         }
