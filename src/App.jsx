@@ -15,12 +15,13 @@ import { AddProduct } from './views/AddProduct';
 import { EditProduct } from './views/EditProduct';
 import { Cart } from './views/Cart';
 
+
 function App() {
     return (
         <>
             <UserContextProvider>
                 <Navbar />
-                <Container maxWidth="lg" sx={{ margin: '2rem auto' }}>
+                <Container maxWidth="md" sx={{ margin: '2rem auto' }}>
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/login" element={<Login />} />
