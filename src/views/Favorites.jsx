@@ -1,6 +1,11 @@
 
 export const Favorites = () => {
   return (
-    <div>Favorites</div>
+    <>
+    <h1>Mis Favoritos</h1>
+    
+
+
+    </>
   )
 }

@@ -4,7 +4,7 @@ import { Link, Outlet } from 'react-router-dom';
 export const Dashboard = () => {
     const dashboardLinks = [
         // { text: 'Mi Perfil', to: '/' },
-        { text: 'Favoritos', to: '/' },
+        { text: 'Favoritos', to: 'favs' },
         { text: 'Mis Publicaciones', to: '/dashboard' },
         { text: 'Agregar Publicaciones', to: 'addproduct' },
     ];

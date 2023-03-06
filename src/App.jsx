@@ -10,6 +10,7 @@ import { Register } from './views/Register';
 import { SetProfile } from './views/SetProfile';
 import { Dashboard } from './views/Dashboard';
 import { ProductsManager } from './views/ProductsManager';
+import { Favorites } from './views/Favorites';
 import { AddProduct } from './views/AddProduct';
 import { EditProduct } from './views/EditProduct';
 
@@ -50,6 +51,7 @@ function App() {
                         }
                     >
                         <Route index element={<ProductsManager />} />
+                        <Route path='favs' element={<Favorites />} />
                         <Route path="addproduct" element={<AddProduct />} />
                         <Route path=":id" element={<EditProduct />} />
                         {/* + rutas */}
