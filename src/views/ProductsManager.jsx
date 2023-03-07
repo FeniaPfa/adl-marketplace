@@ -19,7 +19,12 @@ export const ProductsManager = () => {
     return (
         <>
             {myProducts.map((item) => (
-                <MyProduct key={item.id} product={item}/>
+                <MyProduct
+                    key={item.id}
+                    product={item}
+                    setMyProducts={setMyProducts}
+                    myProducts={myProducts}
+                />
             ))}
         </>
     );

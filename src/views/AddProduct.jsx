@@ -77,12 +77,13 @@ export const AddProduct = () => {
                         fullWidth
                         label="Nivel"
                         helperText="Selecciona el nivel de dificultad de la clase"
-                        defaultValue="Universal"
+                        value={productInfo.level}
+                        // defaultValue="Universal"
                         onChange={(e) => setProductInfo({ ...productInfo, level: e.target.value })}>
                         <MenuItem value="Universal">Universal</MenuItem>
-                        <MenuItem>Principiante</MenuItem>
-                        <MenuItem>Medio</MenuItem>
-                        <MenuItem>Avanzado</MenuItem>
+                        <MenuItem value="Principiantes">Principiante</MenuItem>
+                        <MenuItem value="Intermedio">Intermedio</MenuItem>
+                        <MenuItem value="Avanzado">Avanzado</MenuItem>
                     </TextField>
                     <TextField
                         required
@@ -90,7 +91,8 @@ export const AddProduct = () => {
                         fullWidth
                         label="Edad"
                         helperText="Selecciona para que edad son las clases"
-                        defaultValue="Todas las edades"
+                        value={productInfo.age}
+                        // defaultValue="Todas las edades"
                         onChange={(e) => setProductInfo({ ...productInfo, age: e.target.value })}>
                         <MenuItem value="Todas las edades">Todas las edades</MenuItem>
                         <MenuItem value="Niños">Niños</MenuItem>
