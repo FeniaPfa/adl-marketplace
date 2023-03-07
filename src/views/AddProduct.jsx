@@ -1,4 +1,14 @@
-import { Button, Container, Stack, TextField, Typography } from '@mui/material';
+import {
+    Box,
+    Button,
+    Container,
+    InputLabel,
+    MenuItem,
+    Select,
+    Stack,
+    TextField,
+    Typography,
+} from '@mui/material';
 import { addDoc, setDoc } from 'firebase/firestore';
 import { ref, uploadBytes } from 'firebase/storage';
 import { useState } from 'react';
@@ -13,6 +23,8 @@ export const AddProduct = () => {
         dojo: '',
         time: '',
         price: 0,
+        level: '',
+        age: '',
         userId: user.uid,
         days: '',
         place: '',
@@ -56,6 +68,34 @@ export const AddProduct = () => {
                         placeholder="Seishin Dojo"
                         onChange={(e) => setProductInfo({ ...productInfo, dojo: e.target.value })}
                     />
+                </Stack>
+
+                <Stack direction="row" gap="1.2rem">
+                    <TextField
+                        required
+                        select
+                        fullWidth
+                        label="Nivel"
+                        helperText="Selecciona el nivel de dificultad de la clase"
+                        defaultValue="Universal"
+                        onChange={(e) => setProductInfo({ ...productInfo, level: e.target.value })}>
+                        <MenuItem value="Universal">Universal</MenuItem>
+                        <MenuItem>Principiante</MenuItem>
+                        <MenuItem>Medio</MenuItem>
+                        <MenuItem>Avanzado</MenuItem>
+                    </TextField>
+                    <TextField
+                        required
+                        select
+                        fullWidth
+                        label="Edad"
+                        helperText="Selecciona para que edad son las clases"
+                        defaultValue="Todas las edades"
+                        onChange={(e) => setProductInfo({ ...productInfo, age: e.target.value })}>
+                        <MenuItem value="Todas las edades">Todas las edades</MenuItem>
+                        <MenuItem value="Niños">Niños</MenuItem>
+                        <MenuItem value="Adultos">Adultos</MenuItem>
+                    </TextField>
                 </Stack>
 
                 <Stack direction="row" gap="1.2rem">

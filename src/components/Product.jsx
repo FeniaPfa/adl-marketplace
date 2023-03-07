@@ -4,13 +4,13 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { storage } from '../config/firebase';
 
-export const Product = ({product}) => {
+export const Product = ({ product }) => {
     const navigate = useNavigate();
     const [image, setImage] = useState(null);
     const imgRef = ref(storage, `products-img/${product.id}`);
 
     const handleClick = () => {
-      console.log("click")
+        console.log('click');
         // navigate(`/products/${product.id}`);
     };
 
@@ -23,7 +23,7 @@ export const Product = ({product}) => {
             <Card sx={{ maxWidth: 350 }}>
                 <CardMedia
                     component="img"
-                    sx={{ maxHeight: '200px', minWidth:"200px" }}
+                    sx={{ maxHeight: '200px', minWidth: '200px' }}
                     image={image}
                     alt={product.dojo}
                 />

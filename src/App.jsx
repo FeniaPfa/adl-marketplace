@@ -15,7 +15,6 @@ import { AddProduct } from './views/AddProduct';
 import { EditProduct } from './views/EditProduct';
 import { Cart } from './views/Cart';
 
-
 function App() {
     return (
         <>
@@ -51,22 +50,20 @@ function App() {
                                 </PrivateRoute>
                             }
                         />
-                        
-                        <Route
-                        path="/dashboard"
-                        element={
-                            <PrivateRoute>
-                                <Dashboard />
-                            </PrivateRoute>
-                        }
-                    >
-                        <Route index element={<ProductsManager />} />
-                        <Route path='favs' element={<Favorites />} />
-                        <Route path="addproduct" element={<AddProduct />} />
-                        <Route path=":id" element={<EditProduct />} />
-                        {/* + rutas */}
 
-                    </Route>
+                        <Route
+                            path="/dashboard"
+                            element={
+                                <PrivateRoute>
+                                    <Dashboard />
+                                </PrivateRoute>
+                            }>
+                            <Route index element={<ProductsManager />} />
+                            <Route path="favs" element={<Favorites />} />
+                            <Route path="addproduct" element={<AddProduct />} />
+                            <Route path=":id" element={<EditProduct />} />
+                            {/* + rutas */}
+                        </Route>
                     </Routes>
                 </Container>
             </UserContextProvider>

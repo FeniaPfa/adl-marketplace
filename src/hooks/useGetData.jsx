@@ -24,6 +24,8 @@ export const useGetData = () => {
     }, []);
 
     return {
-        products, getProducts, setProducts
+        products,
+        getProducts,
+        setProducts,
     };
 };

@@ -2,6 +2,7 @@ import { AppBar, Button, Container, Link, Stack, Toolbar, Typography } from '@mu
 import { NavLink } from 'react-router-dom';
 import { logOut } from '../config/firebase';
 import { useUserContext } from '../context/userContext';
+import logo from '/logo.svg'
 
 export const Navbar = () => {
     const { user } = useUserContext();
@@ -29,20 +30,24 @@ export const Navbar = () => {
     return (
         <AppBar position="sticky" component="nav">
             <Container maxWidth="lg">
-                <Toolbar sx={{ display: 'flex', justifyContent: 'space-between'}}>
+                <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
                     <Stack direction="row" sx={{ alignItems: 'center', gap: '.8rem' }}>
-                        <Typography variant="h5" component="h1" fontWeight="bold">
-                            Nombre
+                        <img src={logo} width="50px" />
+                        <Typography variant="h5" component="h1" fontWeight="bold" fontFamily="Kanit, sans-serif">
+                            TATAMI
                         </Typography>
                     </Stack>
-                    <Stack direction="row" gap="1.2rem" sx={{ '> a': { color: '#fff' }, alignItems:"center" }}>
+                    <Stack
+                        direction="row"
+                        gap="1.2rem"
+                        sx={{ '> a': { color: '#fff' }, alignItems: 'center' }}>
                         {routes.map((item) => {
                             if (item.private && !user) return null;
                             if (item.publicOnly && user) return null;
                             return (
                                 <Link
-                                key={item.text}
-                                    sx={{fontSize:"1.2rem"}}
+                                    key={item.text}
+                                    sx={{ fontSize: '1.2rem' }}
                                     variant="h5"
                                     style={activeLink}
                                     to={item.to}
