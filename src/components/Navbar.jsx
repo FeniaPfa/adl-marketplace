@@ -32,7 +32,7 @@ export const Navbar = () => {
             <Container maxWidth="lg">
                 <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
                     <Stack direction="row" sx={{ alignItems: 'center', gap: '.8rem' }}>
-                        <img src={logo} width="50px" />
+                        <img src={logo} width="35px" />
                         <Typography variant="h5" component="h1" fontWeight="bold" fontFamily="Kanit, sans-serif">
                             TATAMI
                         </Typography>
