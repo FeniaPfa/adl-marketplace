@@ -14,6 +14,7 @@ import { AddProduct } from './views/AddProduct';
 import { EditProduct } from './views/EditProduct';
 import { Cart } from './views/Cart';
 import { Register } from './views/Register';
+import { ProductPage } from './views/ProductPage';
 
 function App() {
     return (
@@ -25,6 +26,7 @@ function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
+                        <Route path="/products/:id" element={<ProductPage />} />
 
                         <Route
                             path="user/profile"

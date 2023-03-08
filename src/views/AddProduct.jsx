@@ -21,7 +21,7 @@ export const AddProduct = () => {
     const [productInfo, setProductInfo] = useState({
         sport: '',
         dojo: '',
-        time: '',
+        city: '',
         price: 0,
         level: '',
         age: '',
@@ -105,9 +105,9 @@ export const AddProduct = () => {
                         fullWidth
                         required
                         type="text"
-                        label="Duración"
-                        placeholder="2 Horas"
-                        onChange={(e) => setProductInfo({ ...productInfo, time: e.target.value })}
+                        label="Ciudad"
+                        placeholder="Viña del Mar"
+                        onChange={(e) => setProductInfo({ ...productInfo, city: e.target.value })}
                     />
                     <TextField
                         fullWidth
@@ -152,7 +152,7 @@ export const AddProduct = () => {
                     placeholder="Clases de karate para nivel (principiante, todos los niveles o avanzado)
 Para todas las edades o (niños de x hasta x años o adultos)
                         "
-                    helperText="Ingresa información adicional como nivel requerido o edad requerida para la clase"
+                    helperText="Ingresa información adicional como duración de las clases u otros"
                     onChange={(e) => setProductInfo({ ...productInfo, desc: e.target.value })}
                 />
 

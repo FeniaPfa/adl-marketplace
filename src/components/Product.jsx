@@ -3,7 +3,7 @@ import { getDownloadURL, ref } from 'firebase/storage';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { storage } from '../config/firebase';
-import {formatNumber} from '../utils/utils.js'
+import { formatNumber } from '../utils/utils.js';
 
 export const Product = ({ product }) => {
     const navigate = useNavigate();
@@ -11,8 +11,7 @@ export const Product = ({ product }) => {
     const [loading, setLoading] = useState(true);
 
     const handleClick = () => {
-        console.log('click');
-        // navigate(`/products/${product.id}`);
+        navigate(`/products/${product.id}`);
     };
 
     const getImg = async () => {
@@ -42,7 +41,7 @@ export const Product = ({ product }) => {
                     '&:hover': { boxShadow: '2px 2px 7px #0000001A' },
                 }}
                 onClick={handleClick}>
-                {loading ? (
+                {/* {loading ? (
                     <Skeleton variant="rectangular" width={200} height={150} />
                 ) : (
                     <CardMedia
@@ -51,7 +50,13 @@ export const Product = ({ product }) => {
                         image={image}
                         alt={product.dojo}
                     />
-                )}
+                )} */}
+                <CardMedia
+                    component="img"
+                    sx={{ maxHeight: '150px', minWidth: '200px' }}
+                    image={image}
+                    alt={product.dojo}
+                />
 
                 <CardContent>
                     <Stack gap=".6rem">

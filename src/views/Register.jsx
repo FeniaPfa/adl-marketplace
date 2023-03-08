@@ -1,4 +1,4 @@
-import { Box, Stack, Step, StepLabel, Stepper, Typography } from '@mui/material';
+import { Stack, Step, StepLabel, Stepper, Typography } from '@mui/material';
 import { useState } from 'react';
 import { CreateUserForm } from '../components/CreateUserForm';
 import { SetUserForm } from '../components/SetUserForm';
