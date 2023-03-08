@@ -4,6 +4,7 @@ import { productsCollectionRef } from '../config/firebase';
 
 export const useGetData = () => {
     const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true)
 
     const getProducts = async () => {
         try {
@@ -16,6 +17,8 @@ export const useGetData = () => {
             // console.log("getProducts")
         } catch (err) {
             console.error(err);
+        } finally{
+            setLoading(false)
         }
     };
 
@@ -27,5 +30,6 @@ export const useGetData = () => {
         products,
         getProducts,
         setProducts,
+        loading
     };
 };

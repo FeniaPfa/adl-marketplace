@@ -6,7 +6,6 @@ import UserContextProvider from './context/userContext';
 import { Home } from './views/Home';
 import { Login } from './views/Login';
 import { Profile } from './views/Profile';
-import { Register } from './views/Register';
 import { SetProfile } from './views/SetProfile';
 import { Dashboard } from './views/Dashboard';
 import { ProductsManager } from './views/ProductsManager';
@@ -14,6 +13,7 @@ import { Favorites } from './views/Favorites';
 import { AddProduct } from './views/AddProduct';
 import { EditProduct } from './views/EditProduct';
 import { Cart } from './views/Cart';
+import { Register } from './views/Register';
 
 function App() {
     return (

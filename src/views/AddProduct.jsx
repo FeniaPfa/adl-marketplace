@@ -115,7 +115,7 @@ export const AddProduct = () => {
                         type="number"
                         label="Precio Mensual"
                         placeholder="$"
-                        onChange={(e) => setProductInfo({ ...productInfo, price: e.target.value })}
+                        onChange={(e) => setProductInfo({ ...productInfo, price: e.target.valueAsNumber })}
                     />
                 </Stack>
                 <Stack direction="row" gap="1.2rem">
