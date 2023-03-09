@@ -42,9 +42,10 @@ export const ProductPage = () => {
 
     const listStyle = {
         display: 'flex',
-        gap: '5rem',
+        gap: {xs: "1rem",md :"5rem"},
         color: '#455a64',
         fontWeight: 'bold',
+        flexWrap:{xs:"wrap",md:"noWrap"}
     };
 
     if (!productData) {
@@ -58,15 +59,15 @@ export const ProductPage = () => {
                     sx={{
                         display: 'flex',
                         flexDirection: 'column',
-                        padding: '.1rem 1rem 1rem',
+                        padding: '.3rem 1.2rem 1.2rem',
                         gap: '1rem',
                     }}>
-                    <Box sx={{ display: 'flex', gap:"1rem", alignItems:"center" }}>
+                    <Box sx={{ display: 'flex', gap:"1rem", alignItems:"center", flexWrap:"wrap" }}>
                         <CardMedia
                             component="img"
                             title={productData?.sport}
                             image={img}
-                            sx={{ width: '40%', objectFit: 'cover', aspectRatio:"1/1" }}
+                            sx={{ width: {xs:"100%",md:'40%'}, objectFit: 'cover', aspectRatio:{md:"1/1"} }}
                         />
 
                         <CardContent

@@ -36,7 +36,7 @@ export const Product = ({ product }) => {
         <>
             <Card
                 sx={{
-                    maxWidth: 350,
+                    width: 250,
                     cursor: 'pointer',
                     '&:hover': { boxShadow: '2px 2px 7px #0000001A' },
                 }}
