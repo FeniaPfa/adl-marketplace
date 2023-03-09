@@ -1,10 +1,18 @@
+import { Container, Stack, Typography } from "@mui/material"
+import { FavCard } from "../components/FavCard"
 
 export const Favorites = () => {
+
+
+
+
   return (
     <>
-    <h1>Mis Favoritos</h1>
-    
+    <Typography variant="h3" mb="2rem" fontFamily="Kanit,sans-serif" fontWeight="bold">Mis Favoritos</Typography>
+    <Stack gap="1rem">
 
+    <FavCard />
+    </Stack>
 
     </>
   )

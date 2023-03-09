@@ -1,5 +1,4 @@
 import {
-    Avatar,
     Box,
     Button,
     Card,
@@ -15,6 +14,7 @@ import { getDownloadURL, ref } from 'firebase/storage';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { storage } from '../config/firebase';
+import { Main } from '../containers/Main';
 import { useGetData } from '../hooks/useGetData';
 import { formatNumber } from '../utils/utils.js';
 
@@ -53,7 +53,7 @@ export const ProductPage = () => {
     }
 
     return (
-        <>
+        <Main>
             <Container maxWidth="md">
                 <Card
                     sx={{
@@ -108,8 +108,11 @@ export const ProductPage = () => {
                             <Typography variant="h4" fontWeight="bold" color="primary">
                                 $ {formatNumber(productData?.price)}
                             </Typography>
-
-                            <Button variant="contained">Añadir</Button>
+                            <Stack direction="row" justifyContent="space-around">
+                                
+                            <Button variant="contained">Añadir al carrito</Button>
+                            <Button variant="contained">Guardar en favoritos</Button>
+                            </Stack>
                         </CardContent>
                     </Box>
                     {/* <Typography>{productData?.desc}</Typography> */}
@@ -120,6 +123,6 @@ export const ProductPage = () => {
                     </Typography>
                 </Card>
             </Container>
-        </>
+        </Main>
     );
 };

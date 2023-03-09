@@ -21,21 +21,21 @@ function App() {
         <>
             <UserContextProvider>
                 <Navbar />
-                <Container maxWidth="md" sx={{ margin: '2rem auto' }}>
+
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/products/:id" element={<ProductPage />} />
 
-                        <Route
+                        {/* <Route
                             path="user/profile"
                             element={
                                 <PrivateRoute>
                                     <Profile />
                                 </PrivateRoute>
                             }
-                        />
+                        /> */}
                         <Route
                             path="cart"
                             element={
@@ -60,14 +60,15 @@ function App() {
                                     <Dashboard />
                                 </PrivateRoute>
                             }>
-                            <Route index element={<ProductsManager />} />
+                            <Route index element={<Profile />} />
+                            <Route path='products' element={<ProductsManager />} />
                             <Route path="favs" element={<Favorites />} />
                             <Route path="addproduct" element={<AddProduct />} />
                             <Route path=":id" element={<EditProduct />} />
-                            {/* + rutas */}
+
                         </Route>
                     </Routes>
-                </Container>
+
             </UserContextProvider>
         </>
     );

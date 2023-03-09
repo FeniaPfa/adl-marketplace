@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { MyProduct } from '../components/MyProduct';
 import { useUserContext } from '../context/userContext';
@@ -18,6 +19,8 @@ export const ProductsManager = () => {
 
     return (
         <>
+            <Typography variant="h3" mb="2rem" fontFamily="Kanit,sans-serif" fontWeight="bold">Mis Publicaciones</Typography>
+
             {myProducts.map((item) => (
                 <MyProduct
                     key={item.id}
