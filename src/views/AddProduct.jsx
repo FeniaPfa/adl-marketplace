@@ -138,7 +138,7 @@ export const AddProduct = () => {
                 <TextField
                     required
                     type="text"
-                    label="Dirección"
+                    label="Dirección Completa"
                     placeholder="Los Alamos 123, Viña del Mar"
                     helperText="Ingresa la calle y numero seguido de la ciudad"
                     onChange={(e) => setProductInfo({ ...productInfo, place: e.target.value })}

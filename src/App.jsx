@@ -64,7 +64,7 @@ function App() {
                             <Route path='products' element={<ProductsManager />} />
                             <Route path="favs" element={<Favorites />} />
                             <Route path="addproduct" element={<AddProduct />} />
-                            <Route path=":id" element={<EditProduct />} />
+                            <Route path="products/:id" element={<EditProduct />} />
 
                         </Route>
                     </Routes>

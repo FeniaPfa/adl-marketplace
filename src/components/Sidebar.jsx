@@ -15,7 +15,7 @@ export const Sidebar = () => {
     return (
         <Drawer
             variant="permanent"
-            anchor="lef"
+            anchor="left"
             sx={{
                 width: 200,
                 flexShrink: 0,
