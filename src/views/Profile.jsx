@@ -1,11 +1,11 @@
-import { Avatar, Box, Container, Paper, Stack, Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { doc, getDoc } from 'firebase/firestore';
 import { getDownloadURL, ref } from 'firebase/storage';
-import { useEffect, useState } from 'react';
 import { db, storage } from '../config/firebase';
-import { Main } from '../containers/Main';
 import { useUserContext } from '../context/userContext';
+import { Main } from '../containers/Main';
 import DefaultImg from '/defaultavatar.svg';
+import { Avatar, Box, Paper, Stack, Typography } from '@mui/material';
 
 export const Profile = () => {
     const { user } = useUserContext();
@@ -28,7 +28,6 @@ export const Profile = () => {
             console.log(err.message);
         }
     };
-    console.log(userData);
 
     useEffect(() => {
         getUser();

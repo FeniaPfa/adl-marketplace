@@ -1,8 +1,8 @@
-import { AppBar, Button, Container, Link, Stack, Toolbar, Typography } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import { logOut } from '../config/firebase';
 import { useUserContext } from '../context/userContext';
 import logo from '/logo.svg';
+import { AppBar, Button, Container, Link, Stack, Toolbar, Typography } from '@mui/material';
 
 export const Navbar = () => {
     const { user } = useUserContext();
@@ -11,7 +11,6 @@ export const Navbar = () => {
         { to: '/', text: 'Inicio', private: false },
         { to: '/login', text: 'Ingresar', private: false, publicOnly: true },
         { to: '/register', text: 'Registrarse', private: false, publicOnly: true },
-        // { to: '/user/profile', text: 'Mi Perfil', private: true },
         { to: '/cart', text: 'Carrito', private: true },
         { to: '/dashboard', text: 'Dashboard', private: true },
         // { to: "/products", text: "Products", private: false },

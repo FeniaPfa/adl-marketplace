@@ -1,13 +1,13 @@
-import { Button, Container, MenuItem, Stack, TextField, Typography } from '@mui/material';
-import { doc, getDoc, updateDoc } from 'firebase/firestore';
-import { ref, uploadBytes } from 'firebase/storage';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { ref, uploadBytes } from 'firebase/storage';
 import { db, deleteFile, storage } from '../config/firebase';
+import { Button, Container, MenuItem, Stack, TextField, Typography } from '@mui/material';
 
 export const EditProduct = () => {
     const { id } = useParams();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const [img, setImg] = useState();
 
@@ -29,7 +29,7 @@ export const EditProduct = () => {
             level: data?.level,
             age: data?.age,
             days: data?.days,
-            place: data?.place,
+            adress: data?.place,
             desc: data?.desc,
         });
     };
@@ -53,7 +53,7 @@ export const EditProduct = () => {
             uploadFile();
         }
         console.log('Producto Actualizado');
-        navigate(`/products/${id}`)
+        navigate(`/products/${id}`);
     };
 
     useEffect(() => {
@@ -70,7 +70,6 @@ export const EditProduct = () => {
                     <TextField
                         fullWidth
                         value={productInfo?.sport || ''}
-                        
                         type="text"
                         label="Disciplina"
                         placeholder="Karate"
@@ -155,7 +154,7 @@ export const EditProduct = () => {
                     label="Dirección Completa"
                     placeholder="Los Alamos 123, Viña del Mar"
                     helperText="Ingresa la calle y numero seguido de la ciudad"
-                    onChange={(e) => setProductInfo({ ...productInfo, place: e.target.value })}
+                    onChange={(e) => setProductInfo({ ...productInfo, adress: e.target.value })}
                 />
 
                 <TextField

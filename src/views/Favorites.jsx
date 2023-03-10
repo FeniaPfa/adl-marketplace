@@ -1,4 +1,4 @@
-import { Container, Stack, Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import { FavCard } from '../components/FavCard';
 
 export const Favorites = () => {

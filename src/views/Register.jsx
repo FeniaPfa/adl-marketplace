@@ -1,8 +1,8 @@
-import { Stack, Step, StepLabel, Stepper, Typography } from '@mui/material';
 import { useState } from 'react';
-import { CreateUserForm } from '../components/CreateUserForm';
-import { SetUserForm } from '../components/SetUserForm';
 import { Main } from '../containers/Main';
+import { SetUserForm } from '../components/SetUserForm';
+import { Stack, Step, StepLabel, Stepper, Typography } from '@mui/material';
+import { CreateUserForm } from '../components/CreateUserForm';
 
 export const Register = () => {
     const [step, setStep] = useState(0);

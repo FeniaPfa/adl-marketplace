@@ -1,12 +1,14 @@
-import { Button, Container, MenuItem, Stack, TextField, Typography } from '@mui/material';
+import { useState } from 'react';
 import { addDoc } from 'firebase/firestore';
 import { ref, uploadBytes } from 'firebase/storage';
-import { useState } from 'react';
 import { productsCollectionRef, storage } from '../config/firebase';
 import { useUserContext } from '../context/userContext';
+import { Button, Container, MenuItem, Stack, TextField, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 export const AddProduct = () => {
     const { user } = useUserContext();
+    const navigate = useNavigate()
 
     const [fileError, setFileError] = useState(false);
 
@@ -19,7 +21,7 @@ export const AddProduct = () => {
         age: '',
         userId: user.uid,
         days: '',
-        place: '',
+        adress: '',
         desc: '',
     });
 
@@ -46,6 +48,7 @@ export const AddProduct = () => {
             const imgRef = ref(storage, `products-img/${uid}`);
             await uploadBytes(imgRef, img);
             console.log('Producto e imagen subidos correctamente');
+            navigate(`/products/${uid}`)
         } catch (err) {
             console.log(err.message);
         }
@@ -153,7 +156,7 @@ export const AddProduct = () => {
                     label="Dirección Completa"
                     placeholder="Los Alamos 123, Viña del Mar"
                     helperText="Ingresa la calle y numero seguido de la ciudad"
-                    onChange={(e) => setProductInfo({ ...productInfo, place: e.target.value })}
+                    onChange={(e) => setProductInfo({ ...productInfo, adress: e.target.value })}
                 />
 
                 <TextField

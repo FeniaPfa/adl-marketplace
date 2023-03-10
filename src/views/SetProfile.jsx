@@ -1,11 +1,10 @@
-import { Box, Button, Container, Stack, TextField } from '@mui/material';
-import { updateProfile } from 'firebase/auth';
-import { collection, doc, setDoc } from 'firebase/firestore';
-import { ref, uploadBytes } from 'firebase/storage';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth, db, storage, usersCollectionRef } from '../config/firebase';
+import { collection, doc, setDoc } from 'firebase/firestore';
+import { ref, uploadBytes } from 'firebase/storage';
+import { db, storage } from '../config/firebase';
 import { useUserContext } from '../context/userContext';
+import { Button, Container, Stack, TextField } from '@mui/material';
 
 export const SetProfile = () => {
     const navigate = useNavigate();
@@ -22,8 +21,6 @@ export const SetProfile = () => {
         hasAvatar: false,
         favs: [],
     });
-
-    // crear con setDoc un user en su colleccion
 
     const handleAvatar = (e) => {
         setError(false);

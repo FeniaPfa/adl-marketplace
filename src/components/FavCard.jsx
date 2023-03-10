@@ -2,11 +2,7 @@ import {
     Avatar,
     Box,
     Button,
-    Card,
-    CardContent,
-    CardMedia,
     Paper,
-    Skeleton,
     Stack,
     Typography,
 } from '@mui/material';

@@ -1,9 +1,9 @@
-import { Button, Card, CardContent, CardMedia, Skeleton, Stack, Typography } from '@mui/material';
-import { getDownloadURL, ref } from 'firebase/storage';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getDownloadURL, ref } from 'firebase/storage';
 import { storage } from '../config/firebase';
 import { formatNumber } from '../utils/utils.js';
+import { Card, CardContent, CardMedia, Stack, Typography } from '@mui/material';
 
 export const Product = ({ product }) => {
     const navigate = useNavigate();
@@ -68,7 +68,11 @@ export const Product = ({ product }) => {
                             {product.dojo}
                         </Typography>
                         <Typography variant="subtitle2">{product.city}</Typography>
-                        <Typography variant="h5" fontWeight="bold" color="primary" sx={{letterSpacing:".3rem"}}>
+                        <Typography
+                            variant="h5"
+                            fontWeight="bold"
+                            color="primary"
+                            sx={{ letterSpacing: '.3rem' }}>
                             $ {formatNumber(product.price)}
                         </Typography>
                     </Stack>

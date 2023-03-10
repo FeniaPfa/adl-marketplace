@@ -1,9 +1,9 @@
-import { Box, Divider, Drawer, List, ListItem, ListItemIcon, Toolbar } from '@mui/material';
+import { NavLink } from 'react-router-dom';
+import { Box, Drawer, List, ListItem, ListItemIcon, Toolbar } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
-import { NavLink } from 'react-router-dom';
 
 export const Sidebar = () => {
     const activeStyle = {
@@ -40,7 +40,7 @@ export const Sidebar = () => {
                         <ListItemIcon>
                             <AddCircleRoundedIcon />
                         </ListItemIcon>
-                        Agregar Publicaciones
+                        Crear Publicación
                     </ListItem>
                     <ListItem to="products" component={NavLink} style={activeLink}>
                         <ListItemIcon>

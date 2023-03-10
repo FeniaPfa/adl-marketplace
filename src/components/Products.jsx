@@ -1,10 +1,10 @@
-import { Stack } from '@mui/material';
-import { useGetData } from '../hooks/useGetData';
-import { CardSkeleton } from './CardSkeleton';
+import { useGetProducts } from '../hooks/useGetProducts';
 import { Product } from './Product';
+import { CardSkeleton } from './CardSkeleton';
+import { Stack } from '@mui/material';
 
 export const Products = () => {
-    const { products, loading } = useGetData();
+    const { products, loading } = useGetProducts();
     return (
         <Stack direction="row" gap="2rem" flexWrap="wrap">
             {loading

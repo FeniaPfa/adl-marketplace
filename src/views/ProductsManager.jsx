@@ -1,12 +1,12 @@
-import { Stack, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { MyProduct } from '../components/MyProduct';
 import { useUserContext } from '../context/userContext';
-import { useGetData } from '../hooks/useGetData';
+import { useGetProducts } from '../hooks/useGetProducts';
+import { MyProduct } from '../components/MyProduct';
+import { Stack, Typography } from '@mui/material';
 
 export const ProductsManager = () => {
     const { user } = useUserContext();
-    const { products } = useGetData();
+    const { products } = useGetProducts();
     const [myProducts, setMyProducts] = useState([]);
 
     useEffect(() => {
@@ -23,16 +23,15 @@ export const ProductsManager = () => {
                 Mis Publicaciones
             </Typography>
             <Stack gap="1rem">
-
-            {myProducts.map((item) => (
-                <MyProduct
-                key={item.id}
-                product={item}
-                setMyProducts={setMyProducts}
-                myProducts={myProducts}
-                />
+                {myProducts.map((item) => (
+                    <MyProduct
+                        key={item.id}
+                        product={item}
+                        setMyProducts={setMyProducts}
+                        myProducts={myProducts}
+                    />
                 ))}
-                </Stack>
+            </Stack>
         </>
     );
 };

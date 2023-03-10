@@ -2,7 +2,7 @@ import { getDocs } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { productsCollectionRef } from '../config/firebase';
 
-export const useGetData = () => {
+export const useGetProducts = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true)
 

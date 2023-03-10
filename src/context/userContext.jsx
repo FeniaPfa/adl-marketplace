@@ -12,7 +12,7 @@ export default function UserContextProvider({ children }) {
 
     // Check si user está activo
     useEffect(() => {
-        // observable por firebase 👇
+
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             console.log('UserContext', user);
             setUser(user);
@@ -22,8 +22,6 @@ export default function UserContextProvider({ children }) {
         // unsubscribe()
     }, []);
 
-    // Cuando inicia la aplicación siempre el user estará false
-    // Pero al terminar el useEffect, el user podrá ser null o un objeto
     if (user === false) return <p>Loading app...</p>;
 
     return <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>;

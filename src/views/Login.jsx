@@ -1,13 +1,11 @@
-import { Alert, Box, Button, Container, Stack, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../config/firebase';
 import { Main } from '../containers/Main';
-import { useUserContext } from '../context/userContext';
+import { Alert, Button, Container, Stack, TextField, Typography } from '@mui/material';
 
 export const Login = () => {
     const navigate = useNavigate();
-    const { user } = useUserContext();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -15,7 +13,7 @@ export const Login = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        setError({status: false, message:""})
+        setError({ status: false, message: '' });
         try {
             await login({ email, password });
             navigate('/dashboard');
@@ -36,7 +34,7 @@ export const Login = () => {
                     <Typography fontWeight="bold" variant="h4" textAlign="center">
                         Bienvenido a Tatami
                     </Typography>
-                    {error.status && <Alert severity='error'>{error.message}</Alert>}
+                    {error.status && <Alert severity="error">{error.message}</Alert>}
                     <TextField
                         required
                         label="Correo Electronico"

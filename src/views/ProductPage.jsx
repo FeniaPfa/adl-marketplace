@@ -1,30 +1,29 @@
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { doc, getDoc } from 'firebase/firestore';
+import { getDownloadURL, ref } from 'firebase/storage';
+import { db, storage } from '../config/firebase';
+import { useGetProducts } from '../hooks/useGetProducts';
+import { Main } from '../containers/Main';
+import { formatNumber } from '../utils/utils.js';
 import {
     Box,
     Button,
     Card,
     CardContent,
     CardMedia,
-    Container,
     List,
     ListItem,
     Stack,
     Typography,
 } from '@mui/material';
-import { doc, getDoc } from 'firebase/firestore';
-import { getDownloadURL, ref } from 'firebase/storage';
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { db, storage } from '../config/firebase';
-import { Main } from '../containers/Main';
-import { useGetData } from '../hooks/useGetData';
-import { formatNumber } from '../utils/utils.js';
 
 export const ProductPage = () => {
     const { id } = useParams();
     const [img, setImg] = useState();
     const [userInfo, setUserInfo] = useState();
 
-    const { products, setLoading, loading } = useGetData();
+    const { products, setLoading, loading } = useGetProducts();
 
     const productData = products.find((item) => item.id === id);
 
@@ -78,13 +77,12 @@ export const ProductPage = () => {
                     flexDirection: 'column',
                     padding: '.3rem 1.2rem 1.2rem',
                 }}>
+                {/* card body */}
                 <Box
-                    className="card-body"
                     sx={{
                         display: 'flex',
                         gap: '1rem',
                         alignItems: 'center',
-                        // flexWrap: "wrap",
                         flexDirection: { xs: 'column', sm: 'row' },
                     }}>
                     <CardMedia
@@ -97,7 +95,7 @@ export const ProductPage = () => {
                             aspectRatio: { sm: '1/1' },
                         }}
                     />
-
+                    {/* Card right info */}
                     <CardContent
                         sx={{
                             display: 'flex',
@@ -105,6 +103,7 @@ export const ProductPage = () => {
                             gap: '.6rem',
                             flexGrow: 1,
                         }}>
+                        {/* Sport | City */}
                         <Stack
                             direction="row"
                             justifyContent="space-between"
@@ -113,7 +112,7 @@ export const ProductPage = () => {
                                 Clases de {productData?.sport}
                             </Typography>
                             <Typography variant="overline" fontWeight="bold">
-                                Viña del Mar
+                                {productData?.city}
                             </Typography>
                         </Stack>
                         <Typography
@@ -123,10 +122,11 @@ export const ProductPage = () => {
                             letterSpacing=".3rem">
                             {productData?.dojo}
                         </Typography>
+                        {/* List Direccion | Nivel | Edad */}
                         <List disablePadding>
                             <ListItem sx={listStyle}>
                                 <span style={{ flexGrow: '1' }}>Dirección:</span>
-                                <span>{productData.place}</span>
+                                <span>{productData.adress}</span>
                             </ListItem>
                             <ListItem sx={listStyle}>
                                 <span style={{ flexGrow: '1' }}>Nivel:</span>
@@ -137,6 +137,7 @@ export const ProductPage = () => {
                                 <span>{productData.age}</span>
                             </ListItem>
                         </List>
+                        {/* Precio x mes */}
                         <Box display="flex" gap="1rem" flexDirection="row" alignItems="baseline">
                             <Typography
                                 variant="h4"
@@ -153,12 +154,14 @@ export const ProductPage = () => {
                                 x mes
                             </Typography>
                         </Box>
+                        {/* Añadir | Fav */}
                         <Stack direction="row" justifyContent="space-around">
                             <Button variant="outlined">Guardar en favoritos</Button>
                             <Button variant="contained">Añadir al carrito</Button>
                         </Stack>
                     </CardContent>
                 </Box>
+                {/* User | Descripcion | Horarios */}
                 <Box className="card-bottom">
                     <Typography variant="overline" sx={{ lineHeight: '0' }}>
                         Por:
@@ -166,6 +169,9 @@ export const ProductPage = () => {
                             {' '}
                             {userInfo?.name} {userInfo?.apellido}
                         </b>
+                    </Typography>
+                    <Typography>
+                        <b>Horarios:</b> {productData?.days}
                     </Typography>
                     <Typography>
                         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta inventore
