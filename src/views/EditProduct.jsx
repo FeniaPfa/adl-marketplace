@@ -9,7 +9,6 @@ export const EditProduct = () => {
     const { id } = useParams();
     const navigate = useNavigate()
 
-    const [product, setProduct] = useState(null);
     const [img, setImg] = useState();
 
     const [productInfo, setProductInfo] = useState({});
@@ -21,7 +20,6 @@ export const EditProduct = () => {
         const docSnap = await getDoc(productRef);
         const data = docSnap.data();
 
-        setProduct(data);
         setProductInfo({
             ...productInfo,
             sport: data?.sport,
@@ -80,7 +78,7 @@ export const EditProduct = () => {
                     />
                     <TextField
                         fullWidth
-                        value={product?.dojo || ''}
+                        value={productInfo?.dojo || ''}
                         type="text"
                         label="Dojo o institución"
                         placeholder="Seishin Dojo"
@@ -94,7 +92,7 @@ export const EditProduct = () => {
                         fullWidth
                         label="Nivel"
                         helperText="Selecciona el nivel de dificultad de la clase"
-                        value={product?.level || ''}
+                        value={productInfo?.level || ''}
                         // defaultValue="Universal"
                         onChange={(e) => setProductInfo({ ...productInfo, level: e.target.value })}>
                         <MenuItem value="Universal">Universal</MenuItem>
@@ -107,7 +105,7 @@ export const EditProduct = () => {
                         fullWidth
                         label="Edad"
                         helperText="Selecciona para que edad son las clases"
-                        value={product?.age || ''}
+                        value={productInfo?.age || ''}
                         onChange={(e) => setProductInfo({ ...productInfo, age: e.target.value })}>
                         <MenuItem value="Todas las edades">Todas las edades</MenuItem>
                         <MenuItem value="Niños">Niños</MenuItem>
@@ -118,7 +116,7 @@ export const EditProduct = () => {
                 <Stack direction="row" gap="1.2rem">
                     <TextField
                         fullWidth
-                        value={product?.city || ''}
+                        value={productInfo?.city || ''}
                         type="text"
                         label="Ciudad"
                         placeholder="Viña del Mar"
@@ -126,7 +124,7 @@ export const EditProduct = () => {
                     />
                     <TextField
                         fullWidth
-                        value={product?.price || ''}
+                        value={productInfo?.price || ''}
                         type="number"
                         label="Precio Mensual"
                         placeholder="$"
@@ -144,7 +142,7 @@ export const EditProduct = () => {
                     />
                 </Stack>
                 <TextField
-                    value={product?.days || ''}
+                    value={productInfo?.days || ''}
                     type="text"
                     label="Horarios"
                     placeholder="Lunes, Miercoles y Sabado de 19:00 a 21:00"
@@ -152,7 +150,7 @@ export const EditProduct = () => {
                     onChange={(e) => setProductInfo({ ...productInfo, days: e.target.value })}
                 />
                 <TextField
-                    value={product?.place || ''}
+                    value={productInfo?.place || ''}
                     type="text"
                     label="Dirección Completa"
                     placeholder="Los Alamos 123, Viña del Mar"
@@ -161,7 +159,7 @@ export const EditProduct = () => {
                 />
 
                 <TextField
-                    value={product?.desc || ''}
+                    value={productInfo?.desc || ''}
                     multiline
                     label="Descripción"
                     rows={4}

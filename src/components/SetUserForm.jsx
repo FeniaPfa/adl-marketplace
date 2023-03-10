@@ -27,9 +27,10 @@ export const SetUserForm = () => {
 
     const handleAvatar = (e) => {
         setError(false);
-        const fileSize = e.target.files[0].size / 1024 / 1024;
+        const fileSize = e.target?.files[0].size / 1024 / 1024;
         if (fileSize > 1) {
             setError(true);
+            e.target.value = null;
             setAvatar(null);
             setUserInfo({ ...userInfo, hasAvatar: false });
             return;

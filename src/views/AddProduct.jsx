@@ -1,22 +1,14 @@
-import {
-    Box,
-    Button,
-    Container,
-    InputLabel,
-    MenuItem,
-    Select,
-    Stack,
-    TextField,
-    Typography,
-} from '@mui/material';
-import { addDoc, setDoc } from 'firebase/firestore';
+import { Button, Container, MenuItem, Stack, TextField, Typography } from '@mui/material';
+import { addDoc } from 'firebase/firestore';
 import { ref, uploadBytes } from 'firebase/storage';
 import { useState } from 'react';
-import { productsCollectionRef, storage, usersCollectionRef } from '../config/firebase';
+import { productsCollectionRef, storage } from '../config/firebase';
 import { useUserContext } from '../context/userContext';
 
 export const AddProduct = () => {
     const { user } = useUserContext();
+
+    const [fileError, setFileError] = useState(false);
 
     const [productInfo, setProductInfo] = useState({
         sport: '',
@@ -32,6 +24,18 @@ export const AddProduct = () => {
     });
 
     const [img, setImg] = useState(null);
+
+    const handleFile = (e) => {
+        setFileError(false);
+        const fileSize = e.target?.files[0].size / 1024 / 1024;
+        if (fileSize > 1) {
+            setFileError(true);
+            e.target.value = null;
+            setImg(null);
+            return;
+        }
+        setImg(e.target.files[0]);
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -50,7 +54,9 @@ export const AddProduct = () => {
     return (
         <Container maxWidth="sm" component="form" onSubmit={handleSubmit}>
             <Stack gap="2rem">
-                <Typography variant="h3" fontFamily="Kanit,sans-serif" fontWeight="bold">Agregar Publicación</Typography>
+                <Typography variant="h3" fontFamily="Kanit,sans-serif" fontWeight="bold">
+                    Agregar Publicación
+                </Typography>
                 <Stack direction="row" gap="1.2rem">
                     <TextField
                         fullWidth
@@ -78,7 +84,6 @@ export const AddProduct = () => {
                         label="Nivel"
                         helperText="Selecciona el nivel de dificultad de la clase"
                         value={productInfo.level}
-                        // defaultValue="Universal"
                         onChange={(e) => setProductInfo({ ...productInfo, level: e.target.value })}>
                         <MenuItem value="Universal">Universal</MenuItem>
                         <MenuItem value="Principiantes">Principiante</MenuItem>
@@ -92,7 +97,6 @@ export const AddProduct = () => {
                         label="Edad"
                         helperText="Selecciona para que edad son las clases"
                         value={productInfo.age}
-                        // defaultValue="Todas las edades"
                         onChange={(e) => setProductInfo({ ...productInfo, age: e.target.value })}>
                         <MenuItem value="Todas las edades">Todas las edades</MenuItem>
                         <MenuItem value="Niños">Niños</MenuItem>
@@ -115,16 +119,24 @@ export const AddProduct = () => {
                         type="number"
                         label="Precio Mensual"
                         placeholder="$"
-                        onChange={(e) => setProductInfo({ ...productInfo, price: e.target.valueAsNumber })}
+                        onChange={(e) =>
+                            setProductInfo({ ...productInfo, price: e.target.valueAsNumber })
+                        }
                     />
                 </Stack>
                 <Stack direction="row" gap="1.2rem">
                     <TextField
                         fullWidth
                         required
+                        helperText={
+                            fileError
+                                ? 'El tamaño maximo de la imagen es 1MB'
+                                : 'Sube una imagen menor a 1mb'
+                        }
+                        error={fileError}
                         type="file"
                         inputProps={{ accept: 'image/png, image/jpeg' }}
-                        onChange={(e) => setImg(e.target.files[0])}
+                        onChange={handleFile}
                     />
                 </Stack>
                 <TextField
