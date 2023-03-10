@@ -16,7 +16,7 @@ export const Product = ({ product }) => {
 
     const getImg = async () => {
         const imgRef = ref(storage, `products-img/${product.id}`);
-        // setLoading(true)
+
         try {
             const url = await getDownloadURL(imgRef);
             setImage(url);
@@ -28,7 +28,6 @@ export const Product = ({ product }) => {
     };
 
     useEffect(() => {
-        // getDownloadURL(imgRef).then((url) => setImage(url));
         getImg();
     }, []);
 
@@ -41,16 +40,6 @@ export const Product = ({ product }) => {
                     '&:hover': { boxShadow: '2px 2px 7px #0000001A' },
                 }}
                 onClick={handleClick}>
-                {/* {loading ? (
-                    <Skeleton variant="rectangular" width={200} height={150} />
-                ) : (
-                    <CardMedia
-                        component="img"
-                        sx={{ maxHeight: '150px', minWidth: '200px' }}
-                        image={image}
-                        alt={product.dojo}
-                    />
-                )} */}
                 <CardMedia
                     component="img"
                     sx={{ maxHeight: '150px', minWidth: '200px' }}
@@ -59,23 +48,29 @@ export const Product = ({ product }) => {
                 />
 
                 <CardContent>
-                    <Stack gap=".6rem">
-                        <Typography variant="subtitle2" sx={{ textTransform: 'uppercase' }}>
+                    <Stack gap=".3rem" alignItems="center">
+                        <Typography
+                            variant="overline"
+                            fontWeight="bold"
+                            sx={{ textTransform: 'uppercase', lineHeight: '1.5' }}>
                             Clases de {product.sport}
                         </Typography>
-                        <Typography variant="h5" component="h5" fontWeight="bold">
+                        <Typography
+                            variant="overline"
+                            sx={{ textTransform: 'uppercase', lineHeight: '1.5' }}>
+                            {product.age} - {product.level}
+                        </Typography>
+                        <Typography
+                            variant="h5"
+                            fontWeight="bold"
+                            fontFamily="Kanit,sans-serif"
+                            sx={{ letterSpacing: '.3rem' }}>
                             {product.dojo}
                         </Typography>
-                        <Typography variant="h5">$ {formatNumber(product.price)}</Typography>
-                        {/* <Typography
-                            variant="subtitle2"
-                            component="span"
-                            >
-                            {product?.level} - {product?.age}
-                        </Typography> */}
-                        {/* <Button variant="contained" size="small" onClick={handleClick}>
-                            Ver mas
-                        </Button> */}
+                        <Typography variant="subtitle2">{product.city}</Typography>
+                        <Typography variant="h5" fontWeight="bold" color="primary" sx={{letterSpacing:".3rem"}}>
+                            $ {formatNumber(product.price)}
+                        </Typography>
                     </Stack>
                 </CardContent>
             </Card>
