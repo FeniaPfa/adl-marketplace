@@ -2,6 +2,7 @@ import { Stack, Step, StepLabel, Stepper, Typography } from '@mui/material';
 import { useState } from 'react';
 import { CreateUserForm } from '../components/CreateUserForm';
 import { SetUserForm } from '../components/SetUserForm';
+import { Main } from '../containers/Main';
 
 export const Register = () => {
     const [step, setStep] = useState(0);
@@ -17,18 +18,20 @@ export const Register = () => {
         }
     };
     return (
-        <Stack gap="2rem">
-            <Typography fontWeight="bold" variant="h4" textAlign="center">
-                Crea tu cuenta
-            </Typography>
-            <Stepper activeStep={step} alternativeLabel>
-                {labels.map((label) => (
-                    <Step key={label}>
-                        <StepLabel>{label}</StepLabel>
-                    </Step>
-                ))}
-            </Stepper>
-            {handleSteps(step)}
-        </Stack>
+        <Main>
+            <Stack gap="2rem">
+                <Typography fontWeight="bold" variant="h4" textAlign="center">
+                    Crea tu cuenta
+                </Typography>
+                <Stepper activeStep={step} alternativeLabel>
+                    {labels.map((label) => (
+                        <Step key={label}>
+                            <StepLabel>{label}</StepLabel>
+                        </Step>
+                    ))}
+                </Stepper>
+                {handleSteps(step)}
+            </Stack>
+        </Main>
     );
 };

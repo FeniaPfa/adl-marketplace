@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { MyProduct } from '../components/MyProduct';
 import { useUserContext } from '../context/userContext';
@@ -19,16 +19,20 @@ export const ProductsManager = () => {
 
     return (
         <>
-            <Typography variant="h3" mb="2rem" fontFamily="Kanit,sans-serif" fontWeight="bold">Mis Publicaciones</Typography>
+            <Typography variant="h3" mb="2rem" fontFamily="Kanit,sans-serif" fontWeight="bold">
+                Mis Publicaciones
+            </Typography>
+            <Stack gap="1rem">
 
             {myProducts.map((item) => (
                 <MyProduct
-                    key={item.id}
-                    product={item}
-                    setMyProducts={setMyProducts}
-                    myProducts={myProducts}
+                key={item.id}
+                product={item}
+                setMyProducts={setMyProducts}
+                myProducts={myProducts}
                 />
-            ))}
+                ))}
+                </Stack>
         </>
     );
 };

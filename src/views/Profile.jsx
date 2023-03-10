@@ -48,7 +48,7 @@ export const Profile = () => {
                         sx={{ width: '200px', height: '200px' }}
                     />
                     <Box>
-                        <Typography variant="h2">
+                        <Typography variant="h2" fontFamily="Kanit,sans-serif" fontWeight="bold">
                             {userData.name} {userData.apellido}
                         </Typography>
 

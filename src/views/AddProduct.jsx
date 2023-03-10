@@ -50,7 +50,7 @@ export const AddProduct = () => {
     return (
         <Container maxWidth="sm" component="form" onSubmit={handleSubmit}>
             <Stack gap="2rem">
-                <Typography variant="h4">Agregar Publicación</Typography>
+                <Typography variant="h3" fontFamily="Kanit,sans-serif" fontWeight="bold">Agregar Publicación</Typography>
                 <Stack direction="row" gap="1.2rem">
                     <TextField
                         fullWidth

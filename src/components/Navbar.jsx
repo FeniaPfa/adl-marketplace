@@ -2,7 +2,7 @@ import { AppBar, Button, Container, Link, Stack, Toolbar, Typography } from '@mu
 import { NavLink } from 'react-router-dom';
 import { logOut } from '../config/firebase';
 import { useUserContext } from '../context/userContext';
-import logo from '/logo.svg'
+import logo from '/logo.svg';
 
 export const Navbar = () => {
     const { user } = useUserContext();
@@ -28,12 +28,19 @@ export const Navbar = () => {
     const activeLink = ({ isActive }) => (isActive ? activeStyle : { color: 'white' });
 
     return (
-        <AppBar position="sticky" component="nav" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+        <AppBar
+            position="sticky"
+            component="nav"
+            sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
             <Container maxWidth="lg">
                 <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
                     <Stack direction="row" sx={{ alignItems: 'center', gap: '.8rem' }}>
                         <img src={logo} width="35px" />
-                        <Typography variant="h5" component="h1" fontWeight="bold" fontFamily="Kanit, sans-serif">
+                        <Typography
+                            variant="h5"
+                            component="h1"
+                            fontWeight="bold"
+                            fontFamily="Kanit, sans-serif">
                             TATAMI
                         </Typography>
                     </Stack>
@@ -57,11 +64,7 @@ export const Navbar = () => {
                             );
                         })}
                         {user && (
-                            <Button
-                                variant="outlined"
-                                size="large"
-                                color="secondary"
-                                onClick={handleLogout}>
+                            <Button variant="outlined" color="secondary" onClick={handleLogout}>
                                 Logout
                             </Button>
                         )}

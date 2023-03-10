@@ -49,9 +49,9 @@ export const FavCard = () => {
                         </Button>
                     </Stack>
                 </Stack>
-                <Stack gap="1rem">
-                    <Typography variant="h4">$ 10.000</Typography>
-                    <Button variant="contained" onClick={deleteFav}>
+                <Stack gap="1rem" alignItems="center">
+                    <Typography variant="h4" fontWeight="bold">$ 10.000</Typography>
+                    <Button variant="contained" size='small' onClick={deleteFav}>
                         Agregar al Carrito
                     </Button>
                 </Stack>

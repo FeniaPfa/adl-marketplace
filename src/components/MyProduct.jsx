@@ -3,6 +3,8 @@ import { getDownloadURL, ref } from 'firebase/storage';
 import { useEffect, useState } from 'react';
 import { db, deleteFile, storage } from '../config/firebase';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from '@mui/icons-material/Edit';
 import { deleteDoc, doc } from 'firebase/firestore';
 
 export const MyProduct = ({ product, myProducts, setMyProducts }) => {
@@ -26,18 +28,24 @@ export const MyProduct = ({ product, myProducts, setMyProducts }) => {
         <>
             <Paper sx={{ padding: '1rem' }}>
                 <Stack direction="row" alignItems="center" justifyContent="space-between">
-                    <Avatar
-                        src={image}
-                        sx={{ width: '80px', height: '80px' }}
-                        variant="rounded"
-                        alt={product.sport}
-                    />
-
-                    <Typography>Clases de {product.sport}</Typography>
                     <Stack direction="row" gap="1rem">
-                        <Button variant="contained">Editar</Button>
+                        <Avatar
+                            src={image}
+                            sx={{ width: '80px', height: '80px' }}
+                            variant="rounded"
+                            alt={product.sport}
+                        />
+                        <Stack>
+                            <Typography variant="overline">Clases de {product.sport}</Typography>
+                            <Typography>{product.age}</Typography>
+                            <Typography><b>Nivel:</b> {product.level}</Typography>
+                        </Stack>
+                    </Stack>
+
+                    <Stack direction="row" gap="1rem" alignItems="center">
+                        <Button variant="outlined"><EditIcon /> Editar</Button>
                         <Button variant="contained" onClick={deleteProduct}>
-                            <CloseRoundedIcon />
+                            <DeleteForeverIcon />
                         </Button>
                     </Stack>
                 </Stack>

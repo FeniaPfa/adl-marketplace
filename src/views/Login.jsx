@@ -2,6 +2,7 @@ import { Alert, Box, Button, Container, Stack, TextField, Typography } from '@mu
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../config/firebase';
+import { Main } from '../containers/Main';
 import { useUserContext } from '../context/userContext';
 
 export const Login = () => {
@@ -17,7 +18,7 @@ export const Login = () => {
         setError({status: false, message:""})
         try {
             await login({ email, password });
-            navigate('/user/profile');
+            navigate('/dashboard');
         } catch (err) {
             // console.log({ err });
             if (err.code == 'auth/user-not-found') {
@@ -29,7 +30,7 @@ export const Login = () => {
         }
     };
     return (
-        <>
+        <Main>
             <Container maxWidth="xs" component="form" onSubmit={handleLogin}>
                 <Stack gap="2rem">
                     <Typography fontWeight="bold" variant="h4" textAlign="center">
@@ -62,7 +63,6 @@ export const Login = () => {
                     </Stack>
                 </Stack>
             </Container>
-            {user ? user.email : 'none'}
-        </>
+        </Main>
     );
 };
