@@ -14,58 +14,53 @@ import { EditProduct } from './views/EditProduct';
 import { Cart } from './views/Cart';
 import { Register } from './views/Register';
 import { ProductPage } from './views/ProductPage';
+import { CartProvider } from './context/CartContext';
 
 function App() {
     return (
         <>
             <UserContextProvider>
-                <Navbar />
+                <CartProvider>
+                    <Navbar />
 
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/register" element={<Register />} />
-                    <Route path="/products/:id" element={<ProductPage />} />
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/register" element={<Register />} />
+                        <Route path="/products/:id" element={<ProductPage />} />
 
-                    {/* <Route
-                            path="user/profile"
+                        <Route
+                            path="cart"
                             element={
                                 <PrivateRoute>
-                                    <Profile />
+                                    <Cart />
                                 </PrivateRoute>
                             }
-                        /> */}
-                    <Route
-                        path="cart"
-                        element={
-                            <PrivateRoute>
-                                <Cart />
-                            </PrivateRoute>
-                        }
-                    />
-                    <Route
-                        path="user/setprofile"
-                        element={
-                            <PrivateRoute>
-                                <SetProfile />
-                            </PrivateRoute>
-                        }
-                    />
+                        />
+                        <Route
+                            path="user/setprofile"
+                            element={
+                                <PrivateRoute>
+                                    <SetProfile />
+                                </PrivateRoute>
+                            }
+                        />
 
-                    <Route
-                        path="/dashboard"
-                        element={
-                            <PrivateRoute>
-                                <Dashboard />
-                            </PrivateRoute>
-                        }>
-                        <Route index element={<Profile />} />
-                        <Route path="products" element={<ProductsManager />} />
-                        <Route path="favs" element={<Favorites />} />
-                        <Route path="addproduct" element={<AddProduct />} />
-                        <Route path="products/:id" element={<EditProduct />} />
-                    </Route>
-                </Routes>
+                        <Route
+                            path="/dashboard"
+                            element={
+                                <PrivateRoute>
+                                    <Dashboard />
+                                </PrivateRoute>
+                            }>
+                            <Route index element={<Profile />} />
+                            <Route path="products" element={<ProductsManager />} />
+                            <Route path="favs" element={<Favorites />} />
+                            <Route path="addproduct" element={<AddProduct />} />
+                            <Route path="products/:id" element={<EditProduct />} />
+                        </Route>
+                    </Routes>
+                </CartProvider>
             </UserContextProvider>
         </>
     );

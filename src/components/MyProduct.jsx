@@ -6,6 +6,7 @@ import { db, deleteFile, storage } from '../config/firebase';
 import { Avatar, Button, Paper, Stack, Typography } from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 export const MyProduct = ({ product, myProducts, setMyProducts }) => {
     const [image, setImage] = useState(null);
@@ -22,6 +23,10 @@ export const MyProduct = ({ product, myProducts, setMyProducts }) => {
         console.log('Producto Eliminado');
         console.log(newList);
     };
+
+    const goToProduct = () => {
+        navigate(`/products/${product.id}`)
+    }
 
     const goToEdit = () => {
         console.log('edit');
@@ -42,8 +47,8 @@ export const MyProduct = ({ product, myProducts, setMyProducts }) => {
                             variant="rounded"
                             alt={product.sport}
                         />
-                        <Stack>
-                            <Typography variant="overline">Clases de {product.sport}</Typography>
+                        <Stack justifyContent="center">
+                            <Typography variant="overline" sx={{lineHeight:"1.5"}}>Clases de {product.sport}</Typography>
                             <Typography>{product.age}</Typography>
                             <Typography>
                                 <b>Nivel:</b> {product.level}
@@ -52,8 +57,11 @@ export const MyProduct = ({ product, myProducts, setMyProducts }) => {
                     </Stack>
 
                     <Stack direction="row" gap="1rem" alignItems="center">
+                        <Button variant="outlined" onClick={goToProduct}>
+                            <VisibilityIcon />
+                        </Button>
                         <Button variant="outlined" onClick={goToEdit}>
-                            <EditIcon /> Editar
+                            <EditIcon />
                         </Button>
                         <Button variant="contained" onClick={deleteProduct}>
                             <DeleteForeverIcon />

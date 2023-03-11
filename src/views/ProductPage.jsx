@@ -17,6 +17,7 @@ import {
     Stack,
     Typography,
 } from '@mui/material';
+import { useCartContext } from '../context/CartContext';
 
 export const ProductPage = () => {
     const { id } = useParams();
@@ -24,6 +25,7 @@ export const ProductPage = () => {
     const [userInfo, setUserInfo] = useState();
 
     const { products, setLoading, loading } = useGetProducts();
+    const { addProduct } = useCartContext();
 
     const productData = products.find((item) => item.id === id);
 
@@ -48,7 +50,6 @@ export const ProductPage = () => {
             setImg(url);
         } catch (err) {
             console.log('Error al descagar la imagen', err);
-        } finally {
         }
     };
     useEffect(() => {
@@ -125,16 +126,16 @@ export const ProductPage = () => {
                         {/* List Direccion | Nivel | Edad */}
                         <List disablePadding>
                             <ListItem sx={listStyle}>
-                                <span style={{ flexGrow: '1' }}>Dirección:</span>
-                                <span>{productData.adress}</span>
-                            </ListItem>
-                            <ListItem sx={listStyle}>
                                 <span style={{ flexGrow: '1' }}>Nivel:</span>
                                 <span>{productData.level}</span>
                             </ListItem>
                             <ListItem sx={listStyle}>
                                 <span style={{ flexGrow: '1' }}>Edad:</span>
                                 <span>{productData.age}</span>
+                            </ListItem>
+                            <ListItem sx={listStyle}>
+                                <span style={{ flexGrow: '1' }}>Dirección:</span>
+                                <span>{productData.adress}</span>
                             </ListItem>
                         </List>
                         {/* Precio x mes */}
@@ -157,7 +158,7 @@ export const ProductPage = () => {
                         {/* Añadir | Fav */}
                         <Stack direction="row" justifyContent="space-around">
                             <Button variant="outlined">Guardar en favoritos</Button>
-                            <Button variant="contained">Añadir al carrito</Button>
+                            <Button variant="contained" onClick={() => addProduct(productData)}>Añadir al carrito</Button>
                         </Stack>
                     </CardContent>
                 </Box>
@@ -166,7 +167,6 @@ export const ProductPage = () => {
                     <Typography variant="overline" sx={{ lineHeight: '0' }}>
                         Por:
                         <b>
-                            {' '}
                             {userInfo?.name} {userInfo?.apellido}
                         </b>
                     </Typography>

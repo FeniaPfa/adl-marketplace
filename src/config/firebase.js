@@ -6,7 +6,7 @@ import {
     signOut,
 } from 'firebase/auth';
 import { collection, getFirestore } from 'firebase/firestore';
-import { deleteObject, getStorage } from 'firebase/storage';
+import { deleteObject, getDownloadURL, getStorage, ref } from 'firebase/storage';
 
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -39,6 +39,17 @@ const deleteFile = async (ref) => {
     await deleteObject(ref);
 };
 
+const getImg = async (id, setImg) => {
+    const imgRef = ref(storage, `products-img/${id}`);
+
+    try {
+        const url = await getDownloadURL(imgRef);
+        setImg(url);
+    } catch (err) {
+        console.log('Error al descagar la imagen', err);
+    }
+};
+
 export {
     auth,
     register,
@@ -49,4 +60,5 @@ export {
     productsCollectionRef,
     usersCollectionRef,
     deleteFile,
+    getImg
 };

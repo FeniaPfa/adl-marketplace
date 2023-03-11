@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { logOut } from '../config/firebase';
 import { useUserContext } from '../context/userContext';
 import logo from '/logo.svg';
@@ -33,7 +34,16 @@ export const Navbar = () => {
             sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
             <Container maxWidth="lg">
                 <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Stack direction="row" sx={{ alignItems: 'center', gap: '.8rem' }}>
+                    <Stack
+                        direction="row"
+                        sx={{
+                            alignItems: 'center',
+                            gap: '.8rem',
+                            textDecoration: 'none',
+                            color: '#fff',
+                        }}
+                        to="/"
+                        component={RouterLink}>
                         <img src={logo} width="35px" />
                         <Typography
                             variant="h5"
