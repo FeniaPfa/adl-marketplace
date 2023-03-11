@@ -62,8 +62,9 @@ export const Navbar = () => {
                             if (item.publicOnly && user) return null;
                             return (
                                 <Link
+                                    className='nav-link'
                                     key={item.text}
-                                    sx={{ fontSize: '1.2rem' }}
+                                    sx={{ fontSize: '1.2rem',textTransform:"uppercase", letterSpacing:"1px",textDecoration:"none" }}
                                     variant="h5"
                                     style={activeLink}
                                     to={item.to}

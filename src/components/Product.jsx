@@ -34,10 +34,10 @@ export const Product = ({ product }) => {
     return (
         <>
             <Card
+            className="product-card"
                 sx={{
                     width: 250,
                     cursor: 'pointer',
-                    '&:hover': { boxShadow: '2px 2px 7px #0000001A' },
                 }}
                 onClick={handleClick}>
                 <CardMedia

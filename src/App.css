@@ -1,0 +1,44 @@
+.nav-link{
+  position:relative;
+}
+
+.nav-link:before{
+  position: absolute;
+  content: "";
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 100%;
+  background: #fff;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform .4s linear;
+}
+
+
+.nav-link:hover:before{
+  transform: scaleX(1);
+  transform-origin: left;
+} 
+
+.product-card{
+  position: relative;
+}
+
+.product-card:after{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0%;
+  content: '.';
+  color: transparent;
+  background: #c62828;
+  height: 3px;
+}
+
+.product-card:hover:after{
+  transition: all .5s;
+  width: 100%;
+} 
