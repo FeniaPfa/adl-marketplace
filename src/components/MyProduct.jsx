@@ -47,11 +47,11 @@ export const MyProduct = ({ product, myProducts, setMyProducts }) => {
                             variant="rounded"
                             alt={product.sport}
                         />
-                        <Stack justifyContent="center">
-                            <Typography variant="overline" sx={{lineHeight:"1.5"}}>Clases de {product.sport}</Typography>
-                            <Typography>{product.age}</Typography>
-                            <Typography>
-                                <b>Nivel:</b> {product.level}
+                        <Stack justifyContent="center" gap=".2rem">
+                            <Typography variant="overline" fontWeight="bold" sx={{lineHeight:"1.5"}}>Clases de {product.sport}</Typography>
+                            <Typography variant='overline' sx={{lineHeight:"1.5"}}>{product.age} - {product.level}</Typography>
+                            <Typography fontWeight="bold" fontFamily="Kanit,sans-serif">
+                                {product.dojo}
                             </Typography>
                         </Stack>
                     </Stack>

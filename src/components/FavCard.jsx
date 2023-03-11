@@ -34,7 +34,7 @@ export const FavCard = () => {
                     <Stack gap=".2rem">
                         <Box>
                             
-                        <Typography variant="overline">Karate - Nivel - Edades</Typography>
+                        <Typography variant="overline" sx={{lineHeight:"1.5"}}>Karate - Nivel - Edades</Typography>
                         <Typography variant="h5" fontWeight="bold" fontFamily="Kanit,sans-serif">
                             Cobra Kai
                         </Typography>
