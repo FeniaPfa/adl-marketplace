@@ -4,7 +4,6 @@ import { PrivateRoute } from './components/PrivateRoute';
 import UserContextProvider from './context/userContext';
 import { Home } from './views/Home';
 import { Login } from './views/Login';
-import { Profile } from './views/Profile';
 import { EditProfile } from './views/EditProfile';
 import { Dashboard } from './views/Dashboard';
 import { ProductsManager } from './views/ProductsManager';
@@ -15,6 +14,7 @@ import { Cart } from './views/Cart';
 import { Register } from './views/Register';
 import { ProductPage } from './views/ProductPage';
 import { CartProvider } from './context/CartContext';
+import { DashboardHome } from './views/DashboardHome';
 
 function App() {
     return (
@@ -45,7 +45,7 @@ function App() {
                                     <Dashboard />
                                 </PrivateRoute>
                             }>
-                            <Route index element={<Profile />} />
+                            <Route index element={<DashboardHome />} />
                             <Route path='editprofile' element={<EditProfile />} />
                             <Route path="products" element={<ProductsManager />} />
                             <Route path="favs" element={<Favorites />} />
