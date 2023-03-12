@@ -1,26 +1,26 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { collection, doc, setDoc } from 'firebase/firestore';
+import { collection, doc, getDoc, setDoc } from 'firebase/firestore';
 import { ref, uploadBytes } from 'firebase/storage';
 import { db, storage } from '../config/firebase';
 import { useUserContext } from '../context/userContext';
-import { Button, Container, Stack, TextField } from '@mui/material';
+import { Button, Container, Stack, TextField, Typography } from '@mui/material';
 
-export const SetProfile = () => {
+export const EditProfile = () => {
     const navigate = useNavigate();
     const { user } = useUserContext();
 
     const [avatar, setAvatar] = useState(null);
     const [error, setError] = useState(false);
 
-    const [userInfo, setUserInfo] = useState({
-        name: '',
-        apellido: '',
-        id: user.uid,
-        email: user.email,
-        hasAvatar: false,
-        favs: [],
-    });
+    const [userInfo, setUserInfo] = useState({});
+    const userRef = doc(db, 'users', user.uid);
+
+    const getUser = async () => {
+        const docSnap = await getDoc(userRef);
+        const data = docSnap.data();
+        setUserInfo(data);
+    };
 
     const handleAvatar = (e) => {
         setError(false);
@@ -28,7 +28,6 @@ export const SetProfile = () => {
         if (fileSize > 1) {
             setError(true);
             setAvatar(null);
-            setUserInfo({ ...userInfo, hasAvatar: false });
             return;
         }
         setUserInfo({ ...userInfo, hasAvatar: true });
@@ -49,31 +48,36 @@ export const SetProfile = () => {
 
     const handleUpdateUser = async (e) => {
         e.preventDefault();
-        const userRef = doc(collection(db, 'users'), user.uid);
         try {
             await setDoc(userRef, userInfo);
             uploadAvatar();
             console.log('Datos Actualizados');
-            navigate('/user/profile');
+            navigate('/dashboard');
         } catch (err) {
             console.log(err.message);
         }
     };
 
+    useEffect(() => {
+        getUser();
+    }, []);
+
     return (
         <>
-            <h1>Actualiza tus datos</h1>
+            <Typography variant="h3" fontWeight="bold" fontFamily="Kanit,sans-serif" mb="2rem">
+                Actualiza tus datos
+            </Typography>
             <Container maxWidth="xs" component="form" onSubmit={handleUpdateUser}>
                 <Stack gap="2rem">
                     <TextField
-                        required
+                        value={userInfo?.name || ''}
                         label="Nombre"
                         type="text"
                         placeholder="Nombre..."
                         onChange={(e) => setUserInfo({ ...userInfo, name: e.target.value })}
                     />
                     <TextField
-                        required
+                        value={userInfo?.apellido || ''}
                         label="Apellido"
                         type="text"
                         placeholder="Apellido..."

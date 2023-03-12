@@ -5,7 +5,7 @@ import UserContextProvider from './context/userContext';
 import { Home } from './views/Home';
 import { Login } from './views/Login';
 import { Profile } from './views/Profile';
-import { SetProfile } from './views/SetProfile';
+import { EditProfile } from './views/EditProfile';
 import { Dashboard } from './views/Dashboard';
 import { ProductsManager } from './views/ProductsManager';
 import { Favorites } from './views/Favorites';
@@ -37,14 +37,6 @@ function App() {
                                 </PrivateRoute>
                             }
                         />
-                        <Route
-                            path="user/setprofile"
-                            element={
-                                <PrivateRoute>
-                                    <SetProfile />
-                                </PrivateRoute>
-                            }
-                        />
 
                         <Route
                             path="/dashboard"
@@ -54,6 +46,7 @@ function App() {
                                 </PrivateRoute>
                             }>
                             <Route index element={<Profile />} />
+                            <Route path='editprofile' element={<EditProfile />} />
                             <Route path="products" element={<ProductsManager />} />
                             <Route path="favs" element={<Favorites />} />
                             <Route path="addproduct" element={<AddProduct />} />

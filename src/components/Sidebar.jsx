@@ -4,6 +4,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 
 export const Sidebar = () => {
     const activeStyle = {
@@ -26,9 +27,15 @@ export const Sidebar = () => {
                 <List sx={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                     <ListItem to="/dashboard" component={NavLink} style={activeLink}>
                         <ListItemIcon>
+                            <DashboardIcon />
+                        </ListItemIcon>
+                        Dashboard
+                    </ListItem>
+                    <ListItem to="editprofile" component={NavLink} style={activeLink}>
+                        <ListItemIcon>
                             <AccountCircleIcon />
                         </ListItemIcon>
-                        Perfil
+                        Editar Perfil
                     </ListItem>
                     <ListItem to="favs" component={NavLink} style={activeLink}>
                         <ListItemIcon>
