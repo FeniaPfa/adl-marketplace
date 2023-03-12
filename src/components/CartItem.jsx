@@ -8,19 +8,18 @@ import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
 import { useEffect, useState } from 'react';
 import { getImg } from '../config/firebase.js';
 
-export const TableItem = ({ product }) => {
+export const CartItem = ({ product }) => {
     const [img, setImg] = useState();
     const { addProduct, removeProduct, deleteProduct } = useCartContext();
 
-    useEffect(() =>{
-      getImg(product.id, setImg)
-    },[])
-
+    useEffect(() => {
+        getImg(product.id, setImg);
+    }, []);
 
     return (
         <TableRow key={product.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
             <TableCell align="right">
-              <Avatar src={img} variant="rounded" sx={{ width: '50px', height: '50px' }} />
+                <Avatar src={img} variant="rounded" sx={{ width: '50px', height: '50px' }} />
             </TableCell>
             <TableCell component="th" scope="row">
                 {product?.sport}
@@ -30,8 +29,8 @@ export const TableItem = ({ product }) => {
             </TableCell>
             <TableCell align="right">$ {formatNumber(product?.price)}</TableCell>
             <TableCell align="right">
-                <IconButton color="primary">
-                    <RemoveRoundedIcon onClick={() => removeProduct(product)} />
+                <IconButton color="primary" onClick={() => removeProduct(product)}>
+                    <RemoveRoundedIcon />
                 </IconButton>
                 {product?.count}
                 <IconButton color="primary" onClick={() => addProduct(product)}>

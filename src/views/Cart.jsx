@@ -7,7 +7,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { TableItem } from "../components/TableItem";
+import { CartItem } from "../components/CartItem";
 import { formatNumber } from '../utils/utils.js';
 
 
@@ -37,7 +37,7 @@ export const Cart = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-        {cart.map((item) => <TableItem product={item} />)}
+        {cart.map((item) => <CartItem key={item.id} product={item} />)}
         </TableBody>
       </Table>
       </TableContainer>

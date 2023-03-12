@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useContext } from 'react';
 import { createContext } from 'react';
+import { Loading } from '../components/Loading';
 import { auth } from '../config/firebase';
 
 const UserContext = createContext();
@@ -22,7 +23,7 @@ export default function UserContextProvider({ children }) {
         // unsubscribe()
     }, []);
 
-    if (user === false) return <p>Loading app...</p>;
+    if (user === false) return <Loading />;
 
     return <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>;
 }

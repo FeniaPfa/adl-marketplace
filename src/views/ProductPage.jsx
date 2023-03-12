@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { doc, getDoc } from 'firebase/firestore';
 import { getDownloadURL, ref } from 'firebase/storage';
 import { db, storage } from '../config/firebase';
@@ -24,6 +24,7 @@ import {
 export const ProductPage = () => {
     const { user } = useUserContext();
     const { id } = useParams();
+    const navigate = useNavigate()
     const [img, setImg] = useState();
     const [userInfo, setUserInfo] = useState();
 
@@ -163,9 +164,8 @@ export const ProductPage = () => {
                             {user?.uid !== productData?.userId ? (
                                 <Button variant="outlined">Guardar en favoritos</Button>
                             ) : (
-                                <Button variant="outlined"><EditIcon sx={{mr:".5rem"}} />Editar</Button>
+                                <Button variant="outlined" onClick={() => navigate(`/dashboard/products/${productData?.id}`)}><EditIcon sx={{mr:".5rem"}} />Editar</Button>
                             )}
-                            {/* <Button  variant="outlined">Guardar en favoritos</Button> */}
                             <Button
                                 disabled={user?.uid === productData?.userId}
                                 variant="contained"
