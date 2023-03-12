@@ -1,6 +1,7 @@
 import { doc, getDoc } from 'firebase/firestore';
 import { getDownloadURL, ref } from 'firebase/storage';
 import { useEffect, useState } from 'react';
+import { Loading } from '../components/Loading';
 import { Profile } from '../components/Profile';
 import { db, storage } from '../config/firebase';
 import { Main } from '../containers/Main';
@@ -33,7 +34,7 @@ export const DashboardHome = () => {
     }, []);
 
     if (!userData) {
-        return <p>Cargando...</p>;
+        return <Loading />;
     }
     return (
         <>

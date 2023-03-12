@@ -9,7 +9,7 @@ export const Loading = () => {
           gap="3rem"
           sx={{ margin: "5rem auto" }}
       >
-          <CircularProgress size={200} color="primary" />
+          <CircularProgress size={170} color="primary" />
 
       </Stack>
   </>

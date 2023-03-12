@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { register } from '../config/firebase';
 import { Button, Container, Stack, TextField, Typography } from '@mui/material';
 
-export const CreateUserForm = ({ handleSteps, setStep }) => {
+export const CreateUserForm = ({ setStep }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);

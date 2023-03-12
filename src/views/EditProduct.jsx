@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { ref, uploadBytes } from 'firebase/storage';
-import { db, deleteFile, storage } from '../config/firebase';
+import { db, storage } from '../config/firebase';
 import { Button, Container, MenuItem, Stack, TextField, Typography } from '@mui/material';
 
 export const EditProduct = () => {
@@ -20,18 +20,7 @@ export const EditProduct = () => {
         const docSnap = await getDoc(productRef);
         const data = docSnap.data();
 
-        setProductInfo({
-            ...productInfo,
-            sport: data?.sport,
-            dojo: data?.dojo,
-            city: data?.city,
-            price: data?.price,
-            level: data?.level,
-            age: data?.age,
-            days: data?.days,
-            adress: data?.place,
-            desc: data?.desc,
-        });
+        setProductInfo(data);
     };
 
     const uploadFile = async () => {
@@ -48,7 +37,6 @@ export const EditProduct = () => {
             await updateDoc(productRef, productInfo);
         }
         if (img) {
-            deleteFile(imgRef);
             await updateDoc(productRef, productInfo);
             uploadFile();
         }
@@ -149,7 +137,7 @@ export const EditProduct = () => {
                     onChange={(e) => setProductInfo({ ...productInfo, days: e.target.value })}
                 />
                 <TextField
-                    value={productInfo?.place || ''}
+                    value={productInfo?.adress || ''}
                     type="text"
                     label="Dirección Completa"
                     placeholder="Los Alamos 123, Viña del Mar"

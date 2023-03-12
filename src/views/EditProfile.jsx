@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { collection, doc, getDoc, setDoc } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 import { ref, uploadBytes } from 'firebase/storage';
 import { db, storage } from '../config/firebase';
 import { useUserContext } from '../context/userContext';
@@ -49,7 +49,7 @@ export const EditProfile = () => {
     const handleUpdateUser = async (e) => {
         e.preventDefault();
         try {
-            await setDoc(userRef, userInfo);
+            await updateDoc(userRef, userInfo);
             uploadAvatar();
             console.log('Datos Actualizados');
             navigate('/dashboard');

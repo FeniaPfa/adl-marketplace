@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { doc, getDoc } from 'firebase/firestore';
-import { getDownloadURL, ref } from 'firebase/storage';
-import { db, storage } from '../config/firebase';
+import { db, getImg } from '../config/firebase';
 import { useGetProducts } from '../hooks/useGetProducts';
 import { useCartContext } from '../context/CartContext';
 import { useUserContext } from '../context/userContext';
@@ -20,11 +19,12 @@ import {
     Stack,
     Typography,
 } from '@mui/material';
+import { Loading } from '../components/Loading';
 
 export const ProductPage = () => {
     const { user } = useUserContext();
     const { id } = useParams();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const [img, setImg] = useState();
     const [userInfo, setUserInfo] = useState();
 
@@ -46,18 +46,8 @@ export const ProductPage = () => {
         }
     };
 
-    const getImg = async () => {
-        const imgRef = ref(storage, `products-img/${id}`);
-
-        try {
-            const url = await getDownloadURL(imgRef);
-            setImg(url);
-        } catch (err) {
-            console.log('Error al descagar la imagen', err);
-        }
-    };
     useEffect(() => {
-        getImg();
+        getImg(id, setImg);
 
         getUserInfo();
     }, [productData]);
@@ -71,7 +61,7 @@ export const ProductPage = () => {
     };
 
     if (!productData) {
-        return <p>Loading</p>;
+        return <Loading />;
     }
 
     return (
@@ -164,7 +154,14 @@ export const ProductPage = () => {
                             {user?.uid !== productData?.userId ? (
                                 <Button variant="outlined">Guardar en favoritos</Button>
                             ) : (
-                                <Button variant="outlined" onClick={() => navigate(`/dashboard/products/${productData?.id}`)}><EditIcon sx={{mr:".5rem"}} />Editar</Button>
+                                <Button
+                                    variant="outlined"
+                                    onClick={() =>
+                                        navigate(`/dashboard/products/${productData?.id}`)
+                                    }>
+                                    <EditIcon sx={{ mr: '.5rem' }} />
+                                    Editar
+                                </Button>
                             )}
                             <Button
                                 disabled={user?.uid === productData?.userId}
