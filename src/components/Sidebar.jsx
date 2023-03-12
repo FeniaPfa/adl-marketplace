@@ -20,20 +20,20 @@ export const Sidebar = () => {
             sx={{
                 width: 200,
                 flexShrink: 0,
-                [`& .MuiDrawer-paper`]: { width: 200, boxSizing: 'border-box' },
+                [`& .MuiDrawer-paper`]: { width: 250, boxSizing: 'border-box' },
             }}>
             <Toolbar></Toolbar>
             <Box>
-                <List sx={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <List sx={{ display: 'flex', flexDirection: 'column', gap: '2rem', fontSize:"1.5rem" }}>
                     <ListItem to="/dashboard" component={NavLink} style={activeLink}>
                         <ListItemIcon>
-                            <DashboardIcon />
+                            <DashboardIcon fontSize='large'/>
                         </ListItemIcon>
                         Dashboard
                     </ListItem>
                     <ListItem to="editprofile" component={NavLink} style={activeLink}>
                         <ListItemIcon>
-                            <AccountCircleIcon />
+                            <AccountCircleIcon fontSize='large' />
                         </ListItemIcon>
                         Editar Perfil
                     </ListItem>
@@ -45,13 +45,13 @@ export const Sidebar = () => {
                     </ListItem>
                     <ListItem to="addproduct" component={NavLink} style={activeLink}>
                         <ListItemIcon>
-                            <AddCircleRoundedIcon />
+                            <AddCircleRoundedIcon fontSize='large' />
                         </ListItemIcon>
                         Crear Publicación
                     </ListItem>
                     <ListItem to="products" component={NavLink} style={activeLink}>
                         <ListItemIcon>
-                            <DynamicFeedIcon />
+                            <DynamicFeedIcon fontSize='large' />
                         </ListItemIcon>
                         Mis Publicaciones
                     </ListItem>

@@ -2,6 +2,7 @@ import {
     Avatar,
     Box,
     Button,
+    Container,
     Paper,
     Stack,
     Typography,
@@ -22,36 +23,39 @@ export const FavCard = () => {
     };
 
     return (
-        <Paper sx={{ padding: '1.2rem' }}>
+        <Container maxWidth="lg">
+
+        <Paper sx={{ padding: '2rem' }}>
             <Stack direction="row" alignItems="center" justifyContent="space-between">
                 <Stack direction="row" gap="2rem" alignItems="center">
                     <Avatar
                         src={'https://picsum.photos/200'}
-                        sx={{ width: '80px', height: '80px' }}
+                        sx={{ width: '150px', height: '150px' }}
                         variant="rounded"
                         alt="alt"
-                    />
-                    <Stack gap=".2rem">
+                        />
+                    <Stack gap="1.2rem">
                         <Box>
                             
-                        <Typography variant="overline" sx={{lineHeight:"1.5"}}>Karate - Nivel - Edades</Typography>
-                        <Typography variant="h5" fontWeight="bold" fontFamily="Kanit,sans-serif">
+                        <Typography variant="overline" fontSize="1.2rem" sx={{lineHeight:"1.5"}}>Karate - Nivel - Edades</Typography>
+                        <Typography variant="h4" fontWeight="bold" fontFamily="Kanit,sans-serif">
                             Cobra Kai
                         </Typography>
                         </Box>
-                        <Button variant="outlined" size='small'>
+                        <Button variant="outlined" size='large'>
                             <CloseRoundedIcon />
                             Eliminar
                         </Button>
                     </Stack>
                 </Stack>
                 <Stack gap="1rem" alignItems="center">
-                    <Typography variant="h4" fontWeight="bold">$ 10.000</Typography>
-                    <Button variant="contained" size='small' onClick={deleteFav}>
+                    <Typography variant="h3" fontWeight="bold">$ 10.000</Typography>
+                    <Button variant="contained" size='large' onClick={deleteFav}>
                         Agregar al Carrito
                     </Button>
                 </Stack>
             </Stack>
         </Paper>
+                        </Container>
     );
 };

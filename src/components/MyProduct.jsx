@@ -38,40 +38,41 @@ export const MyProduct = ({ product, myProducts, setMyProducts }) => {
     }, []);
     return (
         <>
-            <Paper sx={{ padding: '1rem' }}>
+            <Paper sx={{ padding: '1.5rem 2rem' }}>
                 <Stack direction="row" alignItems="center" justifyContent="space-between">
-                    <Stack direction="row" gap="1rem">
+                    <Stack direction="row" gap="2rem">
                         <Avatar
                             src={image}
-                            sx={{ width: '80px', height: '80px' }}
+                            sx={{ width: '150px', height: '150px' }}
                             variant="rounded"
                             alt={product.sport}
                         />
-                        <Stack justifyContent="center" gap=".2rem">
+                        <Stack justifyContent="center" gap=".5rem">
                             <Typography
                                 variant="overline"
+                                fontSize="1.2rem"
                                 fontWeight="bold"
                                 sx={{ lineHeight: '1.5' }}>
                                 Clases de {product.sport}
                             </Typography>
-                            <Typography variant="overline" sx={{ lineHeight: '1.5' }}>
+                            <Typography fontSize="1.2rem" variant="overline" sx={{ lineHeight: '1.5' }}>
                                 {product.age} - {product.level}
                             </Typography>
-                            <Typography fontWeight="bold" fontFamily="Kanit,sans-serif">
+                            <Typography fontWeight="bold" variant='h4' fontFamily="Kanit,sans-serif">
                                 {product.dojo}
                             </Typography>
                         </Stack>
                     </Stack>
 
                     <Stack direction="row" gap="1rem" alignItems="center">
-                        <Button variant="outlined" onClick={goToProduct}>
-                            <VisibilityIcon />
+                        <Button variant="outlined" size='large' onClick={goToProduct}>
+                            <VisibilityIcon fontSize='large' />
                         </Button>
-                        <Button variant="outlined" onClick={goToEdit}>
-                            <EditIcon />
+                        <Button variant="outlined" size='large' onClick={goToEdit}>
+                            <EditIcon fontSize='large' />
                         </Button>
-                        <Button variant="contained" onClick={deleteProduct}>
-                            <DeleteForeverIcon />
+                        <Button variant="contained" size='large' onClick={deleteProduct}>
+                            <DeleteForeverIcon fontSize='large' />
                         </Button>
                     </Stack>
                 </Stack>

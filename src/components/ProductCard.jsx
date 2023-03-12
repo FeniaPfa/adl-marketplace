@@ -5,7 +5,7 @@ import { storage } from '../config/firebase';
 import { formatNumber } from '../utils/utils.js';
 import { Card, CardContent, CardMedia, Stack, Typography } from '@mui/material';
 
-export const Product = ({ product }) => {
+export const ProductCard = ({ product }) => {
     const navigate = useNavigate();
     const [image, setImage] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -34,15 +34,15 @@ export const Product = ({ product }) => {
     return (
         <>
             <Card
-            className="product-card"
+                className="product-card"
                 sx={{
-                    width: 250,
+                    width: 350,
                     cursor: 'pointer',
                 }}
                 onClick={handleClick}>
                 <CardMedia
                     component="img"
-                    sx={{ maxHeight: '150px', minWidth: '200px' }}
+                    sx={{ maxHeight: '250px', minWidth: '200px' }}
                     image={image}
                     alt={product.dojo}
                 />
@@ -51,25 +51,27 @@ export const Product = ({ product }) => {
                     <Stack gap=".3rem" alignItems="center">
                         <Typography
                             variant="overline"
+                            fontSize="1rem"
                             fontWeight="bold"
                             sx={{ textTransform: 'uppercase', lineHeight: '1.5' }}>
                             Clases de {product.sport}
                         </Typography>
                         <Typography
                             variant="overline"
+                            fontSize="1rem"
                             sx={{ textTransform: 'uppercase', lineHeight: '1.5' }}>
                             {product.age} - {product.level}
                         </Typography>
                         <Typography
-                            variant="h5"
+                            variant="h4"
                             fontWeight="bold"
                             fontFamily="Kanit,sans-serif"
                             sx={{ letterSpacing: '.3rem' }}>
                             {product.dojo}
                         </Typography>
-                        <Typography variant="subtitle2">{product.city}</Typography>
+                        <Typography variant="subtitle2" fontSize="1.2rem">{product.city}</Typography>
                         <Typography
-                            variant="h5"
+                            variant="h4"
                             fontWeight="bold"
                             color="primary"
                             sx={{ letterSpacing: '.3rem' }}>

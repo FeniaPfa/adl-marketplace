@@ -38,9 +38,9 @@ export const DashboardHome = () => {
     }
     return (
         <>
-            <Main>
+
                 <Profile userData={userData} image={image} />
-            </Main>
+
         </>
     );
 };

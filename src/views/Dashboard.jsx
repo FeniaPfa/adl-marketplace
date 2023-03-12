@@ -6,7 +6,7 @@ export const Dashboard = () => {
     return (
         <Box sx={{ display: 'flex' }}>
             <Sidebar />
-            <Container maxWidth="md">
+            <Container maxWidth="lg">
                 <Box margin="2rem auto">
                     <Outlet />
                 </Box>
