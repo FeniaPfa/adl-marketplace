@@ -4,8 +4,11 @@ import { doc, getDoc } from 'firebase/firestore';
 import { getDownloadURL, ref } from 'firebase/storage';
 import { db, storage } from '../config/firebase';
 import { useGetProducts } from '../hooks/useGetProducts';
+import { useCartContext } from '../context/CartContext';
+import { useUserContext } from '../context/userContext';
 import { Main } from '../containers/Main';
 import { formatNumber } from '../utils/utils.js';
+import EditIcon from '@mui/icons-material/Edit';
 import {
     Box,
     Button,
@@ -17,9 +20,9 @@ import {
     Stack,
     Typography,
 } from '@mui/material';
-import { useCartContext } from '../context/CartContext';
 
 export const ProductPage = () => {
+    const { user } = useUserContext();
     const { id } = useParams();
     const [img, setImg] = useState();
     const [userInfo, setUserInfo] = useState();
@@ -157,14 +160,24 @@ export const ProductPage = () => {
                         </Box>
                         {/* Añadir | Fav */}
                         <Stack direction="row" justifyContent="space-around">
-                            <Button variant="outlined">Guardar en favoritos</Button>
-                            <Button variant="contained" onClick={() => addProduct(productData)}>Añadir al carrito</Button>
+                            {user?.uid !== productData?.userId ? (
+                                <Button variant="outlined">Guardar en favoritos</Button>
+                            ) : (
+                                <Button variant="outlined"><EditIcon sx={{mr:".5rem"}} />Editar</Button>
+                            )}
+                            {/* <Button  variant="outlined">Guardar en favoritos</Button> */}
+                            <Button
+                                disabled={user?.uid === productData?.userId}
+                                variant="contained"
+                                onClick={() => addProduct(productData)}>
+                                Añadir al carrito
+                            </Button>
                         </Stack>
                     </CardContent>
                 </Box>
                 {/* User | Descripcion | Horarios */}
-                <Box className="card-bottom">
-                    <Typography variant="overline" sx={{ lineHeight: '0' }}>
+                <Stack gap=".5rem">
+                    <Typography variant="overline" sx={{ lineHeight: '1' }}>
                         Por:
                         <b>
                             {userInfo?.name} {userInfo?.apellido}
@@ -178,7 +191,7 @@ export const ProductPage = () => {
                         provident velit totam nihil sequi fugiat quia qui dolorem impedit maxime,
                         modi quos maiores rerum repellat numquam dolore libero suscipit!
                     </Typography>
-                </Box>
+                </Stack>
             </Card>
         </Main>
     );

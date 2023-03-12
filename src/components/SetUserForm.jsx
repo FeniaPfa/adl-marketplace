@@ -55,7 +55,7 @@ export const SetUserForm = () => {
             await setDoc(userRef, userInfo);
             uploadAvatar();
             console.log('Datos Actualizados');
-            navigate('/user/profile');
+            navigate('/dashboard');
         } catch (err) {
             console.log(err.message);
         }

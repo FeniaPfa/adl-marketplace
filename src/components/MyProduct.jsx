@@ -25,8 +25,8 @@ export const MyProduct = ({ product, myProducts, setMyProducts }) => {
     };
 
     const goToProduct = () => {
-        navigate(`/products/${product.id}`)
-    }
+        navigate(`/products/${product.id}`);
+    };
 
     const goToEdit = () => {
         console.log('edit');
@@ -48,8 +48,15 @@ export const MyProduct = ({ product, myProducts, setMyProducts }) => {
                             alt={product.sport}
                         />
                         <Stack justifyContent="center" gap=".2rem">
-                            <Typography variant="overline" fontWeight="bold" sx={{lineHeight:"1.5"}}>Clases de {product.sport}</Typography>
-                            <Typography variant='overline' sx={{lineHeight:"1.5"}}>{product.age} - {product.level}</Typography>
+                            <Typography
+                                variant="overline"
+                                fontWeight="bold"
+                                sx={{ lineHeight: '1.5' }}>
+                                Clases de {product.sport}
+                            </Typography>
+                            <Typography variant="overline" sx={{ lineHeight: '1.5' }}>
+                                {product.age} - {product.level}
+                            </Typography>
                             <Typography fontWeight="bold" fontFamily="Kanit,sans-serif">
                                 {product.dojo}
                             </Typography>
