@@ -19,7 +19,7 @@ export const ProductsManager = () => {
 
     return (
         <>
-            <Typography variant="h3" mb="2rem" fontFamily="Kanit,sans-serif" fontWeight="bold">
+            <Typography variant="h2" mb="2rem" fontFamily="Kanit,sans-serif" fontWeight="bold">
                 Mis Publicaciones
             </Typography>
             <Stack gap="1rem">

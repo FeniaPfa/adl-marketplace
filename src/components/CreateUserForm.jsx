@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { register } from '../config/firebase';
-import { Button, Container, Stack, TextField, Typography } from '@mui/material';
+import { Alert, Button, Container, InputAdornment, Stack, TextField, Typography } from '@mui/material';
+import EmailIcon from '@mui/icons-material/Email';
+import LockIcon from '@mui/icons-material/Lock';
 
 export const CreateUserForm = ({ setStep }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
+    const [registerError, setRegisterError] = useState({status:false,message:""})
 
     const handlePassword = (e) => {
         setPassword(e.target.value);
@@ -23,12 +26,16 @@ export const CreateUserForm = ({ setStep }) => {
             await register({ email, password });
             setStep(1);
         } catch (err) {
-            console.log(err.code, err.message);
+            console.log({err});
+            if(err.code === "auth/email-already-in-use"){
+                setRegisterError({status:true, message:"Esta cuenta ya existe"})
+            }
         }
     };
     return (
         <Container component="form" onSubmit={handleRegister} maxWidth="xs">
             <Stack gap="2rem">
+            {registerError.status && <Alert severity="error">{registerError.message}</Alert>}
                 <TextField
                     required
                     label="Correo Electrónico"
@@ -36,6 +43,13 @@ export const CreateUserForm = ({ setStep }) => {
                     placeholder="tatami@email.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <EmailIcon />
+                            </InputAdornment>
+                        ),
+                    }}
                 />
 
                 <TextField
@@ -48,14 +62,29 @@ export const CreateUserForm = ({ setStep }) => {
                     placeholder="******"
                     value={password}
                     onChange={handlePassword}
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <LockIcon />
+                            </InputAdornment>
+                        ),
+                    }}
                 />
-                <Button type="submit" variant="contained">
-                    Registrarse
+                <Button type="submit" variant="contained" size="large">
+                    Siguente
                 </Button>
-                <Stack direction="row" gap=".6rem" justifyContent="center">
-                    <Typography>¿Ya tienes una cuenta?</Typography>
-                    <Link to="/login">Ingresar</Link>
-                </Stack>
+                <Stack gap=".6rem" alignItems="center">
+                        <Typography fontSize="1.2rem">¿Ya tienes una cuenta?</Typography>
+                        <Typography
+                            component={Link}
+                            to="/login"
+                            color="primary"
+                            fontWeight="bold"
+                            sx={{textDecoration:"none"}}
+                            fontSize="1.2rem">
+                            Ingresar
+                        </Typography>
+                    </Stack>
             </Stack>
         </Container>
     );

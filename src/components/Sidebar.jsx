@@ -15,7 +15,8 @@ export const Sidebar = () => {
 
     return (
         <Drawer
-            variant="permanent"
+            variant="persistent"
+            open={true}
             anchor="left"
             sx={{
                 width: 200,

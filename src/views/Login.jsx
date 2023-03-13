@@ -2,7 +2,17 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../config/firebase';
 import { Main } from '../containers/Main';
-import { Alert, Button, Container, Stack, TextField, Typography } from '@mui/material';
+import {
+    Alert,
+    Button,
+    Container,
+    InputAdornment,
+    Stack,
+    TextField,
+    Typography,
+} from '@mui/material';
+import EmailIcon from '@mui/icons-material/Email';
+import LockIcon from '@mui/icons-material/Lock';
 
 export const Login = () => {
     const navigate = useNavigate();
@@ -42,6 +52,13 @@ export const Login = () => {
                         placeholder="tatami@email.com"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <EmailIcon />
+                                </InputAdornment>
+                            ),
+                        }}
                     />
                     <TextField
                         required
@@ -51,13 +68,28 @@ export const Login = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         inputProps={{ minLength: 6 }}
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <LockIcon />
+                                </InputAdornment>
+                            ),
+                        }}
                     />
                     <Button variant="contained" type="submit">
                         Ingresar
                     </Button>
-                    <Stack direction="row" gap=".6rem" justifyContent="center">
-                        <Typography>¿No tienes una cuenta?</Typography>
-                        <Link to="/register">Registrarse</Link>
+                    <Stack gap=".6rem" alignItems="center">
+                        <Typography fontSize="1.2rem">¿No tienes una cuenta?</Typography>
+                        <Typography
+                            component={Link}
+                            to="/register"
+                            color="primary"
+                            fontWeight="bold"
+                            sx={{textDecoration:"none"}}
+                            fontSize="1.2rem">
+                            Registrarse
+                        </Typography>
                     </Stack>
                 </Stack>
             </Container>

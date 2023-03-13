@@ -90,7 +90,7 @@ export const SetUserForm = () => {
                         onChange={handleAvatar}
                     />
 
-                    <Button variant="contained" type="submit">
+                    <Button variant="contained" type="submit" size="large">
                         Actualizar
                     </Button>
                 </Stack>

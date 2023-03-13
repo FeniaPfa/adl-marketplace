@@ -55,10 +55,10 @@ export const AddProduct = () => {
     };
 
     return (
-        <Container maxWidth="sm" component="form" onSubmit={handleSubmit}>
+        <Container maxWidth="md" component="form" onSubmit={handleSubmit}>
             <Stack gap="2rem">
-                <Typography variant="h3" fontFamily="Kanit,sans-serif" fontWeight="bold">
-                    Agregar Publicación
+                <Typography variant="h2" fontFamily="Kanit,sans-serif" fontWeight="bold">
+                    Crear Publicación
                 </Typography>
                 <Stack direction="row" gap="1.2rem">
                     <TextField
@@ -164,9 +164,7 @@ export const AddProduct = () => {
                     multiline
                     label="Descripción"
                     rows={4}
-                    placeholder="Clases de karate para nivel (principiante, todos los niveles o avanzado)
-Para todas las edades o (niños de x hasta x años o adultos)
-                        "
+
                     helperText="Ingresa información adicional como duración de las clases u otros"
                     onChange={(e) => setProductInfo({ ...productInfo, desc: e.target.value })}
                 />

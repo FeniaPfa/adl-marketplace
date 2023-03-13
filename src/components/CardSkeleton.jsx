@@ -3,8 +3,8 @@ import React from 'react';
 
 export const CardSkeleton = () => {
     return (
-        <Card sx={{ width: 250 }}>
-            <Skeleton variant="rectangular" width={250} height={150} />
+        <Card sx={{ width: 350 }}>
+            <Skeleton variant="rectangular" width={350} height={200} />
             <CardContent>
                 <Stack gap=".6rem">
                     <Skeleton height={25} />

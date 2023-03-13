@@ -58,6 +58,7 @@ export const ProductPage = () => {
         color: '#455a64',
         fontWeight: 'bold',
         flexWrap: { xs: 'wrap', md: 'noWrap' },
+        fontSize:"1.3rem"
     };
 
     if (!productData) {
@@ -95,7 +96,7 @@ export const ProductPage = () => {
                         sx={{
                             display: 'flex',
                             flexDirection: 'column',
-                            gap: '.6rem',
+                            gap: '1rem',
                             flexGrow: 1,
                         }}>
                         {/* Sport | City */}
@@ -103,15 +104,15 @@ export const ProductPage = () => {
                             direction="row"
                             justifyContent="space-between"
                             sx={{ color: '#455a64' }}>
-                            <Typography variant="overline" fontWeight="bold">
+                            <Typography variant="overline" fontWeight="bold" fontSize="1.2rem">
                                 Clases de {productData?.sport}
                             </Typography>
-                            <Typography variant="overline" fontWeight="bold">
+                            <Typography variant="overline" fontSize="1.2rem" fontWeight="bold">
                                 {productData?.city}
                             </Typography>
                         </Stack>
                         <Typography
-                            variant="h4"
+                            variant="h2"
                             fontWeight="bold"
                             fontFamily="Kanit,sans-serif"
                             letterSpacing=".3rem">
@@ -135,7 +136,7 @@ export const ProductPage = () => {
                         {/* Precio x mes */}
                         <Box display="flex" gap="1rem" flexDirection="row" alignItems="baseline">
                             <Typography
-                                variant="h4"
+                                variant="h3"
                                 fontWeight="bold"
                                 color="primary"
                                 letterSpacing=".3rem"
@@ -144,26 +145,33 @@ export const ProductPage = () => {
                             </Typography>
                             <Typography
                                 variant="subtitle2"
+                                fontSize="1.2rem"
                                 letterSpacing=".1rem"
                                 textTransform="uppercase">
                                 x mes
                             </Typography>
                         </Box>
                         {/* Añadir | Fav */}
-                        <Stack direction="row" justifyContent="space-around">
+                        <Stack direction="row" justifyContent="space-around" gap=".8rem">
                             {user?.uid !== productData?.userId ? (
-                                <Button variant="outlined">Guardar en favoritos</Button>
+                                <Button variant="outlined" size="large" sx={{ fontSize: '1.3rem' }}>
+                                    Guardar en favoritos
+                                </Button>
                             ) : (
                                 <Button
+                                    size="large"
+                                    sx={{ fontSize: '1.3rem' }}
                                     variant="outlined"
                                     onClick={() =>
                                         navigate(`/dashboard/products/${productData?.id}`)
                                     }>
-                                    <EditIcon sx={{ mr: '.5rem' }} />
+                                    <EditIcon fontSize="large" sx={{ mr: '.5rem' }} />
                                     Editar
                                 </Button>
                             )}
                             <Button
+                                size="large"
+                                sx={{ fontSize: '1.3rem' }}
                                 disabled={user?.uid === productData?.userId}
                                 variant="contained"
                                 onClick={() => addProduct(productData)}>
@@ -173,17 +181,17 @@ export const ProductPage = () => {
                     </CardContent>
                 </Box>
                 {/* User | Descripcion | Horarios */}
-                <Stack gap=".5rem">
-                    <Typography variant="overline" sx={{ lineHeight: '1' }}>
+                <Stack mt="1rem" gap="1rem">
+                    <Typography variant="overline" fontSize="1.2rem" sx={{ lineHeight: '1' }}>
                         Por:
                         <b>
                             {userInfo?.name} {userInfo?.apellido}
                         </b>
                     </Typography>
-                    <Typography>
+                    <Typography fontSize="1.5rem">
                         <b>Horarios:</b> {productData?.days}
                     </Typography>
-                    <Typography>
+                    <Typography fontSize="1.5rem">
                         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta inventore
                         provident velit totam nihil sequi fugiat quia qui dolorem impedit maxime,
                         modi quos maiores rerum repellat numquam dolore libero suscipit!

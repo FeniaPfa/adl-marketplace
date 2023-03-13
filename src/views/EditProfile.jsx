@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { ref, uploadBytes } from 'firebase/storage';
 import { db, storage } from '../config/firebase';
 import { useUserContext } from '../context/userContext';
@@ -63,43 +63,41 @@ export const EditProfile = () => {
     }, []);
 
     return (
-        <>
-            <Typography variant="h3" fontWeight="bold" fontFamily="Kanit,sans-serif" mb="2rem">
-                Actualiza tus datos
-            </Typography>
-            <Container maxWidth="xs" component="form" onSubmit={handleUpdateUser}>
-                <Stack gap="2rem">
-                    <TextField
-                        value={userInfo?.name || ''}
-                        label="Nombre"
-                        type="text"
-                        placeholder="Nombre..."
-                        onChange={(e) => setUserInfo({ ...userInfo, name: e.target.value })}
-                    />
-                    <TextField
-                        value={userInfo?.apellido || ''}
-                        label="Apellido"
-                        type="text"
-                        placeholder="Apellido..."
-                        onChange={(e) => setUserInfo({ ...userInfo, apellido: e.target.value })}
-                    />
-                    <TextField
-                        helperText={
-                            error
-                                ? 'El tamaño maximo de la imagen es 1MB'
-                                : 'Sube una imagen de perfil menor a 1mb'
-                        }
-                        error={error}
-                        type="file"
-                        inputProps={{ accept: 'image/png, image/jpeg' }}
-                        onChange={handleAvatar}
-                    />
+        <Container maxWidth="sm" component="form" onSubmit={handleUpdateUser}>
+            <Stack gap="2rem">
+                <Typography variant="h2" fontWeight="bold" fontFamily="Kanit,sans-serif" mb="2rem">
+                    Actualiza tus datos
+                </Typography>
+                <TextField
+                    value={userInfo?.name || ''}
+                    label="Nombre"
+                    type="text"
+                    placeholder="Nombre..."
+                    onChange={(e) => setUserInfo({ ...userInfo, name: e.target.value })}
+                />
+                <TextField
+                    value={userInfo?.apellido || ''}
+                    label="Apellido"
+                    type="text"
+                    placeholder="Apellido..."
+                    onChange={(e) => setUserInfo({ ...userInfo, apellido: e.target.value })}
+                />
+                <TextField
+                    helperText={
+                        error
+                            ? 'El tamaño maximo de la imagen es 1MB'
+                            : 'Sube una imagen de perfil menor a 1mb'
+                    }
+                    error={error}
+                    type="file"
+                    inputProps={{ accept: 'image/png, image/jpeg' }}
+                    onChange={handleAvatar}
+                />
 
-                    <Button variant="contained" type="submit">
-                        Actualizar
-                    </Button>
-                </Stack>
-            </Container>
-        </>
+                <Button variant="contained" size="large" type="submit">
+                    Actualizar
+                </Button>
+            </Stack>
+        </Container>
     );
 };

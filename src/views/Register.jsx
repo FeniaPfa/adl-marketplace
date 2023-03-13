@@ -20,7 +20,7 @@ export const Register = () => {
     return (
         <Main>
             <Stack gap="2rem">
-                <Typography fontWeight="bold" variant="h4" textAlign="center">
+                <Typography fontWeight="bold" variant="h2" textAlign="center">
                     Crea tu cuenta
                 </Typography>
                 <Stepper activeStep={step} alternativeLabel>
