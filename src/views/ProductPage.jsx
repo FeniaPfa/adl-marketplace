@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db, getImg } from '../config/firebase';
 import { useGetProducts } from '../hooks/useGetProducts';
 import { useCartContext } from '../context/CartContext';
@@ -23,34 +23,98 @@ import { Loading } from '../components/Loading';
 
 export const ProductPage = () => {
     const { user } = useUserContext();
+    const { products } = useGetProducts();
+    const { addProduct } = useCartContext();
+
     const { id } = useParams();
     const navigate = useNavigate();
-    const [img, setImg] = useState();
-    const [userInfo, setUserInfo] = useState();
 
-    const { products, setLoading, loading } = useGetProducts();
-    const { addProduct } = useCartContext();
+    const [img, setImg] = useState();
+    const [productUserInfo, setProductUserInfo] = useState();
+
+    const [myUserInfo, setMyUserInfo] = useState();
+
 
     const productData = products.find((item) => item.id === id);
 
-    const getUserInfo = async () => {
+    const getUserInfo = async (id, setInfo) => {
         try {
             if (productData) {
-                const userRef = doc(db, 'users', productData?.userId);
+                const userRef = doc(db, 'users', id);
                 const docSnap = await getDoc(userRef);
                 const data = docSnap.data();
-                setUserInfo(data);
+                setInfo(data);
             }
         } catch (err) {
             console.log({ err });
         }
     };
 
+    let myUserRef;
+    if (user) {
+        myUserRef = doc(db, 'users', user?.uid);
+    }
+
+    console.log(myUserInfo?.favs);
+
+    let favorites = []
+    const handleFav = () => {
+        if (!user) {
+            alert('Debes estar logueado');
+            return;
+        }
+        let isFav;
+        if (myUserInfo.favs) {
+            isFav = myUserInfo.favs.some((item) => item === productData.id);
+            if (!isFav) {
+                // setMyUserInfo({ ...myUserInfo, favs: [...myUserInfo.favs, productData.id] };
+                favorites = [...myUserInfo.favs, productData.id]
+                uploadFav()
+                getUserInfo(user?.uid, setMyUserInfo);
+                console.log('Guardo en favoritos con exito');
+            }
+            if (isFav) {
+                const newFavs = myUserInfo.favs.filter((item) => item !== productData.id);
+                favorites = [...newFavs]
+                // setMyUserInfo({ ...myUserInfo, favs: newFavs });
+                uploadFav()
+                getUserInfo(user?.uid, setMyUserInfo);
+                console.log('Eliminado con exito de favoritos');
+            }
+        } else{
+            favorites = [productData.id]
+            uploadFav()
+            getUserInfo(user?.uid, setMyUserInfo);
+        }
+    };
+    const uploadFav = async () => {
+        try {
+            await updateDoc(myUserRef, {...myUserInfo, favs: favorites});
+            console.log('Favoritos modificados');
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+
+
     useEffect(() => {
         getImg(id, setImg);
+        getUserInfo(productData?.userId, setProductUserInfo);
 
-        getUserInfo();
+        if (user) {
+            getUserInfo(user?.uid, setMyUserInfo);
+            // if (myUserInfo) {
+                // setFavorites(myUserInfo?.favs);
+            // }
+        }
     }, [productData]);
+
+    // useEffect(() => {
+    //     if(user){
+    //         uploadFav();
+    //     }
+    // }, [myUserInfo]);
 
     const listStyle = {
         display: 'flex',
@@ -58,7 +122,7 @@ export const ProductPage = () => {
         color: '#455a64',
         fontWeight: 'bold',
         flexWrap: { xs: 'wrap', md: 'noWrap' },
-        fontSize:"1.3rem"
+        fontSize: '1.3rem',
     };
 
     if (!productData) {
@@ -154,7 +218,11 @@ export const ProductPage = () => {
                         {/* Añadir | Fav */}
                         <Stack direction="row" justifyContent="space-around" gap=".8rem">
                             {user?.uid !== productData?.userId ? (
-                                <Button variant="outlined" size="large" sx={{ fontSize: '1.3rem' }}>
+                                <Button
+                                    onClick={handleFav}
+                                    variant="outlined"
+                                    size="large"
+                                    sx={{ fontSize: '1.3rem' }}>
                                     Guardar en favoritos
                                 </Button>
                             ) : (
@@ -185,7 +253,7 @@ export const ProductPage = () => {
                     <Typography variant="overline" fontSize="1.2rem" sx={{ lineHeight: '1' }}>
                         Por:
                         <b>
-                            {userInfo?.name} {userInfo?.apellido}
+                            {productUserInfo?.name} {productUserInfo?.apellido}
                         </b>
                     </Typography>
                     <Typography fontSize="1.5rem">
