@@ -150,9 +150,6 @@ export const EditProduct = () => {
                     multiline
                     label="Descripción"
                     rows={4}
-                    placeholder="Clases de karate para nivel (principiante, todos los niveles o avanzado)
-Para todas las edades o (niños de x hasta x años o adultos)
-                        "
                     helperText="Ingresa información adicional como duración de las clases u otros"
                     onChange={(e) => setProductInfo({ ...productInfo, desc: e.target.value })}
                 />
