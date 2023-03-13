@@ -2,23 +2,43 @@ import { NavLink } from 'react-router-dom';
 import { Link as RouterLink } from 'react-router-dom';
 import { logOut } from '../config/firebase';
 import { useUserContext } from '../context/userContext';
+import { useCartContext } from '../context/CartContext';
 import logo from '/logo.svg';
-import { AppBar, Button, Container, Link, Stack, Toolbar, Typography } from '@mui/material';
+import {
+    AppBar,
+    Badge,
+    Button,
+    Container,
+    Divider,
+    Link,
+    Stack,
+    Toolbar,
+    Typography,
+} from '@mui/material';
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 export const Navbar = () => {
     const { user } = useUserContext();
+    const { total } = useCartContext()
 
     const routes = [
         { to: '/', text: 'Inicio', private: false },
         { to: '/login', text: 'Ingresar', private: false, publicOnly: true },
         { to: '/register', text: 'Registrarse', private: false, publicOnly: true },
-        { to: '/cart', text: 'Carrito', private: true },
         { to: '/dashboard', text: 'Dashboard', private: true },
+        // { to: '/cart', text: 'Carrito', private: true },
         // { to: "/products", text: "Products", private: false },
     ];
 
     const handleLogout = () => {
         logOut();
+    };
+
+    const linkStyle = {
+        fontSize: '1.2rem',
+        textTransform: 'uppercase',
+        letterSpacing: '1px',
+        textDecoration: 'none',
     };
 
     const activeStyle = {
@@ -61,22 +81,46 @@ export const Navbar = () => {
                             if (item.private && !user) return null;
                             if (item.publicOnly && user) return null;
                             return (
-                                <Link
-                                    className='nav-link'
-                                    key={item.text}
-                                    sx={{ fontSize: '1.2rem',textTransform:"uppercase", letterSpacing:"1px",textDecoration:"none" }}
-                                    variant="h5"
-                                    style={activeLink}
-                                    to={item.to}
-                                    component={NavLink}>
-                                    {item.text}
-                                </Link>
+                                <>
+                                    <Link
+                                        className="nav-link"
+                                        key={item.text}
+                                        sx={linkStyle}
+                                        variant="h5"
+                                        style={activeLink}
+                                        to={item.to}
+                                        component={NavLink}>
+                                        {item.text}
+                                    </Link>
+                                    <Divider orientation="vertical" variant="middle" flexItem />
+                                </>
                             );
                         })}
                         {user && (
-                            <Button variant="outlined" color="secondary" onClick={handleLogout}>
-                                Logout
-                            </Button>
+                            <>
+                                <Link
+                                className='nav-link'
+                                    sx={linkStyle}
+                                    variant="h5"
+                                    style={activeLink}
+                                    to="/cart"
+                                    component={NavLink}>
+                                        Carrito
+                                </Link>
+                                <Link
+                                    sx={linkStyle}
+                                    variant="h5"
+                                    style={activeLink}
+                                    to="/cart"
+                                    component={NavLink}>
+                                    <Badge badgeContent={total.quantity} color="warning">
+                                        <ShoppingCartIcon />
+                                    </Badge>
+                                </Link>
+                                <Button variant="outlined" color="secondary" onClick={handleLogout}>
+                                    Logout
+                                </Button>
+                            </>
                         )}
                     </Stack>
                 </Toolbar>

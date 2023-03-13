@@ -21,6 +21,10 @@
   transform-origin: left;
 } 
 
+.nav-link svg:hover{
+  transform:none;
+}
+
 .product-card{
   position: relative;
 }

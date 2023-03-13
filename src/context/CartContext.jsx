@@ -39,6 +39,10 @@ export const CartProvider = ({ children }) => {
     };
 
     const deleteProduct = (product) => {
+        const productIndex = cart.findIndex((item) => item.id === product.id);
+        const productQuantity = cart[productIndex].count;
+        const itemTotal = productQuantity * product.price;
+        setTotal({ price: total.price - itemTotal, quantity: total.quantity - productQuantity });
         setCart(cart.filter((item) => item.id !== product.id));
     };
 
