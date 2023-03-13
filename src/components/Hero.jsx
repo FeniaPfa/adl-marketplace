@@ -1,5 +1,5 @@
-import { Stack, SvgIcon, Typography } from '@mui/material';
-import heroimg from '../assets/kimono.png';
+import { Stack, Typography } from '@mui/material';
+import heroimg from '../assets/hero.png';
 
 import logo from '/logo.svg';
 
@@ -7,14 +7,14 @@ export const Hero = () => {
     return (
         <div className="hero">
             <div className="hero__text">
-                <Typography
+                {/* <Typography
                     variant="h1"
                     fontFamily="Kanit,sans-serif"
                     fontWeight="bold"
                     fontSize="4rem"
                     className="hero__title">
                     TATAMI
-                </Typography>
+                </Typography> */}
                 <Typography
                     fontSize="3.2rem"
                     fontWeight="bold"
@@ -32,7 +32,7 @@ export const Hero = () => {
                             TATAMI!
                         </Typography>
                         <Typography fontSize="1.5rem" fontWeight="bold" className="hero__subtitle">
-                            Encuentra y publica tus clases de artes marciales en un solo lugar.
+                            Encuentra y publica clases de artes marciales en un solo lugar.
                         </Typography>
                     </Stack>
                 </div>

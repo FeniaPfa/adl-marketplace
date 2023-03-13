@@ -52,8 +52,9 @@
 .hero{
 
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: flex-start;
+  gap: 2rem;
   height: 80vh;
   background-image: url("./assets/smoke-bg.jpg");
   background-position: center;
@@ -91,8 +92,9 @@
 
 .hero__img{
 
-  vertical-align: top;
-  padding-top: 2rem;
+  vertical-align: bottom;
+  padding-top: 1rem;
   object-fit: cover;
-  width: 400px;
+  /* width: 400px; */
+  height: 100%;
 }
