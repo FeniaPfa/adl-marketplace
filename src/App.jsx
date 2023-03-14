@@ -15,6 +15,7 @@ import { Register } from './views/Register';
 import { ProductPage } from './views/ProductPage';
 import { CartProvider } from './context/CartContext';
 import { DashboardHome } from './views/DashboardHome';
+import { NotFound } from './views/NotFound';
 
 function App() {
     return (
@@ -28,6 +29,7 @@ function App() {
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/products/:id" element={<ProductPage />} />
+                        <Route path="*" element={<NotFound />} />
 
                         <Route
                             path="cart"

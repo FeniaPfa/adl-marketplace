@@ -65,8 +65,9 @@ export const ProductCard = ({ product }) => {
                         <Typography
                             variant="h4"
                             fontWeight="bold"
+                            textAlign="center"
                             fontFamily="Kanit,sans-serif"
-                            sx={{ letterSpacing: '.3rem' }}>
+                            sx={{ letterSpacing: '.3rem'}}>
                             {product.dojo}
                         </Typography>
                         <Typography variant="subtitle2" fontSize="1.2rem">{product.city}</Typography>
