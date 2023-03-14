@@ -1,4 +1,4 @@
-import { Box, Container, Divider, IconButton, Stack, Typography } from '@mui/material';
+import { Box, Container, Divider, IconButton, Link, Stack, Typography } from '@mui/material';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -11,7 +11,7 @@ export const Footer = () => {
             <Stack
                 maxWidth="lg"
                 component={Container}
-                p="1rem 0"
+                p="2rem 0"
                 direction="row"
                 justifyContent="space-between">
                 {/* 1 */}
@@ -73,7 +73,7 @@ export const Footer = () => {
                 alignItems="center"
                 component={Container}>
                 <Typography color="secondary">Todos los derechos reservados © Tatami</Typography>
-                <IconButton sx={{ color: '#fff' }}>
+                <IconButton  component="a" href="https://github.com/FeniaPfa" sx={{ color: '#fff' }} target="_blank">
                     <GitHubIcon />
                 </IconButton>
             </Stack>

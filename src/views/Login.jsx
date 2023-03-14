@@ -38,7 +38,7 @@ export const Login = () => {
         }
     };
     return (
-        <Main>
+        <Container maxWidth="lg" sx={{ margin: '2rem auto'}}>
             <Container maxWidth="xs" component="form" onSubmit={handleLogin}>
                 <Stack gap="2rem">
                     <Typography fontWeight="bold" variant="h4" textAlign="center">
@@ -93,6 +93,6 @@ export const Login = () => {
                     </Stack>
                 </Stack>
             </Container>
-        </Main>
+        </Container>
     );
 };

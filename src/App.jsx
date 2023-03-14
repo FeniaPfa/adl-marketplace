@@ -16,7 +16,7 @@ import { ProductPage } from './views/ProductPage';
 import { CartProvider } from './context/CartContext';
 import { DashboardHome } from './views/DashboardHome';
 import { NotFound } from './views/NotFound';
-import { Footer } from './components/Footer';
+import { Products } from './views/Products';
 
 function App() {
     return (
@@ -29,6 +29,7 @@ function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
+                        <Route path="/products" element={<Products />} />
                         <Route path="/products/:id" element={<ProductPage />} />
                         <Route path="*" element={<NotFound />} />
 

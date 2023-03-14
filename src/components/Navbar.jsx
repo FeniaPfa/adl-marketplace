@@ -24,6 +24,7 @@ export const Navbar = () => {
 
     const routes = [
         { to: '/', text: 'Inicio', private: false },
+        { to: '/products', text: 'Productos', private: false },
         { to: '/login', text: 'Ingresar', private: false, publicOnly: true },
         { to: '/register', text: 'Registrarse', private: false, publicOnly: true },
         { to: '/dashboard', text: 'Dashboard', private: true },

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Main } from '../containers/Main';
 import { SetUserForm } from '../components/SetUserForm';
-import { Stack, Step, StepLabel, Stepper, Typography } from '@mui/material';
+import { Container, Stack, Step, StepLabel, Stepper, Typography } from '@mui/material';
 import { CreateUserForm } from '../components/CreateUserForm';
 
 export const Register = () => {
@@ -18,7 +18,7 @@ export const Register = () => {
         }
     };
     return (
-        <Main>
+        <Container maxWidth="lg" sx={{ margin: '2rem auto' }}>
             <Stack gap="2rem">
                 <Typography fontWeight="bold" variant="h2" textAlign="center">
                     Crea tu cuenta
@@ -32,6 +32,6 @@ export const Register = () => {
                 </Stepper>
                 {handleSteps(step)}
             </Stack>
-        </Main>
+        </Container>
     );
 };
