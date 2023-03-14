@@ -1,16 +1,24 @@
 import { Stack, Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { FavCard } from '../components/FavCard';
+import { Loading } from '../components/Loading';
 import { useGetProducts } from '../hooks/useGetProducts';
 import { useGetUser } from '../hooks/useGetUser';
 
 export const Favorites = () => {
-    // logica para para hacerun map con favcards
     const { products } = useGetProducts();
-    const {userData} = useGetUser()
+    const { userData } = useGetUser();
 
-    const favData = products.filter((item) => userData?.favs.includes(item.id) )
-    console.log(favData)
+    const [favorites, setFavorites] = useState();
 
+    const favData = products.filter((item) => userData?.favs.includes(item.id));
+    // console.log(favorites);
+
+    useEffect(() => {
+        setFavorites(favData);
+    }, [products, userData]);
+
+    if (!favorites) return <Loading />;
 
     return (
         <>
@@ -18,8 +26,15 @@ export const Favorites = () => {
                 Mis Favoritos
             </Typography>
             <Stack gap="1rem">
-                {favData.map(item => <FavCard productData={item} /> )}
-                
+                {favorites.map((item) => (
+                    <FavCard
+                        key={item.id}
+                        productData={item}
+                        setFavorites={setFavorites}
+                        favorites={favorites}
+                        userData={userData}
+                    />
+                ))}
             </Stack>
         </>
     );

@@ -1,23 +1,35 @@
 import { Avatar, Box, Button, Container, Paper, Stack, Typography } from '@mui/material';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import { useEffect, useState } from 'react';
-import { getImg } from '../config/firebase';
+import { db, getImg } from '../config/firebase';
 import { formatNumber } from '../utils/utils.js';
 import { useCartContext } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import { doc, updateDoc } from 'firebase/firestore';
+import { useUserContext } from '../context/userContext';
 
-
-export const FavCard = ({ productData }) => {
+export const FavCard = ({ setFavorites, userData, productData, favorites }) => {
+    const { user } = useUserContext();
     const { addProduct } = useCartContext();
     const [img, setImg] = useState();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const goToFav = () => {
-        navigate(`/products/${productData.id}`)
+        navigate(`/products/${productData.id}`);
     };
 
-    const deleteFav = () => {
-        console.log('delete');
+    const userRef = doc(db, 'users', user?.uid);
+
+    const newFavs = userData.favs.filter((item) => item !== productData.id);
+    const deleteFav = async () => {
+        try {
+            await updateDoc(userRef, { ...userData, favs: newFavs });
+
+            setFavorites(favorites.filter((item) => item.id !== productData.id));
+            console.log('Favoritos modificados');
+        } catch (err) {
+            console.error(err);
+        }
     };
 
     const addToCart = () => {
@@ -55,14 +67,13 @@ export const FavCard = ({ productData }) => {
                                 </Typography>
                             </Box>
                             <Stack direction="row" gap="1rem">
-
-                            <Button variant="outlined" size="large" onClick={goToFav}>
-                                <VisibilityIcon />
-                            </Button>
-                            <Button variant="outlined" size="large" onClick={deleteFav}>
-                                <CloseRoundedIcon />
-                                Eliminar
-                            </Button>
+                                <Button variant="outlined" size="large" onClick={goToFav}>
+                                    <VisibilityIcon />
+                                </Button>
+                                <Button variant="outlined" size="large" onClick={deleteFav}>
+                                    <CloseRoundedIcon />
+                                    Eliminar
+                                </Button>
                             </Stack>
                         </Stack>
                     </Stack>

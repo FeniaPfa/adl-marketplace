@@ -16,6 +16,7 @@ import {
     Typography,
 } from '@mui/material';
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import React from 'react';
 
 export const Navbar = () => {
     const { user } = useUserContext();
@@ -81,10 +82,10 @@ export const Navbar = () => {
                             if (item.private && !user) return null;
                             if (item.publicOnly && user) return null;
                             return (
-                                <>
+                                <React.Fragment key={item.text}>
                                     <Link
                                         className="nav-link"
-                                        key={item.text}
+                                        
                                         sx={linkStyle}
                                         variant="h5"
                                         style={activeLink}
@@ -93,7 +94,7 @@ export const Navbar = () => {
                                         {item.text}
                                     </Link>
                                     <Divider orientation="vertical" variant="middle" flexItem />
-                                </>
+                                </React.Fragment>
                             );
                         })}
                         {user && (
