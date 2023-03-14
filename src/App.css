@@ -108,3 +108,8 @@
   background-size: cover;
   height: 300px;
 }
+
+.landing-img{
+  /* border-radius: 12px; */
+  box-shadow: 2px 2px 10px #0000007a;
+}

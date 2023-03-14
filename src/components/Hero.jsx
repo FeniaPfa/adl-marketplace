@@ -1,4 +1,4 @@
-import { Stack, Typography } from '@mui/material';
+import { Button, Stack, Typography } from '@mui/material';
 import heroimg from '../assets/hero.png';
 
 import logo from '/logo.svg';
@@ -26,7 +26,7 @@ export const Hero = () => {
                     físico y mental
                 </Typography>
                 <div>
-                    <Stack gap="1rem">
+                    <Stack gap="1.2rem" alignItems="flex-start">
                         <Typography fontSize="1.5rem" fontWeight="bold" className="hero__subtitle">
                             ¡Descubre la fuerza interior y la disciplina de las artes marciales con
                             TATAMI!
@@ -34,6 +34,7 @@ export const Hero = () => {
                         <Typography fontSize="1.5rem" fontWeight="bold" className="hero__subtitle">
                             Encuentra y publica clases de artes marciales en un solo lugar.
                         </Typography>
+                        <Button variant='contained' size="large" sx={{padding:"1rem 2rem"}}>Buscar Clases</Button>
                     </Stack>
                 </div>
             </div>
