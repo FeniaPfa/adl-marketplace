@@ -1,15 +1,17 @@
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { Container, Stack, Typography } from "@mui/material";
+import { Footer } from "../components/Footer";
 
 
 export const NotFound = () => {
   return (
+    <>
     <Container maxWidth="md">
     <Stack alignItems="center" mt="3rem">
         <ErrorOutlineIcon
             color="primary"
             sx={{ fontSize: "16rem" }}
-        />
+            />
         <Typography variant="h2" color="primary" fontWeight="bold">
             Error 404
         </Typography>
@@ -18,5 +20,7 @@ export const NotFound = () => {
         </Typography>
     </Stack>
 </Container>
+<Footer />
+            </>
   )
 }

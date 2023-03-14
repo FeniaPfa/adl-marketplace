@@ -9,12 +9,14 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { CartItem } from '../components/CartItem';
 import { formatNumber } from '../utils/utils.js';
+import { Footer } from '../components/Footer';
 
 export const Cart = () => {
     const { cart, total } = useCartContext();
     console.log(cart);
-    if (cart.length === 0) return <p>carrito vacio</p>;
+    // if (cart.length === 0) return <p>carrito vacio</p>;
     return (
+        <>
         <Main>
             
             {/* Tabla */}
@@ -36,7 +38,7 @@ export const Cart = () => {
                         <TableBody>
                             {cart.map((item) => (
                                 <CartItem key={item.id} product={item} />
-                            ))}
+                                ))}
                         </TableBody>
                     </Table>
                 </TableContainer>
@@ -61,5 +63,7 @@ export const Cart = () => {
                 </Button>
             </Stack>
         </Main>
+        <Footer />
+                                </>
     );
 };

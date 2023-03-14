@@ -16,6 +16,7 @@ import { ProductPage } from './views/ProductPage';
 import { CartProvider } from './context/CartContext';
 import { DashboardHome } from './views/DashboardHome';
 import { NotFound } from './views/NotFound';
+import { Footer } from './components/Footer';
 
 function App() {
     return (
@@ -55,6 +56,7 @@ function App() {
                             <Route path="products/:id" element={<EditProduct />} />
                         </Route>
                     </Routes>
+
                 </CartProvider>
             </UserContextProvider>
         </>
