@@ -1,9 +1,19 @@
 import { Avatar, Box, Button, Container, Paper, Stack, Typography } from '@mui/material';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import { useEffect, useState } from 'react';
+import { getImg } from '../config/firebase';
+import { formatNumber } from '../utils/utils.js';
+import { useCartContext } from '../context/CartContext';
+import { useNavigate } from 'react-router-dom';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
-export const FavCard = () => {
+
+export const FavCard = ({ productData }) => {
+    const { addProduct } = useCartContext();
+    const [img, setImg] = useState();
+    const navigate = useNavigate()
     const goToFav = () => {
-        console.log('Ver favorito');
+        navigate(`/products/${productData.id}`)
     };
 
     const deleteFav = () => {
@@ -11,8 +21,12 @@ export const FavCard = () => {
     };
 
     const addToCart = () => {
-        console.log('añadido al carrito');
+        addProduct(productData);
     };
+
+    useEffect(() => {
+        getImg(productData?.id, setImg);
+    });
 
     return (
         <Container maxWidth="lg">
@@ -20,37 +34,43 @@ export const FavCard = () => {
                 <Stack direction="row" alignItems="center" justifyContent="space-between">
                     <Stack direction="row" gap="2rem" alignItems="center">
                         <Avatar
-                            src={'https://picsum.photos/200'}
+                            src={img}
                             sx={{ width: '150px', height: '150px' }}
                             variant="rounded"
                             alt="alt"
                         />
-                        <Stack gap="1.2rem">
+                        <Stack gap="1.2rem" alignItems="flex-start">
                             <Box>
                                 <Typography
                                     variant="overline"
                                     fontSize="1.2rem"
                                     sx={{ lineHeight: '1.5' }}>
-                                    Karate - Nivel - Edades
+                                    {productData?.sport} - {productData?.level} - {productData?.age}
                                 </Typography>
                                 <Typography
                                     variant="h4"
                                     fontWeight="bold"
                                     fontFamily="Kanit,sans-serif">
-                                    Cobra Kai
+                                    {productData?.dojo}
                                 </Typography>
                             </Box>
-                            <Button variant="outlined" size="large">
+                            <Stack direction="row" gap="1rem">
+
+                            <Button variant="outlined" size="large" onClick={goToFav}>
+                                <VisibilityIcon />
+                            </Button>
+                            <Button variant="outlined" size="large" onClick={deleteFav}>
                                 <CloseRoundedIcon />
                                 Eliminar
                             </Button>
+                            </Stack>
                         </Stack>
                     </Stack>
                     <Stack gap="1rem" alignItems="center">
                         <Typography variant="h3" fontWeight="bold">
-                            $ 10.000
+                            $ {formatNumber(productData?.price)}
                         </Typography>
-                        <Button variant="contained" size="large" onClick={deleteFav}>
+                        <Button variant="contained" size="large" onClick={addToCart}>
                             Agregar al Carrito
                         </Button>
                     </Stack>
