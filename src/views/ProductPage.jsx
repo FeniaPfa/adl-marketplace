@@ -33,7 +33,7 @@ export const ProductPage = () => {
     const [productUserInfo, setProductUserInfo] = useState();
 
     const [myUserInfo, setMyUserInfo] = useState();
-
+    const [isFav, setIsFav] = useState(false);
 
     const productData = products.find((item) => item.id === id);
 
@@ -55,48 +55,40 @@ export const ProductPage = () => {
         myUserRef = doc(db, 'users', user?.uid);
     }
 
-    console.log(myUserInfo?.favs);
-
-    let favorites = []
+    let favorites = [];
     const handleFav = () => {
         if (!user) {
             alert('Debes estar logueado');
             return;
         }
-        let isFav;
         if (myUserInfo.favs) {
-            isFav = myUserInfo.favs.some((item) => item === productData.id);
             if (!isFav) {
-                // setMyUserInfo({ ...myUserInfo, favs: [...myUserInfo.favs, productData.id] };
-                favorites = [...myUserInfo.favs, productData.id]
-                uploadFav()
+                favorites = [...myUserInfo.favs, productData.id];
+                uploadFav();
                 getUserInfo(user?.uid, setMyUserInfo);
                 console.log('Guardo en favoritos con exito');
             }
             if (isFav) {
                 const newFavs = myUserInfo.favs.filter((item) => item !== productData.id);
-                favorites = [...newFavs]
-                // setMyUserInfo({ ...myUserInfo, favs: newFavs });
-                uploadFav()
+                favorites = [...newFavs];
+                uploadFav();
                 getUserInfo(user?.uid, setMyUserInfo);
                 console.log('Eliminado con exito de favoritos');
             }
-        } else{
-            favorites = [productData.id]
-            uploadFav()
+        } else {
+            favorites = [productData.id];
+            uploadFav();
             getUserInfo(user?.uid, setMyUserInfo);
         }
     };
     const uploadFav = async () => {
         try {
-            await updateDoc(myUserRef, {...myUserInfo, favs: favorites});
+            await updateDoc(myUserRef, { ...myUserInfo, favs: favorites });
             console.log('Favoritos modificados');
         } catch (err) {
             console.error(err);
         }
     };
-
-
 
     useEffect(() => {
         getImg(id, setImg);
@@ -104,17 +96,12 @@ export const ProductPage = () => {
 
         if (user) {
             getUserInfo(user?.uid, setMyUserInfo);
-            // if (myUserInfo) {
-                // setFavorites(myUserInfo?.favs);
-            // }
         }
     }, [productData]);
 
-    // useEffect(() => {
-    //     if(user){
-    //         uploadFav();
-    //     }
-    // }, [myUserInfo]);
+    useEffect(() => {
+        setIsFav(myUserInfo?.favs?.some((item) => item === productData.id));
+    }, [myUserInfo]);
 
     const listStyle = {
         display: 'flex',
@@ -223,7 +210,7 @@ export const ProductPage = () => {
                                     variant="outlined"
                                     size="large"
                                     sx={{ fontSize: '1.3rem' }}>
-                                    Guardar en favoritos
+                                    {!isFav ? 'Guardar en favoritos' : 'Eliminar Favorito'}
                                 </Button>
                             ) : (
                                 <Button
