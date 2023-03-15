@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useUserContext } from '../context/userContext';
 import { useGetProducts } from '../hooks/useGetProducts';
 import { MyProduct } from '../components/MyProduct';
-import { Stack, Typography } from '@mui/material';
+import { Container, Stack, Typography } from '@mui/material';
 
 export const ProductsManager = () => {
     const { user } = useUserContext();
@@ -18,8 +18,8 @@ export const ProductsManager = () => {
     }
 
     return (
-        <>
-            <Typography variant="h2" mb="2rem" fontFamily="Kanit,sans-serif" fontWeight="bold">
+        <Container maxWidth="lg">
+            <Typography variant="h2" mb="2rem" fontFamily="Kanit,sans-serif" fontWeight="bold" sx={{wordBreak:"break-word",fontSize:{xs:"3rem", sm:"3.7rem"}}}>
                 Mis Publicaciones
             </Typography>
             <Stack gap="1rem">
@@ -32,6 +32,6 @@ export const ProductsManager = () => {
                     />
                 ))}
             </Stack>
-        </>
+        </Container>
     );
 };

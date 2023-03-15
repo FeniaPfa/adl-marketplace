@@ -39,8 +39,8 @@ export const MyProduct = ({ product, myProducts, setMyProducts }) => {
     return (
         <>
             <Paper sx={{ padding: '1.5rem 2rem' }}>
-                <Stack direction="row" alignItems="center" justifyContent="space-between">
-                    <Stack direction="row" gap="2rem">
+                <Stack alignItems="center" justifyContent="space-between" gap="1rem" sx={{flexDirection:{xs:"column",md:"row"}}}>
+                    <Stack gap="2rem" alignItems="center" sx={{flexDirection:{xs:"column",sm:"row"}}}>
                         <Avatar
                             src={image}
                             sx={{ width: '150px', height: '150px' }}
@@ -64,7 +64,7 @@ export const MyProduct = ({ product, myProducts, setMyProducts }) => {
                         </Stack>
                     </Stack>
 
-                    <Stack direction="row" gap="1rem" alignItems="center">
+                    <Stack direction="row" gap="1rem" alignItems="center" justifyContent="center" flexWrap="wrap">
                         <Button variant="outlined" size='large' onClick={goToProduct}>
                             <VisibilityIcon fontSize='large' />
                         </Button>
