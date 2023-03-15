@@ -41,28 +41,30 @@ export const FavCard = ({ setFavorites, userData, productData, favorites }) => {
     });
 
     return (
-        <Container maxWidth="lg">
+        // <Container maxWidth="lg">
             <Paper sx={{ padding: '2rem' }}>
-                <Stack direction="row" alignItems="center" justifyContent="space-between">
-                    <Stack direction="row" gap="2rem" alignItems="center">
+                <Stack alignItems="center" justifyContent="space-between" gap="1rem" sx={{flexDirection:{xs:"column",md:"row"}}}>
+                    <Stack gap="2rem" alignItems="center" sx={{flexDirection:{xs:"column",sm:"row"}}}>
                         <Avatar
                             src={img}
                             sx={{ width: '150px', height: '150px' }}
                             variant="rounded"
                             alt="alt"
                         />
-                        <Stack gap="1.2rem" alignItems="flex-start">
+                        <Stack gap="1.2rem" sx={{alignItems:{xs:"center", md:"flex-start"}}}>
                             <Box>
                                 <Typography
                                     variant="overline"
                                     fontSize="1.2rem"
-                                    sx={{ lineHeight: '1.5' }}>
+                                    sx={{ lineHeight: '1.5',textAlign:{xs:"center",md:"inherit"}}}>
                                     {productData?.sport} - {productData?.level} - {productData?.age}
                                 </Typography>
                                 <Typography
                                     variant="h4"
                                     fontWeight="bold"
-                                    fontFamily="Kanit,sans-serif">
+                                    fontFamily="Kanit,sans-serif"
+                                    sx={{textAlign:{xs:"center",md:"inherit"}}}
+                                    >
                                     {productData?.dojo}
                                 </Typography>
                             </Box>
@@ -87,6 +89,6 @@ export const FavCard = ({ setFavorites, userData, productData, favorites }) => {
                     </Stack>
                 </Stack>
             </Paper>
-        </Container>
+        // </Container>
     );
 };

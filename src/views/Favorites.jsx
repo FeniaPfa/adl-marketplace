@@ -1,4 +1,4 @@
-import { Stack, Typography } from '@mui/material';
+import { Container, Stack, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { FavCard } from '../components/FavCard';
 import { Loading } from '../components/Loading';
@@ -22,20 +22,23 @@ export const Favorites = () => {
 
     return (
         <>
+            <Container maxWidth="lg">
             <Typography variant="h2" mb="2rem" fontFamily="Kanit,sans-serif" fontWeight="bold">
                 Mis Favoritos
             </Typography>
+
             <Stack gap="1rem">
                 {favorites.map((item) => (
                     <FavCard
-                        key={item.id}
-                        productData={item}
-                        setFavorites={setFavorites}
-                        favorites={favorites}
-                        userData={userData}
+                    key={item.id}
+                    productData={item}
+                    setFavorites={setFavorites}
+                    favorites={favorites}
+                    userData={userData}
                     />
-                ))}
+                    ))}
             </Stack>
+                    </Container>
         </>
     );
 };

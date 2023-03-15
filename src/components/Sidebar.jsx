@@ -19,6 +19,8 @@ export const Sidebar = () => {
             anchor="left"
             sx={{
                 width: 200,
+                marginRight:"1rem",
+                display:{xs:"none",md:"inherit"},
                 flexShrink: 0,
                 [`& .MuiDrawer-paper`]: { width: 250, boxSizing: 'border-box' },
             }}>

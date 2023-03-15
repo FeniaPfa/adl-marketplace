@@ -7,15 +7,15 @@ export const Profile = ({userData, image}) => {
     return (
 
 
-            <Container component={Paper} maxWidth="lg" variant='outlined'  sx={{ padding: '3rem'}}>
-                <Stack direction="row" gap="5rem" flexWrap="wrap">
+            <Container component={Paper} maxWidth="md" variant='outlined'  sx={{ padding: '3rem'}}>
+                <Stack direction="row" gap="5rem" alignItems="center" justifyContent="center" flexWrap="wrap">
                     <Avatar
                         src={image ? image : DefaultImg}
                         alt={userData.name}
-                        sx={{ width: '300px', height: '300px' }}
+                        sx={{ width: '200px', height: '200px' }}
                         />
                     <Stack gap="1rem">
-                        <Typography variant="h1" fontFamily="Kanit,sans-serif" fontWeight="bold">
+                        <Typography variant="h2" fontFamily="Kanit,sans-serif" fontWeight="bold">
                             {userData.name} {userData.apellido}
                         </Typography>
 
