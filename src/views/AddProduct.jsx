@@ -60,7 +60,7 @@ export const AddProduct = () => {
                 <Typography variant="h2" fontFamily="Kanit,sans-serif" fontWeight="bold">
                     Crear Publicación
                 </Typography>
-                <Stack direction="row" gap="1.2rem">
+                <Stack gap="1.2rem" sx={{flexDirection:{xs:"column",md:"row"}}}>
                     <TextField
                         fullWidth
                         required
@@ -79,7 +79,7 @@ export const AddProduct = () => {
                     />
                 </Stack>
 
-                <Stack direction="row" gap="1.2rem">
+                <Stack gap="1.2rem" sx={{flexDirection:{xs:"column",md:"row"}}}>
                     <TextField
                         required
                         select
@@ -107,7 +107,7 @@ export const AddProduct = () => {
                     </TextField>
                 </Stack>
 
-                <Stack direction="row" gap="1.2rem">
+                <Stack gap="1.2rem" sx={{flexDirection:{xs:"column",md:"row"}}}>
                     <TextField
                         fullWidth
                         required

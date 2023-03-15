@@ -19,23 +19,29 @@ export const Sidebar = () => {
             anchor="left"
             sx={{
                 width: 200,
-                marginRight:"1rem",
-                display:{xs:"none",md:"inherit"},
+                marginRight: '1rem',
+                display: { xs: 'none', md: 'inherit' },
                 flexShrink: 0,
                 [`& .MuiDrawer-paper`]: { width: 250, boxSizing: 'border-box' },
             }}>
             <Toolbar></Toolbar>
             <Box>
-                <List sx={{ display: 'flex', flexDirection: 'column', gap: '2rem', fontSize:"1.5rem" }}>
+                <List
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '2rem',
+                        fontSize: '1.5rem',
+                    }}>
                     <ListItem to="/dashboard" component={NavLink} style={activeLink}>
                         <ListItemIcon>
-                            <DashboardIcon fontSize='large'/>
+                            <DashboardIcon fontSize="large" />
                         </ListItemIcon>
                         Dashboard
                     </ListItem>
                     <ListItem to="editprofile" component={NavLink} style={activeLink}>
                         <ListItemIcon>
-                            <AccountCircleIcon fontSize='large' />
+                            <AccountCircleIcon fontSize="large" />
                         </ListItemIcon>
                         Editar Perfil
                     </ListItem>
@@ -47,13 +53,13 @@ export const Sidebar = () => {
                     </ListItem>
                     <ListItem to="addproduct" component={NavLink} style={activeLink}>
                         <ListItemIcon>
-                            <AddCircleRoundedIcon fontSize='large' />
+                            <AddCircleRoundedIcon fontSize="large" />
                         </ListItemIcon>
                         Crear Publicación
                     </ListItem>
                     <ListItem to="products" component={NavLink} style={activeLink}>
                         <ListItemIcon>
-                            <DynamicFeedIcon fontSize='large' />
+                            <DynamicFeedIcon fontSize="large" />
                         </ListItemIcon>
                         Mis Publicaciones
                     </ListItem>
