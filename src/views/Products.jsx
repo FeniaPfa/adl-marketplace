@@ -17,7 +17,7 @@ export const Products = () => {
     return (
         <>
         <Main>
-            <Filters products={products} setFilteredList={setFilteredList}/>
+            <Filters products={products} setFilteredList={setFilteredList} filteredList={filteredList}/>
         <Stack direction="row" gap="2rem" flexWrap="wrap" width="100%" justifyContent="center">
             {loading
                 ? Array.from(new Array(6)).map((item, index) => <CardSkeleton key={index} />)

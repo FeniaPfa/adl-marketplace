@@ -1,8 +1,13 @@
 import { Container, MenuItem, TextField } from '@mui/material';
+import { useEffect, useState } from 'react';
 
-export const Filters = ({ products, setFilteredList }) => {
+export const Filters = ({ products, setFilteredList, filteredList }) => {
+
+    const [city, setCity] = useState("")
+    const [sport, setSport] = useState("")
+
     const handleSort = (type) => {
-        let sortedList = [...products];
+        let sortedList = [...filteredList];
         if (type === 'cheap') {
             sortedList.sort((a, b) => b.price - a.price);
             setFilteredList(sortedList);
@@ -13,21 +18,19 @@ export const Filters = ({ products, setFilteredList }) => {
         }
     };
 
-    const handleSearch = (e) => {
-        const query = e.target.value;
-        setFilteredList(
-            products.filter((item) => item.sport.toLowerCase().includes(query.toLowerCase()))
-        );
-    };
-    const handleSearch2 = (e) => {
-        const query = e.target.value;
-        setFilteredList(
-            products.filter((item) => item.city.toLowerCase().includes(query.toLowerCase()))
-        );
-    };
+    useEffect(() => {
+        let newData = [...products]
+        if(sport) {
+            newData = newData.filter(item => item.sport.toLowerCase().includes(sport.toLowerCase()))
+        }
+        if(city){
+            newData= newData.filter(item => item.city.toLowerCase().includes(city.toLowerCase()))
+        }
+        setFilteredList(newData)
+    },[sport, city])
 
     return (
-        <>
+
             <Container
                 maxWidth="md"
                 sx={{ display: 'flex', flexDirection: 'row', gap: '3rem', marginBottom: '2rem' }}>
@@ -40,23 +43,23 @@ export const Filters = ({ products, setFilteredList }) => {
                     <MenuItem disabled value="x">
                         <em>Ordenar</em>
                     </MenuItem>
-                    <MenuItem value="cheap">Precio Ascendente</MenuItem>
-                    <MenuItem value="expensive">Precio Descendiente</MenuItem>
+                    <MenuItem value="cheap">Precio Descendiente</MenuItem>
+                    <MenuItem value="expensive">Precio Ascendente</MenuItem>
                 </TextField>
 
                 <TextField
                     fullWidth
                     label="Buscar por disciplina"
                     placeholder="Karate..."
-                    onChange={handleSearch}
+                    onChange={(e) => setSport(e.target.value)}
                 />
                 <TextField
                     fullWidth
                     label="Buscar por ciudad"
                     placeholder="Viña del Mar..."
-                    onChange={handleSearch2}
+                    onChange={(e) => setCity(e.target.value)}
                 />
             </Container>
-        </>
+
     );
 };
