@@ -34,7 +34,7 @@ export const ProductCard = ({ product }) => {
             <Card
                 className="product-card"
                 sx={{
-                    width: 350,
+                    width: 345,
                     cursor: 'pointer',
                 }}
                 onClick={handleClick}>
