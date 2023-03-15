@@ -73,7 +73,11 @@ export const Footer = () => {
                 alignItems="center"
                 component={Container}>
                 <Typography color="secondary">Todos los derechos reservados © Tatami</Typography>
-                <IconButton  component="a" href="https://github.com/FeniaPfa" sx={{ color: '#fff' }} target="_blank">
+                <IconButton
+                    component="a"
+                    href="https://github.com/FeniaPfa"
+                    sx={{ color: '#fff' }}
+                    target="_blank">
                     <GitHubIcon />
                 </IconButton>
             </Stack>

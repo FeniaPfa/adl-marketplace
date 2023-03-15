@@ -5,6 +5,7 @@ import { Stack } from '@mui/material';
 import { Main } from '../containers/Main';
 import { Filters } from '../components/Filters';
 import { useEffect, useState } from 'react';
+import { Footer } from '../components/Footer';
 
 export const Products = () => {
     const { products, loading, setProducts} = useGetProducts();
@@ -14,6 +15,7 @@ export const Products = () => {
         setFilteredList(products)
     },[products])
     return (
+        <>
         <Main>
             <Filters products={products} setFilteredList={setFilteredList}/>
         <Stack direction="row" gap="2rem" flexWrap="wrap">
@@ -22,5 +24,7 @@ export const Products = () => {
                 : filteredList.map((item) => <ProductCard key={item.id} product={item} />)}
         </Stack>
                 </Main>
+                <Footer />
+                </>
     );
 };

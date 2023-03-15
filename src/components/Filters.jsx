@@ -16,17 +16,13 @@ export const Filters = ({ products, setFilteredList }) => {
     const handleSearch = (e) => {
         const query = e.target.value;
         setFilteredList(
-            products.filter((item) =>
-                item.sport.toLowerCase().includes(query.toLowerCase())
-            )
+            products.filter((item) => item.sport.toLowerCase().includes(query.toLowerCase()))
         );
     };
     const handleSearch2 = (e) => {
         const query = e.target.value;
         setFilteredList(
-            products.filter((item) =>
-                item.city.toLowerCase().includes(query.toLowerCase())
-            )
+            products.filter((item) => item.city.toLowerCase().includes(query.toLowerCase()))
         );
     };
 
@@ -34,7 +30,7 @@ export const Filters = ({ products, setFilteredList }) => {
         <>
             <Container
                 maxWidth="md"
-                sx={{ display: 'flex', flexDirection: 'row', gap: '3rem', marginBottom: '2rem'}}>
+                sx={{ display: 'flex', flexDirection: 'row', gap: '3rem', marginBottom: '2rem' }}>
                 <TextField
                     value={'x'}
                     select
@@ -56,8 +52,8 @@ export const Filters = ({ products, setFilteredList }) => {
                 />
                 <TextField
                     fullWidth
-                    label="Buscar por city"
-                    placeholder="Karate..."
+                    label="Buscar por ciudad"
+                    placeholder="Viña del Mar..."
                     onChange={handleSearch2}
                 />
             </Container>
