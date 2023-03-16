@@ -4,6 +4,7 @@ import { useGetProducts } from '../hooks/useGetProducts';
 import { Loading } from '../components/Loading';
 import { FavCard } from '../components/FavCard';
 import { Container, Stack, Typography } from '@mui/material';
+import { EmptyFavs } from '../components/EmptyFavs';
 
 export const Favorites = () => {
     const { products } = useGetProducts();
@@ -24,8 +25,8 @@ export const Favorites = () => {
             <Typography variant="h2" mb="2rem" fontFamily="Kanit,sans-serif" fontWeight="bold">
                 Mis Favoritos
             </Typography>
-
             <Stack gap="1rem">
+            {favorites.length === 0 && <EmptyFavs />}
                 {favorites.map((item) => (
                     <FavCard
                         key={item.id}

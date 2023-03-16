@@ -40,7 +40,7 @@ export const ProductCard = ({ product }) => {
                 onClick={handleClick}>
                 <CardMedia
                     component="img"
-                    sx={{ maxHeight: '250px', minWidth: '200px' }}
+                    sx={{ height: '250px', minWidth: '200px' }}
                     image={image}
                     alt={product.dojo}
                 />
@@ -57,7 +57,7 @@ export const ProductCard = ({ product }) => {
                         <Typography
                             variant="overline"
                             fontSize="1rem"
-                            sx={{ textTransform: 'uppercase', lineHeight: '1.5' }}>
+                            sx={{ textTransform: 'uppercase', lineHeight: '1.5', textAlign:"center" }}>
                             {product.age} - {product.level}
                         </Typography>
 

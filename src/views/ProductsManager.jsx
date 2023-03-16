@@ -3,6 +3,7 @@ import { useUserContext } from '../context/userContext';
 import { useGetProducts } from '../hooks/useGetProducts';
 import { MyProduct } from '../components/MyProduct';
 import { Container, Stack, Typography } from '@mui/material';
+import { EmptyMyProducts } from '../components/EmptyMyProducts';
 
 export const ProductsManager = () => {
     const { user } = useUserContext();
@@ -23,6 +24,7 @@ export const ProductsManager = () => {
                 Mis Publicaciones
             </Typography>
             <Stack gap="1rem">
+                {myProducts.length === 0 && <EmptyMyProducts />}
                 {myProducts.map((item) => (
                     <MyProduct
                         key={item.id}

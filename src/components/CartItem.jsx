@@ -1,12 +1,11 @@
-import { Avatar, IconButton, TableCell, TableRow } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { formatNumber } from '../utils/utils.js';
+import { getImg } from '../config/firebase.js';
 import { useCartContext } from '../context/CartContext.jsx';
-
+import { Avatar, IconButton, Stack, TableCell, TableRow, Typography } from '@mui/material';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
-import { useEffect, useState } from 'react';
-import { getImg } from '../config/firebase.js';
 
 export const CartItem = ({ product }) => {
     const [img, setImg] = useState();
@@ -22,10 +21,10 @@ export const CartItem = ({ product }) => {
                 <Avatar src={img} variant="rounded" sx={{ width: '50px', height: '50px' }} />
             </TableCell>
             <TableCell component="th" scope="row">
-                {product?.sport}
-            </TableCell>
-            <TableCell align="right" component="th" scope="row">
-                {product?.dojo}
+                <Stack>
+                    <Typography variant="overline">{product?.dojo}</Typography>
+                    {product?.sport}
+                </Stack>
             </TableCell>
             <TableCell align="right">$ {formatNumber(product?.price)}</TableCell>
             <TableCell align="right">
