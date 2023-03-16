@@ -78,7 +78,7 @@ export const ProductCard = ({ product }) => {
                             fontWeight="bold"
                             color="primary"
                             sx={{ letterSpacing: '.3rem' }}>
-                            $ {formatNumber(product.price)}
+                            {product?.price === 0 ? "Gratis" :`$ ${formatNumber(product.price)}` }
                         </Typography>
                     </Stack>
                 </CardContent>
