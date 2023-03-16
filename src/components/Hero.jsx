@@ -1,4 +1,5 @@
 import { Box, Button, Stack, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 import heroimg from '../assets/hero.png';
 
 export const Hero = () => {
@@ -6,18 +7,27 @@ export const Hero = () => {
         <Box
             className="hero"
             sx={{
-                position:"relative",
+                position: 'relative',
                 display: 'flex',
+                gap:"2rem",
                 justifyContent: 'center',
                 alignItems: 'flex-start',
                 flexDirection: { xs: 'column', md: 'row' },
-                height:"80vh",
-                '> img': { display: { xs: 'none', md: 'initial' }, height:{md:"60%",lg:"100%"}, alignSelf:"flex-end" }
+                height: '80vh',
+                '> img': {
+                    display: { xs: 'none', md: 'initial' },
+                    height: { md: '60%', lg: '100%' },
+                    alignSelf: 'flex-end',
+                },
             }}>
             <Box
                 className="hero__text"
                 sx={{
-                    width: { xs: '80%', sm: '70%', md: '50%',lg:"40%" },
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignSelf: 'center',
+                    gap: '1rem',
+                    width: { xs: '80%', sm: '70%', md: '50%', lg: '40%' },
                 }}>
                 <Typography
                     fontWeight="bold"
@@ -26,7 +36,9 @@ export const Hero = () => {
                     fontStyle="italic"
                     className="hero__cta"
                     sx={{
-                        fontSize: { xs: '2rem', sm: '3rem', md: '2.5rem', lg:"3.2rem" },
+                        textTransform: 'uppercase',
+                        color: '#fff',
+                        fontSize: { xs: '2rem', sm: '3rem', md: '2.5rem', lg: '3.2rem' },
                     }}>
                     Supera los desafíos y alcanza <span className="red">tu máximo potencial</span>{' '}
                     físico y mental
@@ -43,7 +55,12 @@ export const Hero = () => {
                         <Typography fontWeight="bold" className="hero__subtitle">
                             Encuentra y publica clases de artes marciales en un solo lugar.
                         </Typography>
-                        <Button variant="contained" size="large" sx={{ padding: '1rem 2rem' }}>
+                        <Button
+                            component={Link}
+                            to="/products"
+                            variant="contained"
+                            size="large"
+                            sx={{ padding: '1rem 2rem' }}>
                             Buscar Clases
                         </Button>
                     </Stack>

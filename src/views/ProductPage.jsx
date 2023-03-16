@@ -6,6 +6,7 @@ import { useGetProducts } from '../hooks/useGetProducts';
 import { useCartContext } from '../context/CartContext';
 import { useUserContext } from '../context/userContext';
 import { Main } from '../containers/Main';
+import { Footer } from '../components/Footer';
 import { formatNumber } from '../utils/utils.js';
 import EditIcon from '@mui/icons-material/Edit';
 import {
@@ -117,6 +118,7 @@ export const ProductPage = () => {
     }
 
     return (
+        <>
         <Main>
             <Card
                 sx={{
@@ -141,7 +143,7 @@ export const ProductPage = () => {
                             objectFit: 'cover',
                             aspectRatio: { sm: '1/1' },
                         }}
-                    />
+                        />
                     {/* Card right info */}
                     <CardContent
                         sx={{
@@ -206,20 +208,20 @@ export const ProductPage = () => {
                         <Stack direction="row" justifyContent="space-around" gap=".8rem">
                             {user?.uid !== productData?.userId ? (
                                 <Button
-                                    onClick={handleFav}
-                                    variant="outlined"
-                                    size="large"
-                                    sx={{ fontSize: '1.3rem' }}>
+                                onClick={handleFav}
+                                variant="outlined"
+                                size="large"
+                                sx={{ fontSize: '1.3rem' }}>
                                     {!isFav ? 'Guardar en favoritos' : 'Eliminar Favorito'}
                                 </Button>
                             ) : (
                                 <Button
-                                    size="large"
-                                    sx={{ fontSize: '1.3rem' }}
-                                    variant="outlined"
-                                    onClick={() =>
-                                        navigate(`/dashboard/products/${productData?.id}`)
-                                    }>
+                                size="large"
+                                sx={{ fontSize: '1.3rem' }}
+                                variant="outlined"
+                                onClick={() =>
+                                    navigate(`/dashboard/products/${productData?.id}`)
+                                }>
                                     <EditIcon fontSize="large" sx={{ mr: '.5rem' }} />
                                     Editar
                                 </Button>
@@ -254,5 +256,7 @@ export const ProductPage = () => {
                 </Stack>
             </Card>
         </Main>
+        <Footer />
+                                    </>
     );
 };

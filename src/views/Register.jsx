@@ -20,7 +20,7 @@ export const Register = () => {
     return (
         <Container maxWidth="lg" sx={{ margin: '2rem auto' }}>
             <Stack gap="2rem">
-                <Typography fontWeight="bold" variant="h2" textAlign="center">
+                <Typography fontWeight="bold" variant="h3" textAlign="center">
                     Crea tu cuenta
                 </Typography>
                 <Stepper activeStep={step} alternativeLabel>
