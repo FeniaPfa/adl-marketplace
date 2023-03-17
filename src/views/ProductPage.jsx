@@ -9,6 +9,9 @@ import { Main } from '../containers/Main';
 import { Footer } from '../components/Footer';
 import { formatNumber } from '../utils/utils.js';
 import EditIcon from '@mui/icons-material/Edit';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import {
     Box,
     Button,
@@ -152,7 +155,9 @@ export const ProductPage = () => {
                             <Stack
                                 direction="row"
                                 justifyContent="space-between"
-                                sx={{ color: '#455a64' }}>
+                                flexWrap="wrap"
+                                sx={{ color: '#455a64' }}
+                                >
                                 <Typography variant="overline" fontWeight="bold" fontSize="1.2rem">
                                     Clases de {productData?.sport}
                                 </Typography>
@@ -164,7 +169,9 @@ export const ProductPage = () => {
                                 variant="h2"
                                 fontWeight="bold"
                                 fontFamily="Kanit,sans-serif"
-                                letterSpacing=".3rem">
+                                letterSpacing=".3rem"
+                                sx={{fontSize:{xs:"2.5rem", md:"3rem"}, wordBreak:"break-word"}}
+                                >
                                 {productData?.dojo}
                             </Typography>
                             {/* List Direccion | Nivel | Edad */}
@@ -207,15 +214,16 @@ export const ProductPage = () => {
                                 </Typography>
                             </Box>
                             {/* Añadir | Fav */}
-                            <Stack direction="row" justifyContent="space-around" gap=".8rem">
+                            <Stack direction="row" justifyContent="space-around" gap=".8rem" flexWrap="wrap">
                                 {user?.uid !== productData?.userId ? (
                                     <Button
                                         disabled={!user}
                                         onClick={handleFav}
                                         variant="outlined"
                                         size="large"
-                                        sx={{ fontSize: '1.3rem' }}>
-                                        {!isFav ? 'Guardar en favoritos' : 'Eliminar Favorito'}
+                                        sx={{ fontSize: '1.3rem',"> svg":{mr: ".2rem"} }}>
+                                            {!isFav ? <FavoriteBorderIcon /> : <FavoriteIcon /> }
+                                        {!isFav ? 'Guardar favorito' : 'Eliminar Favorito'}
                                     </Button>
                                 ) : (
                                     <Button
@@ -235,6 +243,7 @@ export const ProductPage = () => {
                                     disabled={user?.uid === productData?.userId}
                                     variant="contained"
                                     onClick={() => addProduct(productData, user)}>
+                                        <AddShoppingCartIcon sx={{mr:".2rem"}} />
                                     Añadir al carrito
                                 </Button>
                             </Stack>

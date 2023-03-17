@@ -30,7 +30,6 @@ export const ProductCard = ({ product }) => {
     }, []);
 
     return (
-        <>
             <Card
                 className="product-card"
                 sx={{
@@ -83,6 +82,5 @@ export const ProductCard = ({ product }) => {
                     </Stack>
                 </CardContent>
             </Card>
-        </>
     );
 };

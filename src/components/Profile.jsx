@@ -1,5 +1,5 @@
 import DefaultImg from '/defaultavatar.svg';
-import { Avatar, Box, Container, Paper, Stack, Typography } from '@mui/material';
+import { Avatar, Container, Paper, Stack, Typography } from '@mui/material';
 
 export const Profile = ({userData, image}) => {
 

@@ -33,6 +33,7 @@ export const DashboardNavigation = () => {
             />
             <BottomNavigationAction
                 to="editprofile"
+                sx={{textAlign:"center"}}
                 component={NavLink}
                 label="Editar Perfil"
                 value="editprofile"
