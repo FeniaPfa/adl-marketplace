@@ -58,10 +58,6 @@ export const ProductPage = () => {
 
     let favorites = [];
     const handleFav = () => {
-        if (!user) {
-            alert('Debes estar logueado');
-            return;
-        }
         if (myUserInfo.favs) {
             if (!isFav) {
                 favorites = [...myUserInfo.favs, productData.id];
@@ -119,144 +115,147 @@ export const ProductPage = () => {
 
     return (
         <>
-        <Main>
-            <Card
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    padding: '.3rem 1.2rem 1.2rem',
-                }}>
-                {/* card body */}
-                <Box
+            <Main>
+                <Card
                     sx={{
                         display: 'flex',
-                        gap: '1rem',
-                        alignItems: 'center',
-                        flexDirection: { xs: 'column', sm: 'row' },
+                        flexDirection: 'column',
+                        padding: '.3rem 1.2rem 1.2rem',
                     }}>
-                    <CardMedia
-                        component="img"
-                        title={productData?.sport}
-                        image={img}
-                        sx={{
-                            width: { xs: '100%', sm: '40%' },
-                            objectFit: 'cover',
-                            aspectRatio: { sm: '1/1' },
-                        }}
-                        />
-                    {/* Card right info */}
-                    <CardContent
+                    {/* card body */}
+                    <Box
                         sx={{
                             display: 'flex',
-                            flexDirection: 'column',
                             gap: '1rem',
-                            flexGrow: 1,
+                            alignItems: 'center',
+                            flexDirection: { xs: 'column', sm: 'row' },
                         }}>
-                        {/* Sport | City */}
-                        <Stack
-                            direction="row"
-                            justifyContent="space-between"
-                            sx={{ color: '#455a64' }}>
-                            <Typography variant="overline" fontWeight="bold" fontSize="1.2rem">
-                                Clases de {productData?.sport}
-                            </Typography>
-                            <Typography variant="overline" fontSize="1.2rem" fontWeight="bold">
-                                {productData?.city}
-                            </Typography>
-                        </Stack>
-                        <Typography
-                            variant="h2"
-                            fontWeight="bold"
-                            fontFamily="Kanit,sans-serif"
-                            letterSpacing=".3rem">
-                            {productData?.dojo}
-                        </Typography>
-                        {/* List Direccion | Nivel | Edad */}
-                        <List disablePadding>
-                            <ListItem sx={listStyle}>
-                                <span style={{ flexGrow: '1' }}>Nivel:</span>
-                                <span>{productData.level}</span>
-                            </ListItem>
-                            <ListItem sx={listStyle}>
-                                <span style={{ flexGrow: '1' }}>Edad:</span>
-                                <span>{productData.age}</span>
-                            </ListItem>
-                            <ListItem sx={listStyle}>
-                                <span style={{ flexGrow: '1' }}>Dirección:</span>
-                                <span>{productData.adress}</span>
-                            </ListItem>
-                        </List>
-                        {/* Precio x mes */}
-                        <Box display="flex" gap="1rem" flexDirection="row" alignItems="baseline">
+                        <CardMedia
+                            component="img"
+                            title={productData?.sport}
+                            image={img}
+                            sx={{
+                                width: { xs: '100%', sm: '40%' },
+                                objectFit: 'cover',
+                                aspectRatio: { sm: '1/1' },
+                            }}
+                        />
+                        {/* Card right info */}
+                        <CardContent
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '1rem',
+                                flexGrow: 1,
+                            }}>
+                            {/* Sport | City */}
+                            <Stack
+                                direction="row"
+                                justifyContent="space-between"
+                                sx={{ color: '#455a64' }}>
+                                <Typography variant="overline" fontWeight="bold" fontSize="1.2rem">
+                                    Clases de {productData?.sport}
+                                </Typography>
+                                <Typography variant="overline" fontSize="1.2rem" fontWeight="bold">
+                                    {productData?.city}
+                                </Typography>
+                            </Stack>
                             <Typography
-                                variant="h3"
+                                variant="h2"
                                 fontWeight="bold"
-                                color="primary"
-                                letterSpacing=".3rem"
-                                lineHeight="1.5">
-                                $ {formatNumber(productData?.price)}
+                                fontFamily="Kanit,sans-serif"
+                                letterSpacing=".3rem">
+                                {productData?.dojo}
                             </Typography>
-                            <Typography
-                                variant="subtitle2"
-                                fontSize="1.2rem"
-                                letterSpacing=".1rem"
-                                textTransform="uppercase">
-                                x mes
-                            </Typography>
-                        </Box>
-                        {/* Añadir | Fav */}
-                        <Stack direction="row" justifyContent="space-around" gap=".8rem">
-                            {user?.uid !== productData?.userId ? (
+                            {/* List Direccion | Nivel | Edad */}
+                            <List disablePadding>
+                                <ListItem sx={listStyle}>
+                                    <span style={{ flexGrow: '1' }}>Nivel:</span>
+                                    <span>{productData.level}</span>
+                                </ListItem>
+                                <ListItem sx={listStyle}>
+                                    <span style={{ flexGrow: '1' }}>Edad:</span>
+                                    <span>{productData.age}</span>
+                                </ListItem>
+                                <ListItem sx={listStyle}>
+                                    <span style={{ flexGrow: '1' }}>Dirección:</span>
+                                    <span>{productData.adress}</span>
+                                </ListItem>
+                            </List>
+                            {/* Precio x mes */}
+                            <Box
+                                display="flex"
+                                gap="1rem"
+                                flexDirection="row"
+                                alignItems="baseline">
+                                <Typography
+                                    variant="h3"
+                                    fontWeight="bold"
+                                    color="primary"
+                                    letterSpacing=".3rem"
+                                    lineHeight="1.5">
+                                    {productData.price === 0
+                                        ? 'Gratis'
+                                        : `$ ${formatNumber(productData?.price)}`}
+                                </Typography>
+                                <Typography
+                                    variant="subtitle2"
+                                    fontSize="1.2rem"
+                                    letterSpacing=".1rem"
+                                    textTransform="uppercase">
+                                    {productData?.price !== 0 && 'x mes'}
+                                </Typography>
+                            </Box>
+                            {/* Añadir | Fav */}
+                            <Stack direction="row" justifyContent="space-around" gap=".8rem">
+                                {user?.uid !== productData?.userId ? (
+                                    <Button
+                                        disabled={!user}
+                                        onClick={handleFav}
+                                        variant="outlined"
+                                        size="large"
+                                        sx={{ fontSize: '1.3rem' }}>
+                                        {!isFav ? 'Guardar en favoritos' : 'Eliminar Favorito'}
+                                    </Button>
+                                ) : (
+                                    <Button
+                                        size="large"
+                                        sx={{ fontSize: '1.3rem' }}
+                                        variant="outlined"
+                                        onClick={() =>
+                                            navigate(`/dashboard/products/${productData?.id}`)
+                                        }>
+                                        <EditIcon fontSize="large" sx={{ mr: '.5rem' }} />
+                                        Editar
+                                    </Button>
+                                )}
                                 <Button
-                                onClick={handleFav}
-                                variant="outlined"
-                                size="large"
-                                sx={{ fontSize: '1.3rem' }}>
-                                    {!isFav ? 'Guardar en favoritos' : 'Eliminar Favorito'}
+                                    size="large"
+                                    sx={{ fontSize: '1.3rem' }}
+                                    disabled={user?.uid === productData?.userId}
+                                    variant="contained"
+                                    onClick={() => addProduct(productData, user)}>
+                                    Añadir al carrito
                                 </Button>
-                            ) : (
-                                <Button
-                                size="large"
-                                sx={{ fontSize: '1.3rem' }}
-                                variant="outlined"
-                                onClick={() =>
-                                    navigate(`/dashboard/products/${productData?.id}`)
-                                }>
-                                    <EditIcon fontSize="large" sx={{ mr: '.5rem' }} />
-                                    Editar
-                                </Button>
-                            )}
-                            <Button
-                                size="large"
-                                sx={{ fontSize: '1.3rem' }}
-                                disabled={user?.uid === productData?.userId}
-                                variant="contained"
-                                onClick={() => addProduct(productData)}>
-                                Añadir al carrito
-                            </Button>
-                        </Stack>
-                    </CardContent>
-                </Box>
-                {/* User | Descripcion | Horarios */}
-                <Stack mt="1rem" gap="1rem">
-                    <Typography variant="overline" fontSize="1.2rem" sx={{ lineHeight: '1' }}>
-                        Por:
-                        <b>
-                            {productUserInfo?.name} {productUserInfo?.apellido}
-                        </b>
-                    </Typography>
-                    <Typography fontSize="1.5rem">
-                        <b>Horarios:</b> {productData?.days}
-                    </Typography>
-                    <Typography fontSize="1.5rem">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta inventore
-                        provident velit totam nihil sequi fugiat quia qui dolorem impedit maxime,
-                        modi quos maiores rerum repellat numquam dolore libero suscipit!
-                    </Typography>
-                </Stack>
-            </Card>
-        </Main>
-        <Footer />
-                                    </>
+                            </Stack>
+                        </CardContent>
+                    </Box>
+                    {/* User | Descripcion | Horarios */}
+                    <Stack mt="1rem" gap="1rem">
+                        <Typography variant="overline" fontSize="1.2rem" sx={{ lineHeight: '1' }}>
+                            Por:
+                            <b>
+                                {productUserInfo?.name} {productUserInfo?.apellido}
+                            </b>
+                        </Typography>
+                        <Typography fontSize="1.5rem">
+                            <b>Horarios:</b> {productData?.days}
+                        </Typography>
+                        <Typography fontSize="1.5rem">{productData?.desc}</Typography>
+                    </Stack>
+                </Card>
+            </Main>
+            <Footer />
+        </>
     );
 };

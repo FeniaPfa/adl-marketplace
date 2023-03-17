@@ -7,7 +7,7 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
 
-export const CartItem = ({ product }) => {
+export const CartItem = ({ product, user }) => {
     const [img, setImg] = useState();
     const { addProduct, removeProduct, deleteProduct } = useCartContext();
 
@@ -32,7 +32,7 @@ export const CartItem = ({ product }) => {
                     <RemoveRoundedIcon />
                 </IconButton>
                 {product?.count}
-                <IconButton color="primary" onClick={() => addProduct(product)}>
+                <IconButton color="primary" onClick={() => addProduct(product,user)}>
                     <AddRoundedIcon />
                 </IconButton>
             </TableCell>

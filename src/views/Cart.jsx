@@ -11,9 +11,12 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { useUserContext } from '../context/userContext';
 
 export const Cart = () => {
     const { cart, total, resetCart } = useCartContext();
+
+    const { user } = useUserContext();
 
     return (
         <>
@@ -37,7 +40,7 @@ export const Cart = () => {
                             </TableHead>
                             <TableBody>
                                 {cart.map((item) => (
-                                    <CartItem key={item.id} product={item} />
+                                    <CartItem key={item.id} product={item} user={user} />
                                 ))}
                             </TableBody>
                         </Table>

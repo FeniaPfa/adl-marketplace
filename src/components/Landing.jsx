@@ -14,7 +14,6 @@ export const Landing = () => {
                     <Box>
                         <img
                             src={landing1}
-                            // height="500px"
                             className="landing-img"
                             style={{
                                 objectFit: 'cover',
@@ -64,14 +63,13 @@ export const Landing = () => {
             </Container>
             {/* cta */}
             <Stack className="cta" alignItems="center" justifyContent="center">
-                <Container maxWidth="md" sx={{padding:"3rem"}}>
+                <Container maxWidth="md" sx={{ padding: '3rem' }}>
                     <Typography
                         fontFamily="Kanit,sans-serif"
                         variant="h5"
                         color="secondary"
                         textAlign="center"
-                        sx={{fontSize:{xs:"1.2rem", md:"1.8rem"}}}
-                        >
+                        sx={{ fontSize: { xs: '1.2rem', md: '1.8rem' } }}>
                         Comienza a descubrir una nueva forma de mejorar tu salud y bienestar
                         mientras te diviertes y aprendes. ¡Te esperamos!
                     </Typography>
@@ -80,23 +78,12 @@ export const Landing = () => {
                         gap="3rem"
                         justifyContent="center"
                         mt="2rem"
-                        
                         alignItems="center"
                         flexWrap="wrap">
-                        <Button
-                            component={Link}
-                            to="/register"
-                            variant="contained"
-                            size="large"
-                            >
+                        <Button component={Link} to="/register" variant="contained" size="large">
                             Registrarse
                         </Button>
-                        <Button
-                            component={Link}
-                            to="/products"
-                            variant="contained"
-                            size="large"
-                            >
+                        <Button component={Link} to="/products" variant="contained" size="large">
                             Buscar Clases
                         </Button>
                     </Stack>

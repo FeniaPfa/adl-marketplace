@@ -26,7 +26,7 @@ export const Favorites = () => {
                 Mis Favoritos
             </Typography>
             <Stack gap="1rem">
-            {favorites.length === 0 && <EmptyFavs />}
+                {favorites.length === 0 && <EmptyFavs />}
                 {favorites.map((item) => (
                     <FavCard
                         key={item.id}

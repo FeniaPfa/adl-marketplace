@@ -33,12 +33,12 @@ export const FavCard = ({ setFavorites, userData, productData, favorites }) => {
     };
 
     const addToCart = () => {
-        addProduct(productData);
+        addProduct(productData, user);
     };
 
     useEffect(() => {
         getImg(productData?.id, setImg);
-    });
+    },[]);
 
     return (
 
