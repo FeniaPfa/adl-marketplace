@@ -73,7 +73,7 @@ export const AddProduct = () => {
                         fullWidth
                         required
                         type="text"
-                        label="Dojo o institución"
+                        label="Dojo o gym"
                         placeholder="Seishin Dojo"
                         onChange={(e) => setProductInfo({ ...productInfo, dojo: e.target.value })}
                     />
@@ -134,7 +134,7 @@ export const AddProduct = () => {
                         helperText={
                             fileError
                                 ? 'El tamaño maximo de la imagen es 1MB'
-                                : 'Sube una imagen menor a 1mb'
+                                : 'Sube una imagen acorde a la clase que ofreces'
                         }
                         error={fileError}
                         type="file"
@@ -147,7 +147,7 @@ export const AddProduct = () => {
                     type="text"
                     label="Horarios"
                     placeholder="Lunes, Miercoles y Sabado de 19:00 a 21:00"
-                    helperText="Ingresa que dias y a que hora son las clases"
+                    helperText="Ingresa que días y a que hora son las clases"
                     onChange={(e) => setProductInfo({ ...productInfo, days: e.target.value })}
                 />
                 <TextField
@@ -165,7 +165,7 @@ export const AddProduct = () => {
                     label="Descripción"
                     rows={4}
 
-                    helperText="Ingresa información adicional como duración de las clases u otros"
+                    helperText="Ingresa información adicional como duración de las clases, redes sociales u otras formas de contacto"
                     onChange={(e) => setProductInfo({ ...productInfo, desc: e.target.value })}
                 />
 

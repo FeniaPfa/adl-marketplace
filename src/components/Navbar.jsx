@@ -28,12 +28,10 @@ export const Navbar = () => {
 
     const routes = [
         { to: '/', text: 'Inicio', private: false },
-        { to: '/products', text: 'Productos', private: false },
+        { to: '/products', text: 'Clases', private: false },
         { to: '/login', text: 'Ingresar', private: false, publicOnly: true },
         { to: '/register', text: 'Registrarse', private: false, publicOnly: true },
         { to: '/dashboard', text: 'Dashboard', private: true },
-        // { to: '/cart', text: 'Carrito', private: true },
-        // { to: "/products", text: "Products", private: false },
     ];
 
     const handleLogout = () => {

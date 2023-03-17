@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { PrivateRoute } from './components/PrivateRoute';
+import { PublicOnly } from './components/PublicOnly';
 import UserContextProvider from './context/userContext';
 import { Home } from './views/Home';
 import { Login } from './views/Login';
@@ -27,8 +28,22 @@ function App() {
 
                     <Routes>
                         <Route path="/" element={<Home />} />
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/register" element={<Register />} />
+                        <Route
+                            path="/login"
+                            element={
+                                <PublicOnly>
+                                    <Login />
+                                </PublicOnly>
+                            }
+                        />
+                        <Route
+                            path="/register"
+                            element={
+                                <PublicOnly>
+                                    <Register />
+                                </PublicOnly>
+                            }
+                        />
                         <Route path="/products" element={<Products />} />
                         <Route path="/products/:id" element={<ProductPage />} />
                         <Route path="*" element={<NotFound />} />
@@ -50,14 +65,13 @@ function App() {
                                 </PrivateRoute>
                             }>
                             <Route index element={<DashboardHome />} />
-                            <Route path='editprofile' element={<EditProfile />} />
+                            <Route path="editprofile" element={<EditProfile />} />
                             <Route path="products" element={<ProductsManager />} />
                             <Route path="favs" element={<Favorites />} />
                             <Route path="addproduct" element={<AddProduct />} />
                             <Route path="products/:id" element={<EditProduct />} />
                         </Route>
                     </Routes>
-
                 </CartProvider>
             </UserContextProvider>
         </>
