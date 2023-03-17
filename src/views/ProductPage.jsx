@@ -61,24 +61,20 @@ export const ProductPage = () => {
 
     let favorites = [];
     const handleFav = () => {
-        if (myUserInfo.favs) {
-            if (!isFav) {
-                favorites = [...myUserInfo.favs, productData.id];
-                uploadFav();
-                getUserInfo(user?.uid, setMyUserInfo);
-                console.log('Guardo en favoritos con exito');
-            }
-            if (isFav) {
-                const newFavs = myUserInfo.favs.filter((item) => item !== productData.id);
-                favorites = [...newFavs];
-                uploadFav();
-                getUserInfo(user?.uid, setMyUserInfo);
-                console.log('Eliminado con exito de favoritos');
-            }
-        } else {
-            favorites = [productData.id];
+        if (!isFav) {
+            favorites = [...myUserInfo.favs, productData.id];
             uploadFav();
             getUserInfo(user?.uid, setMyUserInfo);
+            setIsFav(true);
+            console.log('Guardo en favoritos con exito');
+        }
+        if (isFav) {
+            const newFavs = myUserInfo.favs.filter((item) => item !== productData.id);
+            favorites = [...newFavs];
+            uploadFav();
+            getUserInfo(user?.uid, setMyUserInfo);
+            setIsFav(false);
+            console.log('Eliminado con exito de favoritos');
         }
     };
     const uploadFav = async () => {
@@ -156,8 +152,7 @@ export const ProductPage = () => {
                                 direction="row"
                                 justifyContent="space-between"
                                 flexWrap="wrap"
-                                sx={{ color: '#455a64' }}
-                                >
+                                sx={{ color: '#455a64' }}>
                                 <Typography variant="overline" fontWeight="bold" fontSize="1.2rem">
                                     Clases de {productData?.sport}
                                 </Typography>
@@ -170,8 +165,10 @@ export const ProductPage = () => {
                                 fontWeight="bold"
                                 fontFamily="Kanit,sans-serif"
                                 letterSpacing=".3rem"
-                                sx={{fontSize:{xs:"2.5rem", md:"3rem"}, wordBreak:"break-word"}}
-                                >
+                                sx={{
+                                    fontSize: { xs: '2.5rem', md: '3rem' },
+                                    wordBreak: 'break-word',
+                                }}>
                                 {productData?.dojo}
                             </Typography>
                             {/* List Direccion | Nivel | Edad */}
@@ -214,15 +211,19 @@ export const ProductPage = () => {
                                 </Typography>
                             </Box>
                             {/* Añadir | Fav */}
-                            <Stack direction="row" justifyContent="space-around" gap=".8rem" flexWrap="wrap">
+                            <Stack
+                                direction="row"
+                                justifyContent="space-around"
+                                gap=".8rem"
+                                flexWrap="wrap">
                                 {user?.uid !== productData?.userId ? (
                                     <Button
                                         disabled={!user}
                                         onClick={handleFav}
                                         variant="outlined"
                                         size="large"
-                                        sx={{ fontSize: '1.3rem',"> svg":{mr: ".2rem"} }}>
-                                            {!isFav ? <FavoriteBorderIcon /> : <FavoriteIcon /> }
+                                        sx={{ fontSize: '1.3rem', '> svg': { mr: '.2rem' } }}>
+                                        {!isFav ? <FavoriteBorderIcon /> : <FavoriteIcon />}
                                         {!isFav ? 'Guardar favorito' : 'Eliminar Favorito'}
                                     </Button>
                                 ) : (
@@ -243,7 +244,7 @@ export const ProductPage = () => {
                                     disabled={user?.uid === productData?.userId}
                                     variant="contained"
                                     onClick={() => addProduct(productData, user)}>
-                                        <AddShoppingCartIcon sx={{mr:".2rem"}} />
+                                    <AddShoppingCartIcon sx={{ mr: '.2rem' }} />
                                     Añadir al carrito
                                 </Button>
                             </Stack>
