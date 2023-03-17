@@ -17,9 +17,13 @@ export const EditProfile = () => {
     const userRef = doc(db, 'users', user.uid);
 
     const getUser = async () => {
-        const docSnap = await getDoc(userRef);
-        const data = docSnap.data();
-        setUserInfo(data);
+        try {
+            const docSnap = await getDoc(userRef);
+            const data = docSnap.data();
+            setUserInfo(data);
+        } catch (err) {
+            console.error(err.message);
+        }
     };
 
     const handleAvatar = (e) => {

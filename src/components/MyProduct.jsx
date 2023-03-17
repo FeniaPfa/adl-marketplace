@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { deleteDoc, doc } from 'firebase/firestore';
-import { getDownloadURL, ref } from 'firebase/storage';
-import { db, deleteFile, storage } from '../config/firebase';
+import { ref } from 'firebase/storage';
+import { db, deleteFile, getImg, storage } from '../config/firebase';
 import { Avatar, Button, Paper, Stack, Typography } from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
@@ -21,7 +21,6 @@ export const MyProduct = ({ product, myProducts, setMyProducts }) => {
         await deleteDoc(productDoc);
         deleteFile(imgRef);
         console.log('Producto Eliminado');
-        console.log(newList);
     };
 
     const goToProduct = () => {
@@ -34,7 +33,7 @@ export const MyProduct = ({ product, myProducts, setMyProducts }) => {
     };
 
     useEffect(() => {
-        getDownloadURL(imgRef).then((url) => setImage(url));
+        getImg(product.id, setImage);
     }, []);
     return (
         <>

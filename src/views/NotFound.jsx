@@ -5,8 +5,8 @@ import { Footer } from '../components/Footer';
 export const NotFound = () => {
     return (
         <>
-            <Container maxWidth="md">
-                <Stack alignItems="center" mt="3rem">
+            <Container maxWidth="md" >
+                <Stack alignItems="center" marginY="5rem">
                     <ErrorOutlineIcon color="primary" sx={{ fontSize: '16rem' }} />
                     <Typography variant="h2" color="primary" fontWeight="bold">
                         Error 404
