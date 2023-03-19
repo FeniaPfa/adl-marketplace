@@ -10,7 +10,7 @@ export const useGetSingleProduct = (id) => {
             const productRef = doc(db, 'products', id);
             const docSnap = await getDoc(productRef);
             const data = docSnap.data();
-            setProductData(data);
+            setProductData({...data,id: id});
         } catch (err) {
             console.error(err.message);
         }

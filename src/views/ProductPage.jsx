@@ -81,7 +81,7 @@ export const ProductPage = () => {
             await updateDoc(myUserRef, { ...myUserInfo, favs: favorites });
             console.log('Favoritos modificados');
         } catch (err) {
-            console.error(err);
+            console.error({err});
         }
     };
 
