@@ -24,13 +24,14 @@ import {
     Typography,
 } from '@mui/material';
 import { Loading } from '../components/Loading';
+import { useGetSingleProduct } from '../hooks/useGetSingleProduct';
 
 export const ProductPage = () => {
+    const { id } = useParams();
     const { user } = useUserContext();
-    const { products } = useGetProducts();
+    const {productData } = useGetSingleProduct(id)
     const { addProduct } = useCartContext();
 
-    const { id } = useParams();
     const navigate = useNavigate();
 
     const [img, setImg] = useState();
@@ -38,8 +39,6 @@ export const ProductPage = () => {
 
     const [myUserInfo, setMyUserInfo] = useState();
     const [isFav, setIsFav] = useState(false);
-
-    const productData = products.find((item) => item.id === id);
 
     const getUserInfo = async (id, setInfo) => {
         try {
