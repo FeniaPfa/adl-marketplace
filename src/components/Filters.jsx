@@ -18,6 +18,24 @@ export const Filters = ({ products, setFilteredList, filteredList }) => {
             sortedList.sort((a, b) => a.price - b.price);
             setFilteredList(sortedList);
         }
+        if (type === 'scoreBest') {
+            sortedList.sort((a, b) => {
+                let scores1 = a.comments.map((item) => item.score);
+                let scores2 = b.comments.map((item) => item.score);
+                let sum1 = scores1.reduce((total, numero) => {
+                    return isNaN(numero) ? total : total + numero;
+                }, 0);
+                let avg1 = scores1.length === 0 ? 0 : sum1 / scores1.length;
+            
+                let sum2 = scores2.reduce((total, numero) => {
+                    return isNaN(numero) ? total : total + numero;
+                }, 0);
+                let avg2 = scores2.length === 0 ? 0 : sum2 / scores2.length;
+            
+                return avg2 - avg1;
+            })
+            setFilteredList(sortedList)
+        }
     };
 
     useEffect(() => {
@@ -62,6 +80,7 @@ export const Filters = ({ products, setFilteredList, filteredList }) => {
                 </MenuItem>
                 <MenuItem value="cheap">Precio Descendiente</MenuItem>
                 <MenuItem value="expensive">Precio Ascendente</MenuItem>
+                <MenuItem value="scoreBest">Mejor Evaluados</MenuItem>
             </TextField>
 
             <TextField
