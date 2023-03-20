@@ -25,11 +25,12 @@ import {
 } from '@mui/material';
 import { Loading } from '../components/Loading';
 import { useGetSingleProduct } from '../hooks/useGetSingleProduct';
+import {CommentSection} from '../components/CommentSection';
 
 export const ProductPage = () => {
     const { id } = useParams();
     const { user } = useUserContext();
-    const {productData } = useGetSingleProduct(id)
+    const { productData, getProduct } = useGetSingleProduct(id)
     const { addProduct } = useCartContext();
 
     const navigate = useNavigate();
@@ -250,7 +251,7 @@ export const ProductPage = () => {
                         </CardContent>
                     </Box>
                     {/* User | Descripcion | Horarios */}
-                    <Stack mt="1rem" gap="1rem">
+                    <Stack m="1rem auto" gap="1rem">
                         <Typography variant="overline" fontSize="1.2rem" sx={{ lineHeight: '1' }}>
                             Por:
                             <b>
@@ -262,6 +263,7 @@ export const ProductPage = () => {
                         </Typography>
                         <Typography fontSize="1.5rem">{productData?.desc}</Typography>
                     </Stack>
+                    <CommentSection productData={productData} myUserInfo={myUserInfo} getProduct={getProduct} />
                 </Card>
             </Main>
             <Footer />

@@ -23,6 +23,7 @@ export const AddProduct = () => {
         days: '',
         adress: '',
         desc: '',
+        comments:[]
     });
 
     const [img, setImg] = useState(null);
