@@ -25,12 +25,12 @@ import {
 } from '@mui/material';
 import { Loading } from '../components/Loading';
 import { useGetSingleProduct } from '../hooks/useGetSingleProduct';
-import {CommentSection} from '../components/CommentSection';
+import { CommentSection } from '../components/CommentSection';
 
 export const ProductPage = () => {
     const { id } = useParams();
     const { user } = useUserContext();
-    const { productData, getProduct } = useGetSingleProduct(id)
+    const { productData, getProduct } = useGetSingleProduct(id);
     const { addProduct } = useCartContext();
 
     const navigate = useNavigate();
@@ -82,7 +82,7 @@ export const ProductPage = () => {
             await updateDoc(myUserRef, { ...myUserInfo, favs: favorites });
             console.log('Favoritos modificados');
         } catch (err) {
-            console.error({err});
+            console.error({ err });
         }
     };
 
@@ -197,8 +197,7 @@ export const ProductPage = () => {
                                     color="primary"
                                     letterSpacing=".3rem"
                                     lineHeight="1.5"
-                                    sx={{fontSize:{xs:"2rem",sm:"3rem"}}}
-                                    >
+                                    sx={{ fontSize: { xs: '2rem', sm: '3rem' } }}>
                                     {productData.price === 0
                                         ? 'Gratis'
                                         : `$ ${formatNumber(productData?.price)}`}
@@ -262,9 +261,19 @@ export const ProductPage = () => {
                         <Typography fontSize="1.2rem">
                             <b>Horarios:</b> {productData?.days}
                         </Typography>
-                        <Typography sx={{whiteSpace: 'pre-line',fontSize:{xs:"1.2rem", sm:"1.5rem"}}}>{productData?.desc}</Typography>
+                        <Typography
+                            sx={{
+                                whiteSpace: 'pre-line',
+                                fontSize: { xs: '1.2rem', sm: '1.5rem' },
+                            }}>
+                            {productData?.desc}
+                        </Typography>
                     </Stack>
-                    <CommentSection productData={productData} myUserInfo={myUserInfo} getProduct={getProduct} />
+                    <CommentSection
+                        productData={productData}
+                        myUserInfo={myUserInfo}
+                        getProduct={getProduct}
+                    />
                 </Card>
             </Main>
             <Footer />

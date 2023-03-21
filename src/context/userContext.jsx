@@ -13,7 +13,6 @@ export default function UserContextProvider({ children }) {
 
     // Check si user está activo
     useEffect(() => {
-
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             console.log('UserContext', user);
             setUser(user);

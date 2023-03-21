@@ -53,7 +53,10 @@ export const Cart = () => {
                         width="100%"
                         alignItems="center"
                         gap="2rem">
-                        <Button variant="outlined" onClick={resetCart} sx={{ alignSelf: 'flex-start' }}>
+                        <Button
+                            variant="outlined"
+                            onClick={resetCart}
+                            sx={{ alignSelf: 'flex-start' }}>
                             Eliminar todos
                         </Button>
                         <Paper

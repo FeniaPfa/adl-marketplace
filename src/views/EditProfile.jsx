@@ -4,14 +4,15 @@ import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { ref, uploadBytes } from 'firebase/storage';
 import { db, storage } from '../config/firebase';
 import { useUserContext } from '../context/userContext';
-import { Button, Container, Stack, TextField, Typography } from '@mui/material';
+import { Alert, Button, Container, Stack, TextField, Typography } from '@mui/material';
 
 export const EditProfile = () => {
     const navigate = useNavigate();
     const { user } = useUserContext();
 
     const [avatar, setAvatar] = useState(null);
-    const [error, setError] = useState(false);
+    const [fileError, setFileError] = useState(false);
+    const [isEmpty, setIsEmpty] = useState(false);
 
     const [userInfo, setUserInfo] = useState({});
     const userRef = doc(db, 'users', user.uid);
@@ -27,10 +28,10 @@ export const EditProfile = () => {
     };
 
     const handleAvatar = (e) => {
-        setError(false);
+        setFileError(false);
         const fileSize = e.target.files[0].size / 1024 / 1024;
         if (fileSize > 1) {
-            setError(true);
+            setFileError(true);
             e.target.value = null;
             setAvatar(null);
             return;
@@ -53,6 +54,11 @@ export const EditProfile = () => {
 
     const handleUpdateUser = async (e) => {
         e.preventDefault();
+        setIsEmpty(false);
+        if (userInfo.name === '' || userInfo.apellido === '') {
+            setIsEmpty(true);
+            return;
+        }
         try {
             await updateDoc(userRef, userInfo);
             uploadAvatar();
@@ -73,6 +79,7 @@ export const EditProfile = () => {
                 <Typography variant="h2" fontWeight="bold" fontFamily="Kanit,sans-serif" mb="2rem">
                     Actualiza tus datos
                 </Typography>
+                {isEmpty && <Alert severity="error">No puedes dejar campos vacios</Alert>}
                 <TextField
                     value={userInfo?.name || ''}
                     label="Nombre"
@@ -89,11 +96,11 @@ export const EditProfile = () => {
                 />
                 <TextField
                     helperText={
-                        error
+                        fileError
                             ? 'El tamaño maximo de la imagen es 1MB'
                             : 'Sube una imagen de perfil menor a 1mb'
                     }
-                    error={error}
+                    error={fileError}
                     type="file"
                     inputProps={{ accept: 'image/png, image/jpeg' }}
                     onChange={handleAvatar}

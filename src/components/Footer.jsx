@@ -15,12 +15,15 @@ export const Footer = () => {
                     alignItems="center"
                     spacing={2}
                     sx={{
-                        justifyContent:{xs:"center",sm:"space-between"}
-                    }}
-                >
+                        justifyContent: { xs: 'center', sm: 'space-between' },
+                    }}>
                     {/* 1 */}
                     <Grid item md={4}>
-                        <Stack direction="row" alignItems="center" gap="1rem" sx={{justifyContent:{xs:"center",sm:"initial"}}}>
+                        <Stack
+                            direction="row"
+                            alignItems="center"
+                            gap="1rem"
+                            sx={{ justifyContent: { xs: 'center', sm: 'initial' } }}>
                             <img src={logo} width="50px" />
                             <Typography
                                 fontFamily="Kanit, sans-serif"
@@ -29,7 +32,9 @@ export const Footer = () => {
                                 TATAMI
                             </Typography>
                         </Stack>
-                        <Typography color="secondary" sx={{textAlign:{xs:"center",sm:"initial"}}}>
+                        <Typography
+                            color="secondary"
+                            sx={{ textAlign: { xs: 'center', sm: 'initial' } }}>
                             Encuentra y publica clases de artes marciales en un solo lugar.
                         </Typography>
                     </Grid>
@@ -66,28 +71,25 @@ export const Footer = () => {
                         </Stack>
                     </Grid>
                 </Grid>
+            </Container>
+            <Divider sx={{ borderColor: '#fff' }} />
 
-                </Container>
-                <Divider sx={{ borderColor: '#fff' }} />
-
-                <Stack
-                    maxWidth="lg"
-                    p="1rem 0"
-                    direction="row"
-                    justifyContent="space-between"
-                    alignItems="center"
-                    component={Container}>
-                    <Typography color="secondary">
-                        Todos los derechos reservados © Tatami
-                    </Typography>
-                    <IconButton
-                        component="a"
-                        href="https://github.com/FeniaPfa"
-                        sx={{ color: '#fff' }}
-                        target="_blank">
-                        <GitHubIcon />
-                    </IconButton>
-                </Stack>
+            <Stack
+                maxWidth="lg"
+                p="1rem 0"
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+                component={Container}>
+                <Typography color="secondary">Todos los derechos reservados © Tatami</Typography>
+                <IconButton
+                    component="a"
+                    href="https://github.com/FeniaPfa"
+                    sx={{ color: '#fff' }}
+                    target="_blank">
+                    <GitHubIcon />
+                </IconButton>
+            </Stack>
         </Box>
     );
 };

@@ -38,8 +38,15 @@ export const MyProduct = ({ product, myProducts, setMyProducts }) => {
     return (
         <>
             <Paper sx={{ padding: '1.5rem 2rem' }}>
-                <Stack alignItems="center" justifyContent="space-between" gap="1rem" sx={{flexDirection:{xs:"column",md:"row"}}}>
-                    <Stack gap="2rem" alignItems="center" sx={{flexDirection:{xs:"column",sm:"row"}}}>
+                <Stack
+                    alignItems="center"
+                    justifyContent="space-between"
+                    gap="1rem"
+                    sx={{ flexDirection: { xs: 'column', md: 'row' } }}>
+                    <Stack
+                        gap="2rem"
+                        alignItems="center"
+                        sx={{ flexDirection: { xs: 'column', sm: 'row' } }}>
                         <Avatar
                             src={image}
                             sx={{ width: '150px', height: '150px' }}
@@ -54,24 +61,35 @@ export const MyProduct = ({ product, myProducts, setMyProducts }) => {
                                 sx={{ lineHeight: '1.5' }}>
                                 Clases de {product.sport}
                             </Typography>
-                            <Typography fontSize="1.2rem" variant="overline" sx={{ lineHeight: '1.5' }}>
+                            <Typography
+                                fontSize="1.2rem"
+                                variant="overline"
+                                sx={{ lineHeight: '1.5' }}>
                                 {product.age} - {product.level}
                             </Typography>
-                            <Typography fontWeight="bold" variant='h4' fontFamily="Kanit,sans-serif">
+                            <Typography
+                                fontWeight="bold"
+                                variant="h4"
+                                fontFamily="Kanit,sans-serif">
                                 {product.dojo}
                             </Typography>
                         </Stack>
                     </Stack>
 
-                    <Stack direction="row" gap="1rem" alignItems="center" justifyContent="center" flexWrap="wrap">
-                        <Button variant="outlined" size='large' onClick={goToProduct}>
-                            <VisibilityIcon fontSize='large' />
+                    <Stack
+                        direction="row"
+                        gap="1rem"
+                        alignItems="center"
+                        justifyContent="center"
+                        flexWrap="wrap">
+                        <Button variant="outlined" size="large" onClick={goToProduct}>
+                            <VisibilityIcon fontSize="large" />
                         </Button>
-                        <Button variant="outlined" size='large' onClick={goToEdit}>
-                            <EditIcon fontSize='large' />
+                        <Button variant="outlined" size="large" onClick={goToEdit}>
+                            <EditIcon fontSize="large" />
                         </Button>
-                        <Button variant="contained" size='large' onClick={deleteProduct}>
-                            <DeleteForeverIcon fontSize='large' />
+                        <Button variant="contained" size="large" onClick={deleteProduct}>
+                            <DeleteForeverIcon fontSize="large" />
                         </Button>
                     </Stack>
                 </Stack>

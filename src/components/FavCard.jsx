@@ -38,10 +38,9 @@ export const FavCard = ({ setFavorites, userData, productData, favorites }) => {
 
     useEffect(() => {
         getImg(productData?.id, setImg);
-    },[]);
+    }, []);
 
     return (
-
         <Paper sx={{ padding: '2rem' }}>
             <Stack
                 alignItems="center"
@@ -98,6 +97,5 @@ export const FavCard = ({ setFavorites, userData, productData, favorites }) => {
                 </Stack>
             </Stack>
         </Paper>
-
     );
 };

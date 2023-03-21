@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 export const AddProduct = () => {
     const { user } = useUserContext();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const [fileError, setFileError] = useState(false);
 
@@ -23,7 +23,7 @@ export const AddProduct = () => {
         days: '',
         adress: '',
         desc: '',
-        comments:[]
+        comments: [],
     });
 
     const [img, setImg] = useState(null);
@@ -49,7 +49,7 @@ export const AddProduct = () => {
             const imgRef = ref(storage, `products-img/${uid}`);
             await uploadBytes(imgRef, img);
             console.log('Producto e imagen subidos correctamente');
-            navigate(`/products/${uid}`)
+            navigate(`/products/${uid}`);
         } catch (err) {
             console.log(err.message);
         }
@@ -61,7 +61,7 @@ export const AddProduct = () => {
                 <Typography variant="h2" fontFamily="Kanit,sans-serif" fontWeight="bold">
                     Crear Publicación
                 </Typography>
-                <Stack gap="1.2rem" sx={{flexDirection:{xs:"column",md:"row"}}}>
+                <Stack gap="1.2rem" sx={{ flexDirection: { xs: 'column', md: 'row' } }}>
                     <TextField
                         fullWidth
                         required
@@ -80,7 +80,7 @@ export const AddProduct = () => {
                     />
                 </Stack>
 
-                <Stack gap="1.2rem" sx={{flexDirection:{xs:"column",md:"row"}}}>
+                <Stack gap="1.2rem" sx={{ flexDirection: { xs: 'column', md: 'row' } }}>
                     <TextField
                         required
                         select
@@ -108,7 +108,7 @@ export const AddProduct = () => {
                     </TextField>
                 </Stack>
 
-                <Stack gap="1.2rem" sx={{flexDirection:{xs:"column",md:"row"}}}>
+                <Stack gap="1.2rem" sx={{ flexDirection: { xs: 'column', md: 'row' } }}>
                     <TextField
                         fullWidth
                         required
@@ -165,7 +165,6 @@ export const AddProduct = () => {
                     multiline
                     label="Descripción"
                     rows={4}
-
                     helperText="Ingresa información adicional como duración de las clases, redes sociales u otras formas de contacto"
                     onChange={(e) => setProductInfo({ ...productInfo, desc: e.target.value })}
                 />

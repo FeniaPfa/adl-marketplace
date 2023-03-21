@@ -1,4 +1,13 @@
-import { Box, Button, Container, Divider, Rating, Stack, TextField, Typography } from '@mui/material';
+import {
+    Box,
+    Button,
+    Container,
+    Divider,
+    Rating,
+    Stack,
+    TextField,
+    Typography,
+} from '@mui/material';
 import { doc, updateDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from '../config/firebase';
@@ -23,6 +32,7 @@ export const CommentSection = ({ productData, myUserInfo, getProduct }) => {
             });
             console.log('Nuevo Comentario');
             getProduct();
+            setNewComment({ score: 0, text: '' });
         } catch (err) {
             console.error({ err });
         }
@@ -43,7 +53,7 @@ export const CommentSection = ({ productData, myUserInfo, getProduct }) => {
         <>
             <Divider />
 
-            {(user && user.uid !== productData.userId) && (
+            {user && user.uid !== productData.userId && (
                 <Container sx={{ margin: '2rem auto' }} component="form" onSubmit={handleSubmit}>
                     <Stack gap="1rem" alignItems="flex-start">
                         <Typography variant="h5" fontWeight="bold">
@@ -59,6 +69,8 @@ export const CommentSection = ({ productData, myUserInfo, getProduct }) => {
                         />
                         <TextField
                             multiline
+                            required
+                            value={newComment.text}
                             rows={2}
                             fullWidth
                             placeholder="Comentario..."
@@ -71,16 +83,17 @@ export const CommentSection = ({ productData, myUserInfo, getProduct }) => {
                 </Container>
             )}
 
-            <Box className="commentList" mt="1rem">
-                <Typography variant='h5' fontWeight="bold">Comentarios</Typography>
+            <Container className="commentList" mt="1rem">
+                <Typography variant="h5" fontWeight="bold">
+                    Comentarios
+                </Typography>
                 <Box marginY="2rem">
-
-                {productData.comments.length === 0 && <EmptyAlert width="md" type="comments" />}
+                    {productData.comments.length === 0 && <EmptyAlert width="md" type="comments" />}
                 </Box>
-                {productData.comments.map((item, index) => (
-                    <Comment key={index} comment={item} />
-                )).reverse()}
-            </Box>
+                {productData.comments
+                    .map((item, index) => <Comment key={index} comment={item} />)
+                    .reverse()}
+            </Container>
         </>
     );
 };

@@ -140,8 +140,6 @@ export const Navbar = () => {
                     </Button>
                 </Toolbar>
                 <Drawer anchor="top" open={open}>
-
-
                     <Toolbar></Toolbar>
                     <Stack
                         mt="3rem"
@@ -149,7 +147,7 @@ export const Navbar = () => {
                         sx={{
                             '> a': { color: '#455a64' },
                             alignItems: 'center',
-                            display: {md: 'none' },
+                            display: { md: 'none' },
                         }}>
                         {routes.map((item) => {
                             if (item.private && !user) return null;

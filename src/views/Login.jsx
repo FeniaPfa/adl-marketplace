@@ -38,7 +38,7 @@ export const Login = () => {
         }
     };
     return (
-        <Container maxWidth="lg" sx={{ margin: '2rem auto'}}>
+        <Container maxWidth="lg" sx={{ margin: '2rem auto' }}>
             <Container maxWidth="xs" component="form" onSubmit={handleLogin}>
                 <Stack gap="2rem">
                     <Typography fontWeight="bold" variant="h4" textAlign="center">
@@ -86,7 +86,7 @@ export const Login = () => {
                             to="/register"
                             color="primary"
                             fontWeight="bold"
-                            sx={{textDecoration:"none"}}
+                            sx={{ textDecoration: 'none' }}
                             fontSize="1.2rem">
                             Registrarse
                         </Typography>

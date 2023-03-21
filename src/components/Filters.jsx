@@ -26,15 +26,15 @@ export const Filters = ({ products, setFilteredList, filteredList }) => {
                     return isNaN(numero) ? total : total + numero;
                 }, 0);
                 let avg1 = scores1.length === 0 ? 0 : sum1 / scores1.length;
-            
+
                 let sum2 = scores2.reduce((total, numero) => {
                     return isNaN(numero) ? total : total + numero;
                 }, 0);
                 let avg2 = scores2.length === 0 ? 0 : sum2 / scores2.length;
-            
+
                 return avg2 - avg1;
-            })
-            setFilteredList(sortedList)
+            });
+            setFilteredList(sortedList);
         }
     };
 

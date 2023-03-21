@@ -1,7 +1,15 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { register } from '../config/firebase';
-import { Alert, Button, Container, InputAdornment, Stack, TextField, Typography } from '@mui/material';
+import {
+    Alert,
+    Button,
+    Container,
+    InputAdornment,
+    Stack,
+    TextField,
+    Typography,
+} from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
 
@@ -9,7 +17,7 @@ export const CreateUserForm = ({ setStep }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
-    const [registerError, setRegisterError] = useState({status:false,message:""})
+    const [registerError, setRegisterError] = useState({ status: false, message: '' });
 
     const handlePassword = (e) => {
         setPassword(e.target.value);
@@ -26,16 +34,16 @@ export const CreateUserForm = ({ setStep }) => {
             await register({ email, password });
             setStep(1);
         } catch (err) {
-            console.log({err});
-            if(err.code === "auth/email-already-in-use"){
-                setRegisterError({status:true, message:"Esta cuenta ya existe"})
+            console.log({ err });
+            if (err.code === 'auth/email-already-in-use') {
+                setRegisterError({ status: true, message: 'Esta cuenta ya existe' });
             }
         }
     };
     return (
         <Container component="form" onSubmit={handleRegister} maxWidth="xs">
             <Stack gap="2rem">
-            {registerError.status && <Alert severity="error">{registerError.message}</Alert>}
+                {registerError.status && <Alert severity="error">{registerError.message}</Alert>}
                 <TextField
                     required
                     label="Correo Electrónico"
@@ -74,17 +82,17 @@ export const CreateUserForm = ({ setStep }) => {
                     Siguente
                 </Button>
                 <Stack gap=".6rem" alignItems="center">
-                        <Typography fontSize="1.2rem">¿Ya tienes una cuenta?</Typography>
-                        <Typography
-                            component={Link}
-                            to="/login"
-                            color="primary"
-                            fontWeight="bold"
-                            sx={{textDecoration:"none"}}
-                            fontSize="1.2rem">
-                            Ingresar
-                        </Typography>
-                    </Stack>
+                    <Typography fontSize="1.2rem">¿Ya tienes una cuenta?</Typography>
+                    <Typography
+                        component={Link}
+                        to="/login"
+                        color="primary"
+                        fontWeight="bold"
+                        sx={{ textDecoration: 'none' }}
+                        fontSize="1.2rem">
+                        Ingresar
+                    </Typography>
+                </Stack>
             </Stack>
         </Container>
     );

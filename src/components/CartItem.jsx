@@ -32,7 +32,7 @@ export const CartItem = ({ product, user }) => {
                     <RemoveRoundedIcon />
                 </IconButton>
                 {product?.count}
-                <IconButton color="primary" onClick={() => addProduct(product,user)}>
+                <IconButton color="primary" onClick={() => addProduct(product, user)}>
                     <AddRoundedIcon />
                 </IconButton>
             </TableCell>

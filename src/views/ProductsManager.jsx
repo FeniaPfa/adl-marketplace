@@ -20,7 +20,12 @@ export const ProductsManager = () => {
 
     return (
         <Container maxWidth="lg">
-            <Typography variant="h2" mb="2rem" fontFamily="Kanit,sans-serif" fontWeight="bold" sx={{wordBreak:"break-word",fontSize:{xs:"3rem", sm:"3.7rem"}}}>
+            <Typography
+                variant="h2"
+                mb="2rem"
+                fontFamily="Kanit,sans-serif"
+                fontWeight="bold"
+                sx={{ wordBreak: 'break-word', fontSize: { xs: '3rem', sm: '3.7rem' } }}>
                 Mis Publicaciones
             </Typography>
             <Stack gap="1rem">

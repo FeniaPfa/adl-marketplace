@@ -9,7 +9,6 @@ export const ProductCard = ({ product }) => {
     const navigate = useNavigate();
     const [image, setImage] = useState(null);
 
-
     const handleClick = () => {
         navigate(`/products/${product.id}`);
     };
@@ -22,7 +21,7 @@ export const ProductCard = ({ product }) => {
             setImage(url);
         } catch (err) {
             console.log('Error al descagar la imagen', err);
-        } 
+        }
     };
 
     useEffect(() => {
@@ -30,57 +29,57 @@ export const ProductCard = ({ product }) => {
     }, []);
 
     return (
-            <Card
-                className="product-card"
-                sx={{
-                    width: 345,
-                    cursor: 'pointer',
-                }}
-                onClick={handleClick}>
-                <CardMedia
-                    component="img"
-                    sx={{ height: '250px', minWidth: '200px' }}
-                    image={image}
-                    alt={product.dojo}
-                />
+        <Card
+            className="product-card"
+            sx={{
+                width: 345,
+                cursor: 'pointer',
+            }}
+            onClick={handleClick}>
+            <CardMedia
+                component="img"
+                sx={{ height: '250px', minWidth: '200px' }}
+                image={image}
+                alt={product.dojo}
+            />
 
-                <CardContent>
-                    <Stack gap=".3rem" alignItems="center">
-                        <Typography
-                            variant="overline"
-                            fontSize="1rem"
-                            fontWeight="bold"
-                            sx={{ textTransform: 'uppercase', lineHeight: '1.5' }}>
-                            Clases de {product.sport}
-                        </Typography>
-                        <Typography
-                            variant="overline"
-                            fontSize="1rem"
-                            sx={{ textTransform: 'uppercase', lineHeight: '1.5', textAlign:"center" }}>
-                            {product.age} - {product.level}
-                        </Typography>
+            <CardContent>
+                <Stack gap=".3rem" alignItems="center">
+                    <Typography
+                        variant="overline"
+                        fontSize="1rem"
+                        fontWeight="bold"
+                        sx={{ textTransform: 'uppercase', lineHeight: '1.5' }}>
+                        Clases de {product.sport}
+                    </Typography>
+                    <Typography
+                        variant="overline"
+                        fontSize="1rem"
+                        sx={{ textTransform: 'uppercase', lineHeight: '1.5', textAlign: 'center' }}>
+                        {product.age} - {product.level}
+                    </Typography>
 
-                        <Typography
-                            variant="h4"
-                            fontWeight="bold"
-                            textAlign="center"
-                            fontFamily="Kanit,sans-serif"
-                            sx={{ letterSpacing: '.3rem' }}>
-                            {product.dojo}
-                        </Typography>
+                    <Typography
+                        variant="h4"
+                        fontWeight="bold"
+                        textAlign="center"
+                        fontFamily="Kanit,sans-serif"
+                        sx={{ letterSpacing: '.3rem' }}>
+                        {product.dojo}
+                    </Typography>
 
-                        <Typography variant="subtitle2" fontSize="1.2rem">
-                            {product.city}
-                        </Typography>
-                        <Typography
-                            variant="h4"
-                            fontWeight="bold"
-                            color="primary"
-                            sx={{ letterSpacing: '.3rem' }}>
-                            {product?.price === 0 ? "Gratis" :`$ ${formatNumber(product.price)}` }
-                        </Typography>
-                    </Stack>
-                </CardContent>
-            </Card>
+                    <Typography variant="subtitle2" fontSize="1.2rem">
+                        {product.city}
+                    </Typography>
+                    <Typography
+                        variant="h4"
+                        fontWeight="bold"
+                        color="primary"
+                        sx={{ letterSpacing: '.3rem' }}>
+                        {product?.price === 0 ? 'Gratis' : `$ ${formatNumber(product.price)}`}
+                    </Typography>
+                </Stack>
+            </CardContent>
+        </Card>
     );
 };

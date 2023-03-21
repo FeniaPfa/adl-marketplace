@@ -9,7 +9,7 @@ export const Hero = () => {
             sx={{
                 position: 'relative',
                 display: 'flex',
-                gap:"2rem",
+                gap: '2rem',
                 justifyContent: 'center',
                 alignItems: 'flex-start',
                 flexDirection: { xs: 'column', md: 'row' },
@@ -68,7 +68,7 @@ export const Hero = () => {
                 </div>
             </Box>
 
-            <img className="hero__img" src={heroimg} alt="Header image"/>
+            <img className="hero__img" src={heroimg} alt="Karateca y boxeador" />
         </Box>
     );
 };
