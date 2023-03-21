@@ -12,6 +12,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { useUserContext } from '../context/userContext';
+import { EmptyAlert } from '../components/EmptyAlert';
 
 export const Cart = () => {
     const { cart, total, resetCart } = useCartContext();
@@ -45,7 +46,7 @@ export const Cart = () => {
                             </TableBody>
                         </Table>
                     </TableContainer>
-                    {cart.length === 0 && <EmptyCart />}
+                    {cart.length === 0 && <EmptyAlert width="sm" type="cart" />}
                     {/* </Paper> */}
                     <Stack
                         direction="row"
