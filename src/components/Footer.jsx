@@ -12,13 +12,15 @@ export const Footer = () => {
                 <Grid
                     container
                     p="2rem 0"
-                    justifyContent="space-between"
                     alignItems="center"
                     spacing={2}
+                    sx={{
+                        justifyContent:{xs:"center",sm:"space-between"}
+                    }}
                 >
                     {/* 1 */}
                     <Grid item md={4}>
-                        <Stack direction="row" alignItems="center" gap="1rem">
+                        <Stack direction="row" alignItems="center" gap="1rem" sx={{justifyContent:{xs:"center",sm:"initial"}}}>
                             <img src={logo} width="50px" />
                             <Typography
                                 fontFamily="Kanit, sans-serif"
@@ -27,7 +29,7 @@ export const Footer = () => {
                                 TATAMI
                             </Typography>
                         </Stack>
-                        <Typography color="secondary">
+                        <Typography color="secondary" sx={{textAlign:{xs:"center",sm:"initial"}}}>
                             Encuentra y publica clases de artes marciales en un solo lugar.
                         </Typography>
                     </Grid>
