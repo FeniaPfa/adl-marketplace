@@ -31,6 +31,7 @@ export const EditProfile = () => {
         const fileSize = e.target.files[0].size / 1024 / 1024;
         if (fileSize > 1) {
             setError(true);
+            e.target.value = null;
             setAvatar(null);
             return;
         }

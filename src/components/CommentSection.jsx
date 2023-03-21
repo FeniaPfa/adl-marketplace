@@ -1,4 +1,4 @@
-import { Button, Container, Divider, Rating, Stack, TextField, Typography } from '@mui/material';
+import { Box, Button, Container, Divider, Rating, Stack, TextField, Typography } from '@mui/material';
 import { doc, updateDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from '../config/firebase';
@@ -45,7 +45,7 @@ export const CommentSection = ({ productData, myUserInfo, getProduct }) => {
             {(user && user.uid !== productData.userId) && (
                 <Container sx={{ margin: '2rem auto' }} component="form" onSubmit={handleSubmit}>
                     <Stack gap="1rem" alignItems="flex-start">
-                        <Typography variant="h4" fontWeight="bold">
+                        <Typography variant="h5" fontWeight="bold">
                             Deja un comentario
                         </Typography>
 
@@ -70,11 +70,12 @@ export const CommentSection = ({ productData, myUserInfo, getProduct }) => {
                 </Container>
             )}
 
-            <div className="commentList">
+            <Box className="commentList" mt="1rem">
+                <Typography variant='h5' fontWeight="bold">Comentarios</Typography>
                 {productData.comments.map((item, index) => (
                     <Comment key={index} comment={item} />
                 )).reverse()}
-            </div>
+            </Box>
         </>
     );
 };

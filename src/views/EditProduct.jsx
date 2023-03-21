@@ -9,9 +9,10 @@ export const EditProduct = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
+    const [productInfo, setProductInfo] = useState({});
     const [img, setImg] = useState();
 
-    const [productInfo, setProductInfo] = useState({});
+    const [fileError, setFileError] = useState(false)
 
     const productRef = doc(db, 'products', id);
     const imgRef = ref(storage, `products-img/${id}`);
@@ -22,6 +23,18 @@ export const EditProduct = () => {
 
         setProductInfo(data);
     };
+
+    const handleFile = (e) => {
+        setFileError(false);
+        const fileSize = e.target?.files[0].size / 1024 / 1024;
+        if (fileSize > 1) {
+            setFileError(true);
+            e.target.value = null;
+            setImg(null);
+            return;
+        }
+        setImg(e.target.files[0]);
+    }
 
     const uploadFile = async () => {
         try {
@@ -54,7 +67,7 @@ export const EditProduct = () => {
                 <Typography variant="h3" mb="2rem" fontFamily="Kanit,sans-serif" fontWeight="bold">
                     Editar Producto
                 </Typography>
-                <Stack direction="row" gap="1.2rem">
+                <Stack direction="row" gap="1.2rem" sx={{flexDirection:{xs:"column",md:"row"}}}>
                     <TextField
                         fullWidth
                         value={productInfo?.sport || ''}
@@ -73,7 +86,7 @@ export const EditProduct = () => {
                     />
                 </Stack>
 
-                <Stack direction="row" gap="1.2rem">
+                <Stack direction="row" gap="1.2rem" sx={{flexDirection:{xs:"column",md:"row"}}}>
                     <TextField
                         select
                         fullWidth
@@ -100,7 +113,7 @@ export const EditProduct = () => {
                     </TextField>
                 </Stack>
 
-                <Stack direction="row" gap="1.2rem">
+                <Stack direction="row" gap="1.2rem" sx={{flexDirection:{xs:"column",md:"row"}}}>
                     <TextField
                         fullWidth
                         value={productInfo?.city || ''}
@@ -124,8 +137,13 @@ export const EditProduct = () => {
                     <TextField
                         fullWidth
                         type="file"
+                        helperText={
+                            fileError
+                                ? 'El tamaño maximo de la imagen es 1MB'
+                                : 'Sube una imagen acorde a la clase que ofreces'
+                        }
                         inputProps={{ accept: 'image/png, image/jpeg' }}
-                        onChange={(e) => setImg(e.target.files[0])}
+                        onChange={handleFile}
                     />
                 </Stack>
                 <TextField

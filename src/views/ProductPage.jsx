@@ -193,11 +193,12 @@ export const ProductPage = () => {
                                 flexDirection="row"
                                 alignItems="baseline">
                                 <Typography
-                                    variant="h3"
                                     fontWeight="bold"
                                     color="primary"
                                     letterSpacing=".3rem"
-                                    lineHeight="1.5">
+                                    lineHeight="1.5"
+                                    sx={{fontSize:{xs:"2rem",sm:"3rem"}}}
+                                    >
                                     {productData.price === 0
                                         ? 'Gratis'
                                         : `$ ${formatNumber(productData?.price)}`}
@@ -221,26 +222,26 @@ export const ProductPage = () => {
                                         disabled={!user}
                                         onClick={handleFav}
                                         variant="outlined"
-                                        size="large"
-                                        sx={{ fontSize: '1.3rem', '> svg': { mr: '.2rem' } }}>
+                                        size="medium"
+                                        sx={{ fontSize: '1.2rem', '> svg': { mr: '.2rem' } }}>
                                         {!isFav ? <FavoriteBorderIcon /> : <FavoriteIcon />}
                                         {!isFav ? 'Guardar favorito' : 'Eliminar Favorito'}
                                     </Button>
                                 ) : (
                                     <Button
-                                        size="large"
-                                        sx={{ fontSize: '1.3rem' }}
+                                        size="medium"
+                                        sx={{ fontSize: '1.2rem' }}
                                         variant="outlined"
                                         onClick={() =>
                                             navigate(`/dashboard/products/${productData?.id}`)
                                         }>
-                                        <EditIcon fontSize="large" sx={{ mr: '.5rem' }} />
+                                        <EditIcon fontSize="large" sx={{ mr: '.3rem' }} />
                                         Editar
                                     </Button>
                                 )}
                                 <Button
-                                    size="large"
-                                    sx={{ fontSize: '1.3rem' }}
+                                    size="medium"
+                                    sx={{ fontSize: '1.2rem' }}
                                     disabled={user?.uid === productData?.userId}
                                     variant="contained"
                                     onClick={() => addProduct(productData, user)}>
@@ -251,17 +252,17 @@ export const ProductPage = () => {
                         </CardContent>
                     </Box>
                     {/* User | Descripcion | Horarios */}
-                    <Stack m="1rem auto" gap="1rem">
+                    <Stack m="1rem auto" gap="1rem" width="100%">
                         <Typography variant="overline" fontSize="1.2rem" sx={{ lineHeight: '1' }}>
                             Por:
                             <b>
                                 {productUserInfo?.name} {productUserInfo?.apellido}
                             </b>
                         </Typography>
-                        <Typography fontSize="1.5rem">
+                        <Typography fontSize="1.2rem">
                             <b>Horarios:</b> {productData?.days}
                         </Typography>
-                        <Typography fontSize="1.5rem">{productData?.desc}</Typography>
+                        <Typography sx={{whiteSpace: 'pre-line',fontSize:{xs:"1.2rem", sm:"1.5rem"}}}>{productData?.desc}</Typography>
                     </Stack>
                     <CommentSection productData={productData} myUserInfo={myUserInfo} getProduct={getProduct} />
                 </Card>
