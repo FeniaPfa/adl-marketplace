@@ -35,6 +35,7 @@ export const Hero = () => {
                     fontFamily="Kanit,sans-serif"
                     fontStyle="italic"
                     className="hero__cta"
+                    component="h1"
                     sx={{
                         textTransform: 'uppercase',
                         color: '#fff',
@@ -67,7 +68,7 @@ export const Hero = () => {
                 </div>
             </Box>
 
-            <img className="hero__img" src={heroimg} />
+            <img className="hero__img" src={heroimg} alt="Header image"/>
         </Box>
     );
 };

@@ -32,6 +32,7 @@ export const Landing = () => {
                         }}>
                         <Typography
                             variant="h3"
+                            component="h2"
                             fontFamily="Kanit, sans-serif"
                             fontWeight="bold"
                             fontStyle="italic"
@@ -95,6 +96,7 @@ export const Landing = () => {
                     <Stack gap="1rem" sx={{ width: { xs: '100%', md: '50%' } }}>
                         <Typography
                             variant="h3"
+                            component="h2"
                             fontFamily="Kanit, sans-serif"
                             fontWeight="bold"
                             fontStyle="italic"

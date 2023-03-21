@@ -15,6 +15,10 @@ export const EmptyAlert = ({width, type}) => {
             title: 'Actualmente, tu carrito de compras se encuentra vacío.',
             text: 'Cuando encuentres una clase que te guste, simplemente añádela a tu carrito de compras y sigue los sencillos pasos para finalizar tu compra.',
         },
+        comments: {
+            title: 'Aun no hay comentarios.',
+            text: '¿Has tomado esta clase? ¡Comparte tu opinión y ayuda a otros usuarios a tomar una decisión informada!',
+        },
     };
 
     return (

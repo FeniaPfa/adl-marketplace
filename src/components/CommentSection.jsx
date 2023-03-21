@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { db } from '../config/firebase';
 import { useUserContext } from '../context/userContext';
 import { Comment } from './Comment';
+import { EmptyAlert } from './EmptyAlert';
 
 export const CommentSection = ({ productData, myUserInfo, getProduct }) => {
     const { user } = useUserContext();
@@ -72,6 +73,10 @@ export const CommentSection = ({ productData, myUserInfo, getProduct }) => {
 
             <Box className="commentList" mt="1rem">
                 <Typography variant='h5' fontWeight="bold">Comentarios</Typography>
+                <Box marginY="2rem">
+
+                {productData.comments.length === 0 && <EmptyAlert width="md" type="comments" />}
+                </Box>
                 {productData.comments.map((item, index) => (
                     <Comment key={index} comment={item} />
                 )).reverse()}
