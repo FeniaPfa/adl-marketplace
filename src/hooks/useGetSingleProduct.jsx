@@ -20,5 +20,5 @@ export const useGetSingleProduct = (id) => {
         getProduct();
     }, []);
 
-    return { productData, getProduct };
+    return { productData, getProduct, setProductData };
 };

@@ -4,6 +4,9 @@ import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db, getImg } from '../config/firebase';
 import { useCartContext } from '../context/CartContext';
 import { useUserContext } from '../context/userContext';
+import { Loading } from '../components/Loading';
+import { useGetSingleProduct } from '../hooks/useGetSingleProduct';
+import { CommentSection } from '../components/CommentSection';
 import { Main } from '../containers/Main';
 import { Footer } from '../components/Footer';
 import { formatNumber } from '../utils/utils.js';
@@ -22,14 +25,11 @@ import {
     Stack,
     Typography,
 } from '@mui/material';
-import { Loading } from '../components/Loading';
-import { useGetSingleProduct } from '../hooks/useGetSingleProduct';
-import { CommentSection } from '../components/CommentSection';
 
 export const ProductPage = () => {
     const { id } = useParams();
     const { user } = useUserContext();
-    const { productData, getProduct } = useGetSingleProduct(id);
+    const { productData, getProduct, setProductData } = useGetSingleProduct(id);
     const [img, setImg] = useState();
     const { addProduct } = useCartContext();
 
@@ -39,7 +39,6 @@ export const ProductPage = () => {
     const [productUserInfo, setProductUserInfo] = useState();
     // Datos del usuario logeado
     const [myUserInfo, setMyUserInfo] = useState();
-
 
     const getUserInfo = async (id, setInfo) => {
         try {
@@ -55,10 +54,10 @@ export const ProductPage = () => {
     };
 
     let myUserRef;
-    let isFav
+    let isFav;
     if (user) {
         myUserRef = doc(db, 'users', user?.uid);
-        isFav = myUserInfo?.favs?.some((item) => item === productData.id)
+        isFav = myUserInfo?.favs?.some((item) => item === productData.id);
     }
 
     let favorites = [];
@@ -66,14 +65,14 @@ export const ProductPage = () => {
         if (!isFav) {
             favorites = [...myUserInfo.favs, productData.id];
             uploadFav();
-            setMyUserInfo({...myUserInfo,favs:[...myUserInfo.favs,productData.id]})
+            setMyUserInfo({ ...myUserInfo, favs: [...myUserInfo.favs, productData.id] });
             console.log('Agregado a favoritos');
         }
         if (isFav) {
             const newFavs = myUserInfo.favs.filter((item) => item !== productData.id);
             favorites = [...newFavs];
             uploadFav();
-            setMyUserInfo({...myUserInfo,favs: newFavs})
+            setMyUserInfo({ ...myUserInfo, favs: newFavs });
             console.log('Eliminado de favoritos');
         }
     };
@@ -94,7 +93,6 @@ export const ProductPage = () => {
             getUserInfo(user?.uid, setMyUserInfo);
         }
     }, [productData]);
-
 
     const listStyle = {
         display: 'flex',
@@ -261,7 +259,7 @@ export const ProductPage = () => {
                         <Typography
                             sx={{
                                 whiteSpace: 'pre-line',
-                                fontSize: { xs: '1.2rem', sm: '1.5rem' },
+                                fontSize: { xs: '1rem', sm: '1.3rem' },
                             }}>
                             {productData?.desc}
                         </Typography>
@@ -270,6 +268,7 @@ export const ProductPage = () => {
                         productData={productData}
                         myUserInfo={myUserInfo}
                         getProduct={getProduct}
+                        setProductData={setProductData}
                     />
                 </Card>
             </Main>

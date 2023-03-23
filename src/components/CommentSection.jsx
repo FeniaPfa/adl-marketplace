@@ -1,3 +1,9 @@
+import { doc, updateDoc } from 'firebase/firestore';
+import { useEffect, useState } from 'react';
+import { db } from '../config/firebase';
+import { useUserContext } from '../context/userContext';
+import { Comment } from './Comment';
+import { EmptyAlert } from './EmptyAlert';
 import {
     Box,
     Button,
@@ -8,14 +14,8 @@ import {
     TextField,
     Typography,
 } from '@mui/material';
-import { doc, updateDoc } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
-import { db } from '../config/firebase';
-import { useUserContext } from '../context/userContext';
-import { Comment } from './Comment';
-import { EmptyAlert } from './EmptyAlert';
 
-export const CommentSection = ({ productData, myUserInfo, getProduct }) => {
+export const CommentSection = ({ productData, myUserInfo, setProductData }) => {
     const { user } = useUserContext();
 
     const [newComment, setNewComment] = useState({
@@ -31,7 +31,7 @@ export const CommentSection = ({ productData, myUserInfo, getProduct }) => {
                 comments: [...productData.comments, newComment],
             });
             console.log('Nuevo Comentario');
-            getProduct();
+            setProductData({ ...productData, comments: [...productData.comments, newComment] });
             setNewComment({ score: 0, text: '' });
         } catch (err) {
             console.error({ err });
@@ -51,7 +51,7 @@ export const CommentSection = ({ productData, myUserInfo, getProduct }) => {
 
     return (
         <>
-            <Divider />
+            <Divider sx={{ marginY: '1rem' }} />
 
             {user && user.uid !== productData.userId && (
                 <Container sx={{ margin: '2rem auto' }} component="form" onSubmit={handleSubmit}>
@@ -91,7 +91,12 @@ export const CommentSection = ({ productData, myUserInfo, getProduct }) => {
                     {productData.comments.length === 0 && <EmptyAlert width="md" type="comments" />}
                 </Box>
                 {productData.comments
-                    .map((item, index) => <Comment key={index} comment={item} />)
+                    .map((item, index) => (
+                        <Comment
+                            key={index}
+                            comment={item}
+                        />
+                    ))
                     .reverse()}
             </Container>
         </>

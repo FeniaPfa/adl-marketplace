@@ -23,7 +23,7 @@ export const FavCard = ({ setFavorites, userData, productData, favorites }) => {
     const newFavs = userData.favs.filter((item) => item !== productData.id);
     const deleteFav = async () => {
         try {
-            await updateDoc(userRef, { ...userData, favs: newFavs });
+            await updateDoc(userRef, { favs: newFavs });
 
             setFavorites(favorites.filter((item) => item.id !== productData.id));
             console.log('Favoritos modificados');

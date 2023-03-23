@@ -1,10 +1,13 @@
-import { Avatar, Box, Divider, Rating, Typography } from '@mui/material';
+import { Avatar, Box, Divider, Rating, Stack, Typography } from '@mui/material';
 import DefaultImg from '/defaultavatar.svg';
 import { getDownloadURL, ref } from 'firebase/storage';
 import React, { useEffect, useState } from 'react';
 import { storage } from '../config/firebase';
-export const Comment = ({ comment }) => {
+import { useUserContext } from '../context/userContext';
+
+export const Comment = ({ comment}) => {
     const [img, setImg] = useState();
+    const {user } = useUserContext()
 
     const getUserAvatar = async () => {
         const imgRef = ref(storage, `users-avatar/${comment.userId}`);
@@ -26,17 +29,20 @@ export const Comment = ({ comment }) => {
 
     return (
         <>
-            <Box p={2} display="flex" gap="2rem">
-                <Avatar sx={{ width: 56, height: 56 }} src={img} alt={comment.name} />
-                <Box>
-                    <Typography variant="h5" fontWeight="bold">
-                        {comment.name}
-                    </Typography>
+            <Stack direction="row" justifyContent="space-between" alignItems="flex-start">
+                <Box p={2} display="flex" gap="2rem">
+                    <Avatar sx={{ width: 56, height: 56 }} src={img} alt={comment.name} />
+                    <Box>
+                        <Typography variant="h5" fontWeight="bold">
+                            {comment.name}
+                        </Typography>
 
-                    <Rating value={comment.score} readOnly />
-                    <Typography color="warning">{comment.text}</Typography>
+                        <Rating value={comment.score} readOnly />
+                        <Typography color="warning">{comment.text}</Typography>
+                    </Box>
                 </Box>
-            </Box>
+
+            </Stack>
             <Divider />
         </>
     );
