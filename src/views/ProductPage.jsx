@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db, getImg } from '../config/firebase';
-import { useGetProducts } from '../hooks/useGetProducts';
 import { useCartContext } from '../context/CartContext';
 import { useUserContext } from '../context/userContext';
 import { Main } from '../containers/Main';
@@ -31,15 +30,16 @@ export const ProductPage = () => {
     const { id } = useParams();
     const { user } = useUserContext();
     const { productData, getProduct } = useGetSingleProduct(id);
+    const [img, setImg] = useState();
     const { addProduct } = useCartContext();
 
     const navigate = useNavigate();
 
-    const [img, setImg] = useState();
+    // Datos del usuario que publico la clase
     const [productUserInfo, setProductUserInfo] = useState();
-
+    // Datos del usuario logeado
     const [myUserInfo, setMyUserInfo] = useState();
-    const [isFav, setIsFav] = useState(false);
+
 
     const getUserInfo = async (id, setInfo) => {
         try {
@@ -55,8 +55,10 @@ export const ProductPage = () => {
     };
 
     let myUserRef;
+    let isFav
     if (user) {
         myUserRef = doc(db, 'users', user?.uid);
+        isFav = myUserInfo?.favs?.some((item) => item === productData.id)
     }
 
     let favorites = [];
@@ -64,23 +66,21 @@ export const ProductPage = () => {
         if (!isFav) {
             favorites = [...myUserInfo.favs, productData.id];
             uploadFav();
-            getUserInfo(user?.uid, setMyUserInfo);
-            setIsFav(true);
-            console.log('Guardo en favoritos con exito');
+            setMyUserInfo({...myUserInfo,favs:[...myUserInfo.favs,productData.id]})
+            console.log('Agregado a favoritos');
         }
         if (isFav) {
             const newFavs = myUserInfo.favs.filter((item) => item !== productData.id);
             favorites = [...newFavs];
             uploadFav();
-            getUserInfo(user?.uid, setMyUserInfo);
-            setIsFav(false);
-            console.log('Eliminado con exito de favoritos');
+            setMyUserInfo({...myUserInfo,favs: newFavs})
+            console.log('Eliminado de favoritos');
         }
     };
     const uploadFav = async () => {
         try {
-            await updateDoc(myUserRef, { ...myUserInfo, favs: favorites });
-            console.log('Favoritos modificados');
+            await updateDoc(myUserRef, { favs: favorites });
+            console.log('Favoritos actualizados');
         } catch (err) {
             console.error({ err });
         }
@@ -95,9 +95,6 @@ export const ProductPage = () => {
         }
     }, [productData]);
 
-    useEffect(() => {
-        setIsFav(myUserInfo?.favs?.some((item) => item === productData.id));
-    }, [myUserInfo]);
 
     const listStyle = {
         display: 'flex',
