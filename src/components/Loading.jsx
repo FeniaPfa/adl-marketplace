@@ -2,7 +2,7 @@ import { CircularProgress, Stack } from '@mui/material';
 
 export const Loading = () => {
     return (
-        <>
+
             <Stack
                 justifyContent="center"
                 alignItems="center"
@@ -10,6 +10,6 @@ export const Loading = () => {
                 sx={{ margin: '5rem auto' }}>
                 <CircularProgress size={170} color="primary" />
             </Stack>
-        </>
+
     );
 };

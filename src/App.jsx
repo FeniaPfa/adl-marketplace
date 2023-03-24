@@ -1,7 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { PrivateRoute } from './components/PrivateRoute';
-import { PublicOnly } from './components/PublicOnly';
 import UserContextProvider from './context/userContext';
 import { Home } from './views/Home';
 import { Login } from './views/Login';
@@ -31,17 +30,13 @@ function App() {
                         <Route
                             path="/login"
                             element={
-                                <PublicOnly>
                                     <Login />
-                                </PublicOnly>
                             }
                         />
                         <Route
                             path="/register"
                             element={
-                                <PublicOnly>
                                     <Register />
-                                </PublicOnly>
                             }
                         />
                         <Route path="/products" element={<Products />} />

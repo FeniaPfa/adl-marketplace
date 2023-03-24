@@ -191,7 +191,15 @@ export const Navbar = () => {
                                         <ShoppingCartIcon />
                                     </Badge>
                                 </Link>
-                                <Button variant="outlined" color="secondary" onClick={handleLogout}>
+                                <Button
+                                    variant="outlined"
+                                    color="secondary"
+                                    onClick={handleLogout}
+                                    sx={{
+                                        color: { xs: '#455a64', md: 'initial' },
+                                        borderColor: { xs: '#455a64', md: 'initial' },
+                                        marginBottom: { xs: '2rem', md: 'initial' },
+                                    }}>
                                     Logout
                                 </Button>
                             </>

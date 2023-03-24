@@ -12,6 +12,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { useUserContext } from '../context/userContext';
 import { EmptyAlert } from '../components/EmptyAlert';
+import { pay } from '../utils/alerts';
 
 export const Cart = () => {
     const { cart, total, resetCart } = useCartContext();
@@ -77,7 +78,9 @@ export const Cart = () => {
                             </Stack>
                         </Paper>
                     </Stack>
-                    <Button variant="contained" size="large" sx={{ alignSelf: 'flex-end' }}>
+                    <Button
+                    onClick={pay}
+                    variant="contained" size="large" sx={{ alignSelf: 'flex-end' }}>
                         Comprar
                     </Button>
                 </Stack>

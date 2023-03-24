@@ -61,3 +61,24 @@ export const notUserCart = () => {
         },
     });
 };
+
+export const pay = () => {
+    let timerInterval;
+    Swal.fire({
+        title: 'Redirigiendo a Webpay',
+        html:'Gracias por usar Tatami',
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: () => {
+            Swal.showLoading();
+
+        },
+        willClose: () => {
+            clearInterval(timerInterval);
+        },
+    }).then((result) => {
+        if (result.dismiss === Swal.DismissReason.timer) {
+            console.log('I was closed by the timer');
+        }
+    });
+};

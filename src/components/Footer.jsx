@@ -34,8 +34,9 @@ export const Footer = () => {
                         </Stack>
                         <Typography
                             color="secondary"
+                            mt=".5rem"
                             sx={{ textAlign: { xs: 'center', sm: 'initial' } }}>
-                            Encuentra y publica clases de artes marciales en un solo lugar.
+                            Únete a nuestra comunidad de entusiastas de las artes marciales y comienza a encontrar o publicar clases hoy mismo
                         </Typography>
                     </Grid>
                     {/* 2 */}
@@ -77,18 +78,29 @@ export const Footer = () => {
             <Stack
                 maxWidth="lg"
                 p="1rem 0"
-                direction="row"
                 justifyContent="space-between"
                 alignItems="center"
+                sx={{ flexDirection: { xs: 'column', sm: 'row' } }}
                 component={Container}>
-                <Typography color="secondary">Todos los derechos reservados © Tatami</Typography>
-                <IconButton
-                    component="a"
-                    href="https://github.com/FeniaPfa"
-                    sx={{ color: '#fff' }}
-                    target="_blank">
-                    <GitHubIcon />
-                </IconButton>
+                <Typography color="secondary" sx={{ textAlign: { xs: 'center', sm: 'initial' } }}>
+                    Todos los derechos reservados © Tatami
+                </Typography>
+                <Box>
+                    <IconButton
+                        component="a"
+                        href="https://github.com/FeniaPfa"
+                        sx={{ color: '#fff' }}
+                        target="_blank">
+                        <GitHubIcon />
+                    </IconButton>
+                    <IconButton
+                        component="a"
+                        href="https://www.linkedin.com/in/fernanda-aguilar-p/"
+                        sx={{ color: '#fff' }}
+                        target="_blank">
+                        <LinkedInIcon />
+                    </IconButton>
+                </Box>
             </Stack>
         </Box>
     );

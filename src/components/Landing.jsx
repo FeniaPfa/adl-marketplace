@@ -1,7 +1,6 @@
 import { Box, Button, Container, Stack, Typography } from '@mui/material';
 import landing1 from '../assets/landing1.jpg';
 import dojo from '../assets/dojo.jpg';
-import { Main } from '../containers/Main';
 import { Link } from 'react-router-dom';
 
 export const Landing = () => {
@@ -45,8 +44,8 @@ export const Landing = () => {
                             gap="1rem"
                             sx={{ '> p': { fontSize: { xs: '1rem', sm: '1.3rem' } } }}>
                             <Typography fontWeight="bold">
-                                En Tatami no necesitas volverte viral para poder tener visibilidad
-                                en tus publicaciones.
+                                ¿Estás cansado de que tus publicaciones pierdan su visibilidad en el mar de contenido de las redes sociales? ¡No te
+                                preocupes!
                             </Typography>
                             <Typography>
                                 Si eres un entusiasta de las artes marciales o buscas probar algo

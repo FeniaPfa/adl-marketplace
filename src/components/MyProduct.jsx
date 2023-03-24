@@ -58,13 +58,19 @@ export const MyProduct = ({ product, myProducts, setMyProducts }) => {
                                 variant="overline"
                                 fontSize="1.2rem"
                                 fontWeight="bold"
-                                sx={{ lineHeight: '1.5' }}>
+                                sx={{
+                                    lineHeight: '1.5',
+                                    textAlign: { xs: 'center', sm: 'initial' },
+                                }}>
                                 Clases de {product.sport}
                             </Typography>
                             <Typography
                                 fontSize="1.2rem"
                                 variant="overline"
-                                sx={{ lineHeight: '1.5' }}>
+                                sx={{
+                                    lineHeight: '1.5',
+                                    textAlign: { xs: 'center', sm: 'initial' },
+                                }}>
                                 {product.age} - {product.level}
                             </Typography>
                             <Typography

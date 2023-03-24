@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Main } from '../containers/Main';
 import { SetUserForm } from '../components/SetUserForm';
 import { Container, Stack, Step, StepLabel, Stepper, Typography } from '@mui/material';
 import { CreateUserForm } from '../components/CreateUserForm';
