@@ -102,7 +102,7 @@ export const Landing = () => {
                             color="primary"
                             textTransform="uppercase"
                             sx={{ fontSize: { xs: '2rem', sm: '3rem' } }}>
-                            Compara de manera facil y rapida!
+                            Compara de manera fácil y rápida!
                         </Typography>
                         <Stack
                             gap="1rem"
