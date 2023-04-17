@@ -12,6 +12,7 @@ import {
 } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
+import { PublicOnly } from './PublicOnly';
 
 export const CreateUserForm = ({ setStep }) => {
     const [email, setEmail] = useState('');
@@ -41,59 +42,63 @@ export const CreateUserForm = ({ setStep }) => {
         }
     };
     return (
-        <Container component="form" onSubmit={handleRegister} maxWidth="xs">
-            <Stack gap="2rem">
-                {registerError.status && <Alert severity="error">{registerError.message}</Alert>}
-                <TextField
-                    required
-                    label="Correo Electrónico"
-                    type="email"
-                    placeholder="tatami@email.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    InputProps={{
-                        startAdornment: (
-                            <InputAdornment position="start">
-                                <EmailIcon />
-                            </InputAdornment>
-                        ),
-                    }}
-                />
+        <PublicOnly>
+            <Container component="form" onSubmit={handleRegister} maxWidth="xs">
+                <Stack gap="2rem">
+                    {registerError.status && (
+                        <Alert severity="error">{registerError.message}</Alert>
+                    )}
+                    <TextField
+                        required
+                        label="Correo Electrónico"
+                        type="email"
+                        placeholder="tatami@email.com"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <EmailIcon />
+                                </InputAdornment>
+                            ),
+                        }}
+                    />
 
-                <TextField
-                    required
-                    error={error}
-                    inputProps={{ minLength: '6' }}
-                    helperText={error ? 'El minimo de la constraseña son 6 caracteres' : ''}
-                    label="Contraseña"
-                    type="password"
-                    placeholder="******"
-                    value={password}
-                    onChange={handlePassword}
-                    InputProps={{
-                        startAdornment: (
-                            <InputAdornment position="start">
-                                <LockIcon />
-                            </InputAdornment>
-                        ),
-                    }}
-                />
-                <Button type="submit" variant="contained" size="large">
-                    Siguente
-                </Button>
-                <Stack gap=".6rem" alignItems="center">
-                    <Typography fontSize="1.2rem">¿Ya tienes una cuenta?</Typography>
-                    <Typography
-                        component={Link}
-                        to="/login"
-                        color="primary"
-                        fontWeight="bold"
-                        sx={{ textDecoration: 'none' }}
-                        fontSize="1.2rem">
-                        Ingresar
-                    </Typography>
+                    <TextField
+                        required
+                        error={error}
+                        inputProps={{ minLength: '6' }}
+                        helperText={error ? 'El minimo de la constraseña son 6 caracteres' : ''}
+                        label="Contraseña"
+                        type="password"
+                        placeholder="******"
+                        value={password}
+                        onChange={handlePassword}
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <LockIcon />
+                                </InputAdornment>
+                            ),
+                        }}
+                    />
+                    <Button type="submit" variant="contained" size="large">
+                        Siguente
+                    </Button>
+                    <Stack gap=".6rem" alignItems="center">
+                        <Typography fontSize="1.2rem">¿Ya tienes una cuenta?</Typography>
+                        <Typography
+                            component={Link}
+                            to="/login"
+                            color="primary"
+                            fontWeight="bold"
+                            sx={{ textDecoration: 'none' }}
+                            fontSize="1.2rem">
+                            Ingresar
+                        </Typography>
+                    </Stack>
                 </Stack>
-            </Stack>
-        </Container>
+            </Container>
+        </PublicOnly>
     );
 };
