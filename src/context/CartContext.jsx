@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from 'react';
-import { addProductAlert, notUserCart, removeProductAlert, resetCartAlert } from '../utils/alerts';
+import { addProductAlert, notUserCart, removeProductAlert, resetCartAlert } from '../common/utils/alerts';
 
 const CartContext = createContext();
 
@@ -17,11 +17,7 @@ export const CartProvider = ({ children }) => {
         setTotal({ price: total.price + product.price, quantity: total.quantity + 1 });
         const isInCart = cart.some((item) => item.id === product.id);
         if (isInCart) {
-            setCart(
-                cart.map((item) =>
-                    item.id === product.id ? { ...item, count: item.count + 1 } : item
-                )
-            );
+            setCart(cart.map((item) => (item.id === product.id ? { ...item, count: item.count + 1 } : item)));
         }
         if (!isInCart) {
             setCart([...cart, { ...product, count: 1 }]);
@@ -33,13 +29,7 @@ export const CartProvider = ({ children }) => {
         const productIndex = cart.findIndex((item) => item.id === product.id);
         if (cart[productIndex].count !== 0) {
             setTotal({ price: total.price - product.price, quantity: total.quantity - 1 });
-            setCart(
-                cart.map((item) =>
-                    item.id === product.id && item.count !== 1
-                        ? { ...item, count: item.count - 1 }
-                        : item
-                )
-            );
+            setCart(cart.map((item) => (item.id === product.id && item.count !== 1 ? { ...item, count: item.count - 1 } : item)));
         }
         if (cart[productIndex].count === 1) {
             deleteProduct(product);
@@ -62,8 +52,7 @@ export const CartProvider = ({ children }) => {
     };
 
     return (
-        <CartContext.Provider
-            value={{ cart, total, addProduct, deleteProduct, removeProduct, resetCart }}>
+        <CartContext.Provider value={{ cart, total, addProduct, deleteProduct, removeProduct, resetCart }}>
             {children}
         </CartContext.Provider>
     );
