@@ -1,7 +1,7 @@
 import { doc, getDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from '../config/firebase';
-import { useUserContext } from '../context/userContext';
+import { useUserContext } from '../context';
 
 export const useGetUser = () => {
     const [userData, setUserData] = useState();
