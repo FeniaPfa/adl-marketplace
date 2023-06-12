@@ -1,6 +1,6 @@
 import { Box, Button, Container, Stack, Typography } from '@mui/material';
-import landing1 from '../../../assets/landing1.jpg';
-import dojo from '../../../assets/dojo.jpg';
+import landing1 from '../../../assets/landing1.webp';
+import dojo from '../../../assets/dojo.webp';
 import { Link } from 'react-router-dom';
 
 export const Landing = () => {
@@ -13,6 +13,7 @@ export const Landing = () => {
                     <Box>
                         <img
                             src={landing1}
+                            alt="Persona practicando boxeo"
                             className="landing-img"
                             style={{
                                 objectFit: 'cover',
@@ -107,7 +108,7 @@ export const Landing = () => {
                         </Stack>
                     </Stack>
                     <Box sx={{ width: { xs: '100%', md: '50%' } }}>
-                        <img className="landing-img" src={dojo} style={{ objectFit: 'cover', width: '100%' }} />
+                        <img className="landing-img" alt="Dojo" src={dojo} style={{ objectFit: 'cover', width: '100%' }} />
                     </Box>
                 </Stack>
             </Container>

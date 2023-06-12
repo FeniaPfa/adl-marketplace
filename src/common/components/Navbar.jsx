@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Link as RouterLink } from 'react-router-dom';
 import { logOut } from '../../config/firebase';
@@ -53,7 +53,7 @@ export const Navbar = () => {
                         }}
                         to="/"
                         component={RouterLink}>
-                        <img src={logo} width="35px" />
+                        <img src={logo} width="35px" alt="Logo Tatami" />
                         <Typography variant="h5" component="h1" fontWeight="bold" fontFamily="Kanit, sans-serif">
                             TATAMI
                         </Typography>
@@ -95,7 +95,13 @@ export const Navbar = () => {
                                     component={NavLink}>
                                     Carrito
                                 </Link>
-                                <Link sx={linkStyle} variant="h5" style={activeLink} to="/cart" component={NavLink}>
+                                <Link
+                                    aria-label="Ver carrito"
+                                    sx={linkStyle}
+                                    variant="h5"
+                                    style={activeLink}
+                                    to="/cart"
+                                    component={NavLink}>
                                     <Badge badgeContent={total.quantity} color="warning">
                                         <Icons.ShoppingCartIcon />
                                     </Badge>
@@ -152,6 +158,7 @@ export const Navbar = () => {
                                     Carrito
                                 </Link>
                                 <Link
+                                    aria-label="Ver carrito"
                                     sx={linkStyle}
                                     variant="h5"
                                     style={activeLinkMobile}

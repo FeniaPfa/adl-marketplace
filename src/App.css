@@ -51,7 +51,7 @@
 }
 
 .hero {
-    background-image: url('./assets/smoke-bg.jpg');
+    background-image: url('./assets/smoke-bg.webp');
     background-position: center;
     background-size: cover;
     overflow: hidden;
@@ -77,7 +77,7 @@
 }
 
 .cta {
-    background: url('./assets/cta.jpg');
+    background: url('./assets/cta.webp');
     background-position: center;
     background-size: cover;
 }
@@ -86,6 +86,6 @@
     box-shadow: 2px 2px 10px #0000007a;
 }
 
-.custom-button{
-    background: #c62828!important;
+.custom-button {
+    background: #c62828 !important;
 }

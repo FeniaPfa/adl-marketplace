@@ -21,7 +21,7 @@ export const Footer = () => {
                             alignItems="center"
                             gap="1rem"
                             sx={{ justifyContent: { xs: 'center', sm: 'initial' } }}>
-                            <img src={logo} width="50px" />
+                            <img src={logo} width="50px" alt="Logo Tatami" />
                             <Typography
                                 fontFamily="Kanit, sans-serif"
                                 fontWeight="bold"
@@ -73,10 +73,16 @@ export const Footer = () => {
                     Todos los derechos reservados © Tatami
                 </Typography>
                 <Box>
-                    <IconButton component="a" href="https://github.com/FeniaPfa" sx={{ color: '#fff' }} target="_blank">
+                    <IconButton
+                        component="a"
+                        href="https://github.com/FeniaPfa"
+                        sx={{ color: '#fff' }}
+                        target="_blank"
+                        aria-label="Enlace a Github">
                         <Icons.GitHubIcon />
                     </IconButton>
                     <IconButton
+                        aria-label="Enlace a Linkedin"
                         component="a"
                         href="https://www.linkedin.com/in/fernanda-aguilar-p/"
                         sx={{ color: '#fff' }}
