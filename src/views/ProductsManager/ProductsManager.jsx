@@ -1,20 +1,20 @@
 import { useEffect, useState } from 'react';
 import { Container, Stack, Typography } from '@mui/material';
 import { useUserContext } from '../../context';
-import { useGetProducts } from '../../hooks';
 import { MyProduct } from './components';
 import { EmptyAlert } from '../../common/components';
+import { useProductsByUserId } from '../../hooks/useProductsByUserId';
 
 export const ProductsManager = () => {
     const { user } = useUserContext();
-    const { products } = useGetProducts();
+    const { products, loading } = useProductsByUserId(user.uid);
     const [myProducts, setMyProducts] = useState([]);
 
     useEffect(() => {
-        setMyProducts(products.filter((item) => item.userId === user.uid));
+        setMyProducts(products);
     }, [products]);
 
-    if (!myProducts) {
+    if (loading) {
         return <p>Loading</p>;
     }
 
