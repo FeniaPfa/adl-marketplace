@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
-import { doc, updateDoc } from 'firebase/firestore';
-import { db } from '../../../config/firebase';
 import { useUserContext } from '../../../context';
 import { Box, Button, Container, Divider, Rating, Stack, TextField, Typography } from '@mui/material';
 import { EmptyAlert } from '../../../common/components';
 import { Comment } from './Comment';
+import { updateProduct } from '../../../services/products';
 
 export const CommentSection = ({ product, myUserInfo, setProduct }) => {
     const { user } = useUserContext();
@@ -16,11 +15,11 @@ export const CommentSection = ({ product, myUserInfo, setProduct }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const productRef = doc(db, 'products', product.id);
+
         try {
-            await updateDoc(productRef, {
-                comments: [...product.comments, newComment],
-            });
+            const newComments = { comments: [...product.comments, newComment] };
+            updateProduct(product.id, newComments);
+
             console.log('Nuevo Comentario');
             setProduct({ ...product, comments: [...product.comments, newComment] });
             setNewComment({ score: 0, text: '' });
