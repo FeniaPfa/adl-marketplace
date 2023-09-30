@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db, getImg } from '../../config/firebase';
 import { useCartContext, useUserContext } from '../../context';
-import { useGetSingleProduct } from '../../hooks';
+import { useSingleProduct } from '../../hooks';
 import { CommentSection } from './components';
 import { Footer, Loading, Layout } from '../../common/components';
 import { formatNumber } from '../../common/utils';
@@ -13,7 +13,7 @@ import { Box, Button, Card, CardContent, CardMedia, List, ListItem, Stack, Typog
 export const ProductPage = () => {
     const { id } = useParams();
     const { user, setUserData, userData } = useUserContext();
-    const { productData, getProduct, setProductData } = useGetSingleProduct(id);
+    const { productData, getProduct, setProductData } = useSingleProduct(id);
     const [img, setImg] = useState();
     const { addProduct } = useCartContext();
 
