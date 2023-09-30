@@ -12,7 +12,7 @@ import { Box, Button, Card, CardContent, CardMedia, List, ListItem, Stack, Typog
 
 export const ProductPage = () => {
     const { id } = useParams();
-    const { user } = useUserContext();
+    const { user, setUserData, userData } = useUserContext();
     const { productData, getProduct, setProductData } = useGetSingleProduct(id);
     const [img, setImg] = useState();
     const { addProduct } = useCartContext();
@@ -48,6 +48,7 @@ export const ProductPage = () => {
     const handleFav = () => {
         if (!isFav) {
             favorites = [...myUserInfo.favs, productData.id];
+            setUserData({ ...userData, favs: [...userData.favs, productData.id] });
             uploadFav();
             setMyUserInfo({ ...myUserInfo, favs: [...myUserInfo.favs, productData.id] });
             console.log('Agregado a favoritos');
