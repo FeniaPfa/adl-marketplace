@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Link as RouterLink } from 'react-router-dom';
-import { logOut } from '../../config/firebase';
 import { useUserContext, useCartContext } from '../../context';
 import logo from '/logo.svg';
 import Icons from '../Icons';
 import { AppBar, Badge, Button, Container, Divider, Drawer, Link, Stack, Toolbar, Typography } from '@mui/material';
 
 export const Navbar = () => {
-    const { user } = useUserContext();
+    const { user, logOut } = useUserContext();
     const { total } = useCartContext();
 
     const [open, setOpen] = useState(false);
