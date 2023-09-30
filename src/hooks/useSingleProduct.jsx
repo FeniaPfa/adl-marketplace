@@ -1,26 +1,24 @@
-import { doc, getDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
-import { db } from '../config/firebase';
-import { getImage } from '../services/images';
+import { getProduct } from '../services/products';
 
 export const useSingleProduct = (id) => {
-    const [productData, setProductData] = useState();
+    const [product, setProduct] = useState();
+    const [loading, setLoading] = useState(true);
 
-    const getProduct = async () => {
+    const getProductData = async () => {
         try {
-            const productRef = doc(db, 'products', id);
-            const docSnap = await getDoc(productRef);
-            const data = docSnap.data();
-            const imageUrl = await getImage(id);
-            setProductData({ ...data, id: id, image: imageUrl });
+            const productData = await getProduct(id);
+            setProduct(productData);
         } catch (err) {
             console.error(err.message);
+        } finally {
+            setLoading(false);
         }
     };
 
     useEffect(() => {
-        getProduct();
+        getProductData();
     }, []);
 
-    return { productData, getProduct, setProductData };
+    return { product, getProductData, setProduct, loading };
 };

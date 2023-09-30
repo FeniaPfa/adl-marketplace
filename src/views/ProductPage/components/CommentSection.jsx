@@ -6,7 +6,7 @@ import { Box, Button, Container, Divider, Rating, Stack, TextField, Typography }
 import { EmptyAlert } from '../../../common/components';
 import { Comment } from './Comment';
 
-export const CommentSection = ({ productData, myUserInfo, setProductData }) => {
+export const CommentSection = ({ product, myUserInfo, setProduct }) => {
     const { user } = useUserContext();
 
     const [newComment, setNewComment] = useState({
@@ -16,13 +16,13 @@ export const CommentSection = ({ productData, myUserInfo, setProductData }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const productRef = doc(db, 'products', productData.id);
+        const productRef = doc(db, 'products', product.id);
         try {
             await updateDoc(productRef, {
-                comments: [...productData.comments, newComment],
+                comments: [...product.comments, newComment],
             });
             console.log('Nuevo Comentario');
-            setProductData({ ...productData, comments: [...productData.comments, newComment] });
+            setProduct({ ...product, comments: [...product.comments, newComment] });
             setNewComment({ score: 0, text: '' });
         } catch (err) {
             console.error({ err });
@@ -44,7 +44,7 @@ export const CommentSection = ({ productData, myUserInfo, setProductData }) => {
         <>
             <Divider sx={{ marginY: '1rem' }} />
 
-            {user && user.uid !== productData.userId && (
+            {user && user.uid !== product.userId && (
                 <Container sx={{ margin: '2rem auto' }} component="form" onSubmit={handleSubmit}>
                     <Stack gap="1rem" alignItems="flex-start">
                         <Typography variant="h5" fontWeight="bold">
@@ -78,8 +78,8 @@ export const CommentSection = ({ productData, myUserInfo, setProductData }) => {
                 <Typography variant="h5" fontWeight="bold">
                     Comentarios
                 </Typography>
-                <Box marginY="2rem">{productData.comments.length === 0 && <EmptyAlert width="md" type="comments" />}</Box>
-                {productData.comments.map((item, index) => <Comment key={index} comment={item} />).reverse()}
+                <Box marginY="2rem">{product.comments.length === 0 && <EmptyAlert width="md" type="comments" />}</Box>
+                {product.comments.map((item, index) => <Comment key={index} comment={item} />).reverse()}
             </Container>
         </>
     );
