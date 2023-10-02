@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { db, getImg } from '../../../config/firebase';
-import { doc, updateDoc } from 'firebase/firestore';
+import { getImg } from '../../../config/firebase';
 import { useUserContext, useCartContext } from '../../../context';
 import { formatNumber } from '../../../common/utils';
 import { Avatar, Box, Button, Paper, Stack, Typography } from '@mui/material';
 import Icons from '../../../common/Icons';
+import { updateFavorites } from '../../../services/favorites';
 
-export const FavCard = ({ setFavorites, userData, productData, favorites }) => {
-    const { user } = useUserContext();
+export const FavCard = ({ setFavorites, productData, favorites }) => {
+    const { user, userData, setUserData } = useUserContext();
     const { addProduct } = useCartContext();
     const [img, setImg] = useState();
     const navigate = useNavigate();
@@ -16,14 +16,14 @@ export const FavCard = ({ setFavorites, userData, productData, favorites }) => {
         navigate(`/products/${productData.id}`);
     };
 
-    const userRef = doc(db, 'users', user?.uid);
-
-    const newFavs = userData.favs.filter((item) => item !== productData.id);
     const deleteFav = async () => {
         try {
-            await updateDoc(userRef, { favs: newFavs });
+            const newFavs = userData.favs.filter((item) => item !== productData.id);
+
+            updateFavorites(userData.id, newFavs);
 
             setFavorites(favorites.filter((item) => item.id !== productData.id));
+            setUserData({ ...userData, favs: newFavs });
             console.log('Favoritos modificados');
         } catch (err) {
             console.error(err);
