@@ -24,10 +24,11 @@ export const UserContextProvider = ({ children }) => {
 
     // Check si user está activo
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (auth) => {
-            if (auth) {
-                setUser({ uid: auth.uid });
-                getUserData(auth.uid);
+        const unsubscribe = onAuthStateChanged(auth, (authUser) => {
+            setUser(authUser);
+            if (authUser) {
+                setUser({ uid: authUser.uid, email: authUser.email });
+                getUserData(authUser.uid);
             }
         });
 
@@ -35,7 +36,7 @@ export const UserContextProvider = ({ children }) => {
         // unsubscribe()
     }, []);
 
-    // if (user === false) return <Loading />;
+    if (user === false) return <Loading />;
 
     return <UserContext.Provider value={{ user, userData, setUserData, logOut }}>{children}</UserContext.Provider>;
 };
