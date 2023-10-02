@@ -1,11 +1,6 @@
 import { initializeApp } from 'firebase/app';
-import { getAnalytics } from "firebase/analytics";
-import {
-    createUserWithEmailAndPassword,
-    getAuth,
-    signInWithEmailAndPassword,
-    signOut,
-} from 'firebase/auth';
+import { getAnalytics } from 'firebase/analytics';
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { collection, getFirestore } from 'firebase/firestore';
 import { deleteObject, getDownloadURL, getStorage, ref } from 'firebase/storage';
 
@@ -29,7 +24,7 @@ const register = ({ email, password }) => createUserWithEmailAndPassword(auth, e
 
 const login = ({ email, password }) => signInWithEmailAndPassword(auth, email, password);
 
-const logOut = () => signOut(auth);
+const disconnect = () => signOut(auth);
 
 // Firestore
 const db = getFirestore(app);
@@ -53,15 +48,4 @@ const getImg = async (id, setImg) => {
     }
 };
 
-export {
-    auth,
-    register,
-    login,
-    logOut,
-    db,
-    storage,
-    productsCollectionRef,
-    usersCollectionRef,
-    deleteFile,
-    getImg
-};
+export { auth, register, login, disconnect, db, storage, productsCollectionRef, usersCollectionRef, deleteFile, getImg };

@@ -1,82 +1,40 @@
-import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { doc, getDoc, updateDoc } from 'firebase/firestore';
-import { db, getImg } from '../../config/firebase';
 import { useCartContext, useUserContext } from '../../context';
-import { useGetSingleProduct } from '../../hooks';
+import { useSingleProduct } from '../../hooks';
 import { CommentSection } from './components';
 import { Footer, Loading, Layout } from '../../common/components';
 import { formatNumber } from '../../common/utils';
 import Icons from '../../common/Icons';
 import { Box, Button, Card, CardContent, CardMedia, List, ListItem, Stack, Typography } from '@mui/material';
+import { updateFavorites } from '../../services/favorites';
 
 export const ProductPage = () => {
     const { id } = useParams();
-    const { user } = useUserContext();
-    const { productData, getProduct, setProductData } = useGetSingleProduct(id);
-    const [img, setImg] = useState();
+    const { user, setUserData, userData } = useUserContext();
+    const { product, setProduct, loading } = useSingleProduct(id);
     const { addProduct } = useCartContext();
 
     const navigate = useNavigate();
 
-    // Datos del usuario que publico la clase
-    const [productUserInfo, setProductUserInfo] = useState();
-    // Datos del usuario logeado
-    const [myUserInfo, setMyUserInfo] = useState();
-
-    const getUserInfo = async (id, setInfo) => {
-        try {
-            if (productData) {
-                const userRef = doc(db, 'users', id);
-                const docSnap = await getDoc(userRef);
-                const data = docSnap.data();
-                setInfo(data);
-            }
-        } catch (err) {
-            console.error({ err });
-        }
-    };
-
-    let myUserRef;
     let isFav;
     if (user) {
-        myUserRef = doc(db, 'users', user?.uid);
-        isFav = myUserInfo?.favs?.some((item) => item === productData.id);
+        isFav = userData?.favs?.some((item) => item === id);
     }
 
-    let favorites = [];
     const handleFav = () => {
+        let newFavs = [];
         if (!isFav) {
-            favorites = [...myUserInfo.favs, productData.id];
-            uploadFav();
-            setMyUserInfo({ ...myUserInfo, favs: [...myUserInfo.favs, productData.id] });
+            newFavs = [...userData.favs, product.id];
+            setUserData({ ...userData, favs: [...userData.favs, product.id] });
             console.log('Agregado a favoritos');
         }
         if (isFav) {
-            const newFavs = myUserInfo.favs.filter((item) => item !== productData.id);
-            favorites = [...newFavs];
-            uploadFav();
-            setMyUserInfo({ ...myUserInfo, favs: newFavs });
+            newFavs = userData.favs.filter((item) => item !== product.id);
+            setUserData({ ...userData, favs: newFavs });
             console.log('Eliminado de favoritos');
         }
+        updateFavorites(user.uid, newFavs);
     };
-    const uploadFav = async () => {
-        try {
-            await updateDoc(myUserRef, { favs: favorites });
-            console.log('Favoritos actualizados');
-        } catch (err) {
-            console.error({ err });
-        }
-    };
-
-    useEffect(() => {
-        getImg(id, setImg);
-        getUserInfo(productData?.userId, setProductUserInfo);
-
-        if (user) {
-            getUserInfo(user?.uid, setMyUserInfo);
-        }
-    }, [productData]);
 
     const listStyle = {
         display: 'flex',
@@ -87,7 +45,7 @@ export const ProductPage = () => {
         fontSize: '1.3rem',
     };
 
-    if (!productData) {
+    if (loading) {
         return <Loading />;
     }
 
@@ -110,8 +68,8 @@ export const ProductPage = () => {
                         }}>
                         <CardMedia
                             component="img"
-                            title={productData?.sport}
-                            image={img}
+                            title={product?.sport}
+                            image={product?.image}
                             sx={{
                                 width: { xs: '100%', sm: '40%' },
                                 objectFit: 'cover',
@@ -129,10 +87,10 @@ export const ProductPage = () => {
                             {/* Sport | City */}
                             <Stack direction="row" justifyContent="space-between" flexWrap="wrap" sx={{ color: '#455a64' }}>
                                 <Typography variant="overline" fontWeight="bold" fontSize="1.2rem">
-                                    Clases de {productData?.sport}
+                                    Clases de {product?.sport}
                                 </Typography>
                                 <Typography variant="overline" fontSize="1.2rem" fontWeight="bold">
-                                    {productData?.city}
+                                    {product?.city}
                                 </Typography>
                             </Stack>
                             <Typography
@@ -144,21 +102,21 @@ export const ProductPage = () => {
                                     fontSize: { xs: '2.5rem', md: '3rem' },
                                     wordBreak: 'break-word',
                                 }}>
-                                {productData?.dojo}
+                                {product?.dojo}
                             </Typography>
                             {/* List Direccion | Nivel | Edad */}
                             <List disablePadding>
                                 <ListItem sx={listStyle}>
                                     <span style={{ flexGrow: '1' }}>Nivel:</span>
-                                    <span>{productData.level}</span>
+                                    <span>{product?.level}</span>
                                 </ListItem>
                                 <ListItem sx={listStyle}>
                                     <span style={{ flexGrow: '1' }}>Edad:</span>
-                                    <span>{productData.age}</span>
+                                    <span>{product.age}</span>
                                 </ListItem>
                                 <ListItem sx={listStyle}>
                                     <span style={{ flexGrow: '1' }}>Dirección:</span>
-                                    <span>{productData.adress}</span>
+                                    <span>{product.adress}</span>
                                 </ListItem>
                             </List>
                             {/* Precio x mes */}
@@ -169,15 +127,15 @@ export const ProductPage = () => {
                                     letterSpacing=".3rem"
                                     lineHeight="1.5"
                                     sx={{ fontSize: { xs: '2rem', sm: '3rem' } }}>
-                                    {productData.price === 0 ? 'Gratis' : `$ ${formatNumber(productData?.price)}`}
+                                    {product.price === 0 ? 'Gratis' : `$ ${formatNumber(product?.price)}`}
                                 </Typography>
                                 <Typography variant="subtitle2" fontSize="1.2rem" letterSpacing=".1rem" textTransform="uppercase">
-                                    {productData?.price !== 0 && 'x mes'}
+                                    {product?.price !== 0 && 'x mes'}
                                 </Typography>
                             </Box>
                             {/* Añadir | Fav */}
                             <Stack direction="row" justifyContent="space-around" gap=".8rem" flexWrap="wrap">
-                                {user?.uid !== productData?.userId ? (
+                                {user?.uid !== product?.userId ? (
                                     <Button
                                         disabled={!user}
                                         onClick={handleFav}
@@ -192,7 +150,7 @@ export const ProductPage = () => {
                                         size="medium"
                                         sx={{ fontSize: '1.2rem' }}
                                         variant="outlined"
-                                        onClick={() => navigate(`/dashboard/products/${productData?.id}`)}>
+                                        onClick={() => navigate(`/dashboard/products/${product?.id}`)}>
                                         <Icons.EditIcon fontSize="large" sx={{ mr: '.3rem' }} />
                                         Editar
                                     </Button>
@@ -200,9 +158,9 @@ export const ProductPage = () => {
                                 <Button
                                     size="medium"
                                     sx={{ fontSize: '1.2rem' }}
-                                    disabled={user?.uid === productData?.userId}
+                                    disabled={user?.uid === product?.userId}
                                     variant="contained"
-                                    onClick={() => addProduct(productData, user)}>
+                                    onClick={() => addProduct(product, user)}>
                                     <Icons.AddShoppingCartIcon sx={{ mr: '.2rem' }} />
                                     Añadir al carrito
                                 </Button>
@@ -213,27 +171,20 @@ export const ProductPage = () => {
                     <Stack m="1rem auto" gap="1rem" width="100%">
                         <Typography variant="overline" fontSize="1.2rem" sx={{ lineHeight: '1' }}>
                             Por:
-                            <b>
-                                {productUserInfo?.name} {productUserInfo?.apellido}
-                            </b>
+                            <b>{product?.userName}</b>
                         </Typography>
                         <Typography fontSize="1.2rem">
-                            <b>Horarios:</b> {productData?.days}
+                            <b>Horarios:</b> {product?.days}
                         </Typography>
                         <Typography
                             sx={{
                                 whiteSpace: 'pre-line',
                                 fontSize: { xs: '1rem', sm: '1.3rem' },
                             }}>
-                            {productData?.desc}
+                            {product?.desc}
                         </Typography>
                     </Stack>
-                    <CommentSection
-                        productData={productData}
-                        myUserInfo={myUserInfo}
-                        getProduct={getProduct}
-                        setProductData={setProductData}
-                    />
+                    <CommentSection product={product} myUserInfo={userData} setProduct={setProduct} />
                 </Card>
             </Layout>
             <Footer />
